@@ -26,10 +26,10 @@
   <object-name>strelki</object-name>  
   <object-name>navigac</object-name>
   <object-name>posadk</object-name>
-    <emission>
-    <red-prop>tu154/light/panel/ext-red</red-prop>
-    <green-prop>tu154/light/panel/ext-green</green-prop>
-    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  <emission>
+    <red-prop>sim/model/cabin-lighting/vnesh</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh</blue-prop>
   </emission>
 </animation>
 
@@ -45,9 +45,9 @@
   <object-name>auto_pitch</object-name>
   <object-name>_handle_marker</object-name>
   <emission>
-    <red-prop>tu154/light/instruments/int-red</red-prop>
-    <green-prop>tu154/light/instruments/int-green</green-prop>
-    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+    <red-prop>sim/model/cabin-lighting/lamps</red-prop>
+    <green-prop>sim/model/cabin-lighting/lamps</green-prop>
+    <blue-prop>sim/model/cabin-lighting/lamps</blue-prop>
   </emission>
 </animation>
 
@@ -642,7 +642,7 @@
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
-      <script>absu.absu_stab_on()</script>
+      <script>absu.absu_stab_toggle()</script>
     </binding>
   </action>
 </animation>
@@ -1082,7 +1082,7 @@
   <object-name>kurs_handle</object-name>
   <visible>true</visible>
   <action>
-    <button>3</button>
+    <button>4</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
@@ -1110,7 +1110,7 @@
   <object-name>kurs_handle</object-name>
   <visible>true</visible>
   <action>
-    <button>4</button>
+    <button>3</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>

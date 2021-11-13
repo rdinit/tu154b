@@ -1,7 +1,7 @@
 AC3Db
 MATERIAL "mat_1" rgb 1 1 1 amb 0 0 0 emis 0 0 0 spec 0 0 0 shi 10 trans 0
 OBJECT world
-kids 7
+kids 8
 OBJECT poly
 name "base"
 loc -0.000124849 -0.00563379 0.000252645
@@ -25,6 +25,25 @@ OBJECT poly
 name "text"
 loc 0.00023273 -0.00376327 0.00810178
 texture "text_v-52.png"
+crease 100.000000
+numvert 4
+-1.03377e-07 -0.0477825 0.0504063
+1.1269e-07 0.0477825 0.0504063
+9.87202e-08 0.0477825 -0.0504063
+-1.13621e-07 -0.0477825 -0.0504063
+numsurf 1
+SURF 0x20
+mat 0
+refs 4
+3 1 0
+2 1 1
+1 5.96046e-08 1
+0 0 2.98023e-08
+kids 0
+OBJECT poly
+name "text_b"
+loc 0.00023273 -0.00376327 0.00810178
+texture "text_v-52_b.png"
 crease 100.000000
 numvert 4
 -1.03377e-07 -0.0477825 0.0504063

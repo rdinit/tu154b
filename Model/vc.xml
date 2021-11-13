@@ -15,26 +15,23 @@
 <PropertyList>
  <path>interior.ac</path>
 <!-- Transparent Surfaces for Rembrandt rendering -->
- <effect>
+ <!--<effect>
     <inherits-from>Effects/model-transparent</inherits-from>
     <object-name>MESH199</object-name>
-    <object-name>LeftWindowGlass</object-name>
-    <object-name>RightWindowGlass</object-name>
- </effect>
+ </effect>-->
 
 <!-- Uncomment it if you want remove cabin glass -->
 <!--
 <animation>
 	<type>select</type>
 	<object-name>MESH199</object-name>
-        <object-name>LeftWindowGlass</object-name>
-        <object-name>RightWindowGlass</object-name>
         <condition>
 	<not>	<property>/sim/rendering/rembrandt/enabled</property>	</not>
       	</condition>
 </animation>
 -->
 <!--Group all in VC-->
+
 <animation>
   <type>none</type>
   <name>virtualcockpit</name>
@@ -317,7 +314,6 @@
     <object-name>sw-96</object-name>
     <object-name>check_lamps_3</object-name>
     <object-name>check-lamps-4</object-name>
-    <object-name>check-lamps_4</object-name>
     <object-name>bt-1</object-name>
     <object-name>bt-2</object-name>
     <object-name>bt-3</object-name>
@@ -334,6 +330,12 @@
     <object-name>lever_sti8</object-name>
     <object-name>lever_sti0</object-name>
     <object-name>lever_sti7</object-name>  
+    <object-name>dme-1</object-name>
+    <object-name>dme-2</object-name>
+    <object-name>sw-wiper-left</object-name>
+    <object-name>sw-wiper-right</object-name>
+    <object-name>ind-busters</object-name>
+    <object-name>air-cond-panel</object-name>
 </animation>
 <!--Hide VC on external views-->
 <animation>
@@ -514,13 +516,41 @@
 </animation>
 
 
+<!--Tiller-->
+<animation>
+  <type>rotate</type>
+  <object-name>taxi_handle</object-name>
+  <property>controls/flight/rudder</property>
+  <factor>50</factor>
+  <condition>
+    <not><property>/tu154/switches/steering-limit</property></not>
+  </condition>
+  <axis>
+    <x1-m>0.723</x1-m>
+    <y1-m>-0.815</y1-m>
+    <z1-m>0.535</z1-m>
+    <x2-m>0.7015</x2-m>
+    <y2-m>-0.825</y2-m>
+    <z2-m>0.524</z2-m>
+  </axis>
+</animation>
+
+
 <!--Gear handle-->
 <animation>
   <type>rotate</type>
   <object-name>gear_handle</object-name>
-  <property>tu154/gear/sw-main</property>
-  <factor>30</factor>
-  <offset-deg>30</offset-deg>
+  <property>sim/model/gear-lever/position</property>
+  <offset-deg>-10</offset-deg>
+  <factor>90.0</factor>
+	
+  <!--<condition>
+  <equals>
+   <property>gear/gear/wow</property>
+   <value>false</value>
+  </equals>
+ </condition>-->
+  
   <center>
     <x-m>0.7007</x-m>
     <y-m>0.0</y-m>
@@ -540,82 +570,41 @@
     <button>0</button>
     <repeatable>false</repeatable>
     <binding>
-      <command>nasal</command>
-      <script>
-          var pos = getprop("tu154/gear/sw-main");
-          if (pos) {
-              interpolate("tu154/gear/sw-main", 0, 0.2);
-          } else if (getprop("controls/gear/gear-down")) {
-              interpolate("tu154/gear/sw-main", -1, 0.2);
-              if (!(getprop("gear/gear/wow")
-                    or getprop("tu154/gear/sw-emerg1")
-                    or getprop("tu154/gear/sw-emerg2")))
-                  setprop("controls/gear/gear-down", 0);
-          } else {
-              interpolate("tu154/gear/sw-main", 1, 0.2);
-              setprop("controls/gear/gear-down", 1);
-          }
-      </script>
-    </binding>
-  </action>
-</animation>
-<!--Emergency gear system 1-->
-<animation>
-  <type>translate</type>
-  <object-name>EmergGearExtHandle</object-name>
-  <property>tu154/gear/sw-emerg1</property>
-  <factor>0.1</factor>
-  <axis>
-    <x1-m>1.12453</x1-m>
-    <y1-m>0.98919</y1-m>
-    <z1-m>0.41541</z1-m>
-    <x2-m>1.12675</x2-m>
-    <y2-m>0.96830</y2-m>
-    <z2-m>0.52967</z2-m>
-  </axis>
-</animation>
-<animation>
-  <type>pick</type>
-  <object-name>EmergGearExtHandle</object-name>
-  <visible>true</visible>
-  <action>
-    <button>0</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-assign</command>
+      <command>property-toggle</command>
+  <!--<condition>
+    <equals>
+	<property>gear/gear/wow</property>
+	    <value>false</value>
+     </equals>
+ </condition>    -->
       <property>controls/gear/gear-down</property>
-      <value>1</value>
-    </binding>
-    <binding>
-      <command>property-interpolate</command>
-      <property>tu154/gear/sw-emerg1</property>
-      <value>1</value>
-      <time>0.4</time>
-    </binding>
-  </action>
-  <action>
-    <button>1</button>
-    <repeatable>false</repeatable>
-    <binding>
-      <command>property-interpolate</command>
-      <property>tu154/gear/sw-emerg1</property>
-      <value>0</value>
-      <time>0.4</time>
     </binding>
   </action>
 </animation>
-<!--Emergency gear system 2-->
 
 <!--Flap handle-->
+<animation>
+  <type>translate</type>
+  <object-name>flaps_handle</object-name>
+  <property>sim/model/constants/one</property>
+  <factor>0.01</factor>
+  <axis>
+    <x>-1</x>
+    <y>0</y>
+    <z>-0.6</z>
+  </axis>
+</animation>
+
 <animation>
   <type>rotate</type>
   <object-name>flaps_handle</object-name>
   <property>controls/flight/flaps</property>
-  <factor>45.0</factor>
+  <offset-deg>-20</offset-deg>
+  <factor>93.0</factor>
   <center>
-    <x-m>0.688</x-m>
+    <x-m>0.695</x-m>
     <y-m>0.0</y-m>
-    <z-m>1.335</z-m>
+    <z-m>1.337</z-m>
   </center>
   <axis>
     <x>0.0</x>
@@ -623,6 +612,11 @@
     <z>0.0</z>
   </axis>
 </animation>
+<!--
+    <x-m>0.688</x-m>
+    <y-m>0.0</y-m>
+    <z-m>1.335</z-m>
+-->
 
 <animation>
   <type>pick</type>
@@ -633,7 +627,7 @@
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
-      <script>controls.flapsDown(1)</script>
+      <script>controls.flapsDown(-1)</script>
     </binding>
   </action>  
   <action>
@@ -641,7 +635,7 @@
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
-      <script>controls.flapsDown(-1)</script>
+      <script>controls.flapsDown(1)</script>
     </binding>
   </action>  
   <action>
@@ -649,7 +643,7 @@
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
-      <script>controls.flapsDown(1)</script>
+      <script>controls.flapsDown(-1)</script>
     </binding>
   </action>
   <action>
@@ -657,7 +651,7 @@
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
-      <script>controls.flapsDown(-1)</script>
+      <script>controls.flapsDown(1)</script>
     </binding>
   </action>
 </animation>
@@ -730,7 +724,7 @@
   <object-name>stab_auto_handle</object-name>  
   <visible>true</visible>
   <action>
-    <button>0</button>
+    <button>1</button>
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
@@ -748,7 +742,7 @@
     </binding>
   </action>
   <action>
-    <button>1</button>
+    <button>0</button>
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
@@ -764,7 +758,7 @@
     </binding>
   </action>
   <action>
-    <button>3</button>
+    <button>4</button>
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
@@ -782,7 +776,7 @@
     </binding>
   </action>
   <action>
-    <button>4</button>
+    <button>3</button>
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
@@ -1294,6 +1288,273 @@
 
 <!-- Rembrandt light -->
  
+
+
+ <effect>
+  <inherits-from>Effects/Glass</inherits-from>
+  <object-name>MESH199</object-name>
+  <object-name>LeftWindowGlass</object-name>
+  <object-name>RightWindowGlass</object-name>
+ </effect>
+
+
+ <!--Doors Panel-->
+ <effect>
+ <inherits-from>Effects/model-transparent</inherits-from>
+  <object-name>DoorsPanel_CargoFront</object-name>
+  <object-name>DoorsPanel_CargoMiddle</object-name>
+  <object-name>DoorsPanel_PassRearLatch</object-name>
+  <object-name>DoorsPanel_PassRearLock</object-name>
+  <object-name>DoorsPanel_Steer63</object-name>
+  <object-name>DoorsPanel_SteerDisabled</object-name>
+  <object-name>DoorsPanel_TechHatch2</object-name>
+  <object-name>DoorsPanel_Unused</object-name>
+</effect>
+
+ <animation>
+  <type>blend</type>
+  <!--<object-name>DoorsPanel_CargoFront</object-name>
+  <object-name>DoorsPanel_CargoMiddle</object-name>
+  <object-name>DoorsPanel_PassRearLatch</object-name>
+  <object-name>DoorsPanel_PassRearLock</object-name>
+  <object-name>DoorsPanel_Steer63</object-name>
+  <object-name>DoorsPanel_SteerDisabled</object-name>
+  <object-name>DoorsPanel_TechHatch2</object-name>-->
+  <object-name>DoorsPanel_Unused</object-name>
+  <expression>
+    <max>
+      <dif>
+        <value>1</value>
+        <property>tu154/systems/electrical/checking-lamps/apu-panel</property>
+      </dif>
+      <dif>
+        <value>1</value>
+        <div>
+          <property>/tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+          <value>27</value>
+        </div>
+      </dif>
+    </max>
+  </expression>
+ </animation>
+
+ <animation>
+  <type>blend</type>
+  <object-name>DoorsPanel_CargoFront</object-name>
+  <expression>
+    <max>
+      <min>
+        <max>
+          <value>0</value>
+          <dif>
+            <value>1</value>
+            <prod>
+              <value>10</value>
+              <property>tu154/door/cargo0</property>
+            </prod>
+          </dif>
+        </max>
+        <dif>
+          <value>1</value>
+          <property>tu154/systems/electrical/checking-lamps/apu-panel</property>
+        </dif>
+      </min>
+      <dif>
+        <value>1</value>
+        <div>
+          <property>/tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+          <value>27</value>
+        </div>
+      </dif>
+    </max>
+  </expression>
+ </animation>
+
+ <animation>
+  <type>blend</type>
+  <object-name>DoorsPanel_CargoMiddle</object-name>
+  <expression>
+    <max>
+      <min>
+        <max>
+          <value>0</value>
+          <dif>
+            <value>1</value>
+            <prod>
+              <value>10</value>
+              <property>tu154/door/cargo1</property>
+            </prod>
+          </dif>
+        </max>
+        <dif>
+          <value>1</value>
+          <property>tu154/systems/electrical/checking-lamps/apu-panel</property>
+        </dif>
+      </min>
+      <dif>
+        <value>1</value>
+        <div>
+          <property>/tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+          <value>27</value>
+        </div>
+      </dif>
+    </max>
+  </expression>
+ </animation>
+
+ <animation>
+  <type>blend</type>
+  <object-name>DoorsPanel_PassRearLatch</object-name>
+  <expression>
+    <max>
+      <min>
+        <max>
+          <value>0</value>
+          <dif>
+            <value>1</value>
+            <prod>
+              <value>10</value>
+              <property>tu154/door/passe</property>
+            </prod>
+          </dif>
+        </max>
+        <dif>
+          <value>1</value>
+          <property>tu154/systems/electrical/checking-lamps/apu-panel</property>
+        </dif>
+      </min>
+      <dif>
+        <value>1</value>
+        <div>
+          <property>/tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+          <value>27</value>
+        </div>
+      </dif>
+    </max>
+  </expression>
+ </animation>
+
+ <animation>
+  <type>blend</type>
+  <object-name>DoorsPanel_PassRearLock</object-name>
+  <expression>
+    <max>
+      <min>
+        <max>
+          <value>0</value>
+          <dif>
+            <value>1</value>
+            <prod>
+              <value>10</value>
+              <property>tu154/door/passe</property>
+            </prod>
+          </dif>
+        </max>
+        <dif>
+          <value>1</value>
+          <property>tu154/systems/electrical/checking-lamps/apu-panel</property>
+        </dif>
+      </min>
+      <dif>
+        <value>1</value>
+        <div>
+          <property>/tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+          <value>27</value>
+        </div>
+      </dif>
+    </max>
+  </expression>
+ </animation>
+
+ <animation>
+  <type>blend</type>
+  <object-name>DoorsPanel_Steer63</object-name>
+  <expression>
+    <max>
+      <min>
+        <max>
+          <value>0</value>
+            <prod>
+              <value>1</value>
+              <property>tu154/switches/steering-limit</property>
+            </prod>
+        </max>
+        <dif>
+          <value>1</value>
+          <property>tu154/systems/electrical/checking-lamps/apu-panel</property>
+        </dif>
+      </min>
+      <dif>
+        <value>1</value>
+        <div>
+          <property>/tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+          <value>27</value>
+        </div>
+      </dif>
+    </max>
+  </expression>
+ </animation>
+
+ <animation>
+  <type>blend</type>
+  <object-name>DoorsPanel_SteerDisabled</object-name>
+  <expression>
+    <max>
+      <min>
+        <max>
+          <value>0</value>
+            <prod>
+              <value>1</value>
+              <property>tu154/switches/steering</property>
+            </prod>
+        </max>
+        <dif>
+          <value>1</value>
+          <property>tu154/systems/electrical/checking-lamps/apu-panel</property>
+        </dif>
+      </min>
+      <dif>
+        <value>1</value>
+        <div>
+          <property>/tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+          <value>27</value>
+        </div>
+      </dif>
+    </max>
+  </expression>
+ </animation>
+
+ <animation>
+  <type>blend</type>
+  <object-name>DoorsPanel_TechHatch2</object-name>
+  <expression>
+    <max>
+      <min>
+        <max>
+          <value>0</value>
+          <dif>
+            <value>1</value>
+            <prod>
+              <value>10</value>
+              <property>tu154/door/refuel</property>
+            </prod>
+          </dif>
+        </max>
+        <dif>
+          <value>1</value>
+          <property>tu154/systems/electrical/checking-lamps/apu-panel</property>
+        </dif>
+      </min>
+      <dif>
+        <value>1</value>
+        <div>
+          <property>/tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+          <value>27</value>
+        </div>
+      </dif>
+    </max>
+  </expression>
+ </animation>
 
 
 

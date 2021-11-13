@@ -15,10 +15,10 @@
 <animation>
   <type>material</type>
   <object-name>base</object-name>
-    <emission>
-    <red-prop>tu154/light/panel/ext-red</red-prop>
-    <green-prop>tu154/light/panel/ext-green</green-prop>
-    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  <emission>
+    <red-prop>sim/model/cabin-lighting/vnesh</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh</blue-prop>
   </emission>
 </animation>
 
@@ -29,9 +29,9 @@
   <object-name>b1</object-name>
   <object-name>b2</object-name>
   <emission>
-    <red-prop>tu154/light/instruments/int-red</red-prop>
-    <green-prop>tu154/light/instruments/int-green</green-prop>
-    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+    <red-prop>sim/model/cabin-lighting/prib</red-prop>
+    <green-prop>sim/model/cabin-lighting/prib</green-prop>
+    <blue-prop>sim/model/cabin-lighting/prib-2</blue-prop>
   </emission>
 </animation>
 
@@ -61,7 +61,7 @@
   <property>tu154/instrumentation/rsbn/handle-2</property>
   <interpolation>
     <entry><ind>	0.0</ind>	<dep>	-60.0</dep></entry>
-    <entry><ind>	9.95</ind>	<dep>	235.65</dep></entry>
+    <entry><ind>	9.0</ind>	<dep>	210.0</dep></entry>
   </interpolation>
   <center>
     <x-m>0.0</x-m>
@@ -140,7 +140,7 @@
   <object-name>handle_1</object-name>
   <visible>true</visible>
   <action>
-    <button>3</button>
+    <button>4</button>
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>      
@@ -153,7 +153,7 @@
   <object-name>handle_1</object-name>
   <visible>true</visible>
   <action>
-    <button>4</button>
+    <button>3</button>
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>      
@@ -166,7 +166,7 @@
   <object-name>handle_2</object-name>
   <visible>true</visible>
   <action>
-    <button>3</button>
+    <button>4</button>
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>      
@@ -179,7 +179,7 @@
   <object-name>handle_2</object-name>
   <visible>true</visible>
   <action>
-    <button>4</button>
+    <button>3</button>
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>      
@@ -195,12 +195,13 @@
   <object-name>hs_1</object-name>
   <visible>false</visible>
   <action>
-    <button>0</button>
-    <button>3</button>
+    <button>1</button>
+    <button>4</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
-      <property>instrumentation/nav[2]/volume</property>
+      <!--<property>instrumentation/nav[2]/volume</property>-->
+      <property>/tu154/instrumentation/rsbn/volume</property>
       <step>0.2</step>
       <min>0.0</min>
       <max>1.0</max>
@@ -213,12 +214,13 @@
   <object-name>hs_1</object-name>
   <visible>false</visible>
   <action>
-    <button>1</button>
-    <button>4</button>
+    <button>0</button>
+    <button>3</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
-      <property>instrumentation/nav[2]/volume</property>
+      <!--<property>instrumentation/nav[2]/volume</property>-->
+      <property>/tu154/instrumentation/rsbn/volume</property>
       <step>-0.2</step>
       <min>0.0</min>
       <max>1.0</max>

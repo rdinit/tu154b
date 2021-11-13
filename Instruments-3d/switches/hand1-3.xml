@@ -16,9 +16,9 @@
   <type>material</type>
   <object-name>handle</object-name>
   <emission>
-    <red-prop>tu154/light/panel/ext-red</red-prop>
-    <green-prop>tu154/light/panel/ext-green</green-prop>
-    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+    <red-prop>sim/model/cabin-lighting/vnesh</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh</blue-prop>
   </emission>
 </animation>
 
@@ -84,7 +84,7 @@
   <object-name>handle</object-name>
   <visible>true</visible>
   <action>
-    <button>3</button>
+    <button>4</button>
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
@@ -104,7 +104,7 @@
   <object-name>handle</object-name>
   <visible>true</visible>
   <action>
-    <button>4</button>
+    <button>3</button>
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>

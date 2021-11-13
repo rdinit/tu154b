@@ -17,9 +17,9 @@
   <object-name>_c_1</object-name>
   <object-name>_c_2</object-name>
   <emission>
-    <red-prop>tu154/light/panel/ext-red</red-prop>
-    <green-prop>tu154/light/panel/ext-green</green-prop>
-    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+    <red-prop>sim/model/cabin-lighting/vnesh</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh</blue-prop>
   </emission>
 </animation>
 <!--Brightness-->
@@ -40,14 +40,7 @@
   <object-name>_d_2</object-name>
   <condition>
     <or>
-      <equals>
-        <property>fdm/jsbsim/fuel/balance-state</property>
-        <value>-1</value>
-      </equals>
-      <less-than>
-        <property>fdm/jsbsim/fuel/disbalance-3</property>
-        <value>0</value>
-      </less-than>
+     <property>tu154/lamps/tank-3-r-level</property>
      <property>tu154/systems/electrical/checking-lamps/engine-panel</property>
     </or>
   </condition>

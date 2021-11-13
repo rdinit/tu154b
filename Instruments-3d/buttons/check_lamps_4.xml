@@ -16,9 +16,9 @@
   <type>material</type>
   <object-name>button</object-name>
   <emission>
-    <red-prop>tu154/light/panel/ext-red</red-prop>
-    <green-prop>tu154/light/panel/ext-green</green-prop>
-    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+    <red-prop>sim/model/cabin-lighting/vnesh</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh</blue-prop>
   </emission>
 </animation>
 
@@ -56,10 +56,8 @@
     <binding>
       <command>nasal</command>
       <script>
-        if (getprop("tu154/systems/electrical/buses/DC27-bus-L/volts")) {
-          setprop("tu154/systems/electrical/checking-lamps/engine-panel", 1.0 );
-          engines.check_lamps_eng();
-        }
+	setprop("tu154/systems/electrical/checking-lamps/engine-panel", 1.0 );
+        engines.check_lamps_eng();
       </script>
     </binding>
     <mod-up>

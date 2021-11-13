@@ -16,12 +16,32 @@
   <type>material</type>
   <object-name>cover</object-name>
   <emission>
-    <red-prop>tu154/light/panel/ext-red</red-prop>
-    <green-prop>tu154/light/panel/ext-green</green-prop>
-    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+    <red-prop>sim/model/cabin-lighting/vnesh</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh</blue-prop>
   </emission>
 </animation>
 <!--Indicators-->
+<animation>
+  <type>select</type>
+  <object-name>text</object-name>
+  <condition>
+    <greater-than>
+      <property>/tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+      <value>10</value>
+    </greater-than>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>text_back</object-name>
+  <condition>
+    <less-than>
+      <property>/tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+      <value>10</value>
+    </less-than>
+  </condition>
+</animation>
 <animation>
   <type>material</type>
   <object-name>text</object-name>

@@ -8,11 +8,11 @@
 #    	yurik.nsk@gmail.com						   #
 ############################################################################-->
 
-<PropertyList>
+<PropertyList include="Aircraft/tu154b/Systems/walker-include.xml">
 
  <sim>
-	 <description>Tupolev Tu-154b airliner</description>
-	 <author>Yurik V. Nikiforoff aka Yurik_nsk</author>
+	 <description>Tupolev Tu-154B-2 airliner</description>
+	 <author>Yurik V. Nikiforoff aka Yurik_nsk; modded by ShFsn</author>
 
 
 	 <status>advanced production</status>
@@ -23,15 +23,31 @@
 	  <model type="int">5</model>
 	</rating>
 
+  
+	<tags>
+	 <tag>transport</tag>
+	 <tag>1960s</tag>
+	 <tag>1970s</tag>
+	 <tag>1980s</tag>
+	 <tag>1990s</tag>
+	 <tag>2000s</tag>
+	 <tag>2010s</tag>
+	 <tag>ifr</tag>
+	 <tag>retractable-gear</tag>
+	 <tag>t-tail</tag>
+	 <tag>jet</tag>
+	 <tag>rembrandt</tag>
+	</tags>
+
 	 <help>
 	   <title>Tu-154B-2</title>
    	   <key>
-	    <name>s</name>
-	    <desc>Autostart</desc>
+	    <name>u</name>
+	    <desc>Autostart (aUtostart)</desc>
 	   </key>
 	   <key>
-	    <name>d/D/Ctrl+D</name>
-	    <desc>AP On/Autothrottle On/AP-AT Off </desc>
+	    <name>f/F/Ctrl+F</name>
+	    <desc>AP On/Autothrottle On/AP-AT Off (F - autoFlight)</desc>
 	   </key>
 	   <key>
 	    <name>N/n/Ctrl+N/*</name>
@@ -42,49 +58,54 @@
 	    <desc>Spoilers control</desc>
 	   </key>
 	   <key>
-	    <name>F2</name>
-	    <desc>Thrust reverser On</desc>
+	    <name>r</name>
+	    <desc>Thrust reverser On (ReveRseR)</desc>
 	   </key>
 	   <key>
-	    <name>Delete</name>
-	    <desc>Center aileron, elevator, and rudder</desc>
+	    <name>M</name>
+	    <desc>Center aileron, elevator, and rudder (in Middle)</desc>
 	   </key>
-	   <key>
-	    <name>m</name>
-	    <desc>Map case zoom-in</desc>
-	   </key>
-	   <key>
-	    <name>ctrl+g</name>
-	    <desc>Gear handle neutral</desc>
-	   </key>
+     <key>
+      <name>1-0</name>
+      <desc>Fast Views Switches</desc>
+     </key>
 	 </help>
+
+  <flight-recorder include="Systems/tu154b-flightrec.xml"/>
+
+  <replay>
+    <buffer>
+      <medium-res-sample-dt type="double">0.25</medium-res-sample-dt>
+      <medium-res-time type="double">1800</medium-res-time>
+    </buffer>
+  </replay>
 
 <menubar>
   <default>
+
     <menu n="10">
+      <label>|</label>
+      <enabled type="bool">false</enabled>
+    </menu>
+
+    <menu n="11">
       <label>Tu-154B-2</label>
       <enabled type="bool">true</enabled>
+
       <item>
-	<label>Select Livery</label>
-	<binding>
-	<command>nasal</command>
-	<script>aircraft.livery.dialog.toggle()</script>
-	</binding>
-      </item>
-      <item>
-	      <label>Route manager</label>
-	      <binding>
-		      <command>dialog-show</command>
-		      <dialog-name>route-manager</dialog-name>
-	      </binding>
+        <label>Secondary Radio</label>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>sec-radio</dialog-name>
+        </binding>
       </item>
 
       <item>
-	      <label>NVU Calculator</label>
-	      <binding>
-		      <command>dialog-show</command>
-		      <dialog-name>nav</dialog-name>
-	      </binding>
+        <label>Maintenance</label>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>maintenance</dialog-name>
+        </binding>
       </item>
 
       <item>
@@ -97,11 +118,65 @@
       </item>
 
     </menu>
+
+    <menu n="12">
+      <label>Navigation</label>
+      <enabled type="bool">true</enabled>
+
+      <item>
+        <label>Airport Charts</label>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>airports</dialog-name>
+        </binding>
+      </item>
+
+      <item>
+        <label>Route manager</label>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>route-manager</dialog-name>
+        </binding>
+      </item>
+
+      <item>
+        <label>NVU Calculator</label>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>nav</dialog-name>
+        </binding>
+      </item>
+
+    </menu>
+
+    <menu n="14">
+      <label>Other</label>
+      <enabled type="bool">true</enabled>
+
+      <item>
+        <label>Select Livery</label>
+        <binding>
+          <command>nasal</command>
+          <script>aircraft.livery.dialog.toggle()</script>
+        </binding>
+      </item>
+
+      <item>
+        <label>Preferences</label>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>preferences</dialog-name>
+        </binding>
+      </item>
+
+    </menu>
+
   </default>
 </menubar>
 
 
 
+<gui n="0" include="gui/it-gui.xml"/>
 <gui>
   <style>
     <colors>
@@ -125,12 +200,101 @@
   <file type="string">85363-AFL</file>
  </livery>
 
+ <constants>
+  <one type="float">1</one>
+ </constants>
+
  <pushback>
-  <kp type="double">100</kp>
-  <ki type="double">25</ki>
-  <kd type="double">0</kd>
+  <kp type="double">2000</kp>
+  <ki type="double">500</ki>
+  <kd type="double">250</kd>
   <position-norm type="double">0</position-norm>
  </pushback>
+
+ <map>
+  <default_exit>
+   <x-offset-m type ="float">-4.25</x-offset-m>
+   <y-offset-m type ="float">-8</y-offset-m>
+  </default_exit>
+ </map>
+
+ <eng-doors>
+  <rotate1 type ="float">0</rotate1>
+  <rotate3 type ="float">0</rotate3>
+  <rotate-offset type ="float">0</rotate-offset>
+ </eng-doors>
+
+ <rev-flaps>
+  <rev-flaps1 type ="float">0</rev-flaps1>
+  <rev-flaps3 type ="float">0</rev-flaps3>
+  <rev-flaps-offset type ="float">0</rev-flaps-offset>
+ </rev-flaps>
+
+ <cabin-lighting>
+  <vnesh type="double" >0.0</vnesh>
+  <vnesh-2 type="double" >0.0</vnesh-2>
+  <lamps type="double" >0.0</lamps>
+  <lamps-2 type="double" >0.0</lamps-2>
+  <prib type="double" >0.0</prib>
+  <prib-2 type="double" >0.0</prib-2>
+ </cabin-lighting>
+
+ <!--<external-lighting>
+  <headlight type="float">0</headlight>
+  <logo type="float">0</logo>
+ </external-lighting>-->
+
+ <nav-display>
+  <show type="bool">true</show>
+ </nav-display>
+
+ <ground-services>
+  <stairs type="bool">false</stairs>
+  <st-cover type="bool">false</st-cover>
+  <bus1 type="bool">false</bus1>
+  <bus2 type="bool">false</bus2>
+  <f-buggage type="bool">false</f-buggage>
+  <r-buggage type="bool">false</r-buggage>
+  <chocks type="bool">true</chocks>
+  <chockss type="bool">true</chockss>
+  <de-ice type="bool">false</de-ice>
+  <de-ice-p type="bool">false</de-ice-p>
+  <de-ice-pp type="double">0</de-ice-pp>
+  <catering type="bool">false</catering>
+  <cat-up type="bool">false</cat-up>
+  <ext-power type="bool">false</ext-power>
+  <ep-connect type="bool">false</ep-connect>
+  <fuel-l type="bool">false</fuel-l>
+  <fuel-r type="bool">false</fuel-r>
+  <f-connect-l type="bool">false</f-connect-l>
+  <f-connect-r type="bool">false</f-connect-r>
+ </ground-services>
+
+ <glass-effect>
+  <frostk type="double">1</frostk>
+ </glass-effect>
+
+ <replay-fix>
+  <save_state type="bool">true</save_state>
+ </replay-fix>
+
+ <gear-lever>
+  <position type="float">0.5</position>
+ </gear-lever>
+
+ <door>
+  <position-x-m type="float">-18.66</position-x-m>
+  <position-y-m type="float">-1.742</position-y-m>
+  <position-z-m type="float">1.015</position-z-m>
+  <jetway-hood-deg type="float">12.0</jetway-hood-deg>
+ </door>
+ <door>
+  <position-x-m type="float">-7.697</position-x-m>
+  <position-y-m type="float">-1.87</position-y-m>
+  <position-z-m type="float">1.015</position-z-m>
+  <jetway-hood-deg type="float">11.0</jetway-hood-deg>
+ </door>
+
 </model>
 
 <flight-model>jsb</flight-model>
@@ -141,6 +305,14 @@
 
 <sound>
   <path>Aircraft/tu154b/Sound/sound.xml</path>
+  <internal type="bool">true</internal>
+  <external type="bool">false</external>
+  <pax type="bool">false</pax>
+  <window-open type="bool">false</window-open>
+  <loud-ext type="bool">true</loud-ext>
+  <voices>
+    <copilot type="string"></copilot>
+  </voices>
 </sound>
 
   <checklists include="tu154b-checklists.xml"/>
@@ -165,6 +337,7 @@
      <y-offset-m >2.16</y-offset-m>
      <z-offset-m >-21.75</z-offset-m>
      <pitch-offset-deg type="double">-10.0</pitch-offset-deg>
+     <default-field-of-view-deg type="double">84.5</default-field-of-view-deg>
    </config>
   </view>
   <!--Custom views-->
@@ -178,10 +351,11 @@
       <x-offset-m type="double" >0.55</x-offset-m>
       <y-offset-m type="double" >2.18</y-offset-m>
       <z-offset-m type="double" >-21.75</z-offset-m>
-      <pitch-offset-deg type="double">-12.0</pitch-offset-deg>
+      <heading-offset-deg type="double">38.0</heading-offset-deg>
+      <pitch-offset-deg type="double">-28.7</pitch-offset-deg>
       <from-model-idx type="int">0</from-model-idx>
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-      <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
+      <default-field-of-view-deg type="double">103.0</default-field-of-view-deg>
       <default-pitch-deg type="double">0</default-pitch-deg>
       <default-heading-deg type="double">0</default-heading-deg>
       <front-direction-deg type="double">0</front-direction-deg>
@@ -195,6 +369,7 @@
       <dynamic-view type="bool">true</dynamic-view>
     </config>
   </view>
+
   <view n="102">
     <name>Navigator View</name>
     <!--<enabled type="bool" >true</enabled>-->
@@ -205,10 +380,10 @@
       <x-offset-m type="double" >0.0</x-offset-m>
       <y-offset-m type="double" >2.25</y-offset-m>
       <z-offset-m type="double" >-21.75</z-offset-m>
-      <pitch-offset-deg type="double">-60.0</pitch-offset-deg>
+      <pitch-offset-deg type="double">-66.0</pitch-offset-deg>
       <from-model-idx type="int">0</from-model-idx>
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-      <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
+      <default-field-of-view-deg type="double">79.1</default-field-of-view-deg>
       <default-pitch-deg type="double">0</default-pitch-deg>
       <default-heading-deg type="double">0</default-heading-deg>
       <front-direction-deg type="double">0</front-direction-deg>
@@ -222,6 +397,7 @@
       <dynamic-view type="bool">true</dynamic-view>
     </config>
   </view>
+
   <view n="103">
     <name>Overhead View</name>
     <!--<enabled type="bool">true</enabled>-->
@@ -232,10 +408,10 @@
       <x-offset-m type="double" >0.0</x-offset-m>
       <y-offset-m type="double" >1.5</y-offset-m>
       <z-offset-m type="double" >-21.75</z-offset-m>
-      <pitch-offset-deg type="double">70.0</pitch-offset-deg>
+      <pitch-offset-deg type="double">69.0</pitch-offset-deg>
       <from-model-idx type="int">0</from-model-idx>
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-      <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
+      <default-field-of-view-deg type="double">71.6</default-field-of-view-deg>
       <default-pitch-deg type="double">0</default-pitch-deg>
       <default-heading-deg type="double">0</default-heading-deg>
       <front-direction-deg type="double">0</front-direction-deg>
@@ -249,6 +425,7 @@
       <dynamic-view type="bool">true</dynamic-view>
     </config>
   </view>
+
   <view n="104">
     <name>Flight Engineer View</name>
     <!--<enabled type="bool" >true</enabled>-->
@@ -260,10 +437,10 @@
       <y-offset-m type="double" >2.25</y-offset-m>
       <z-offset-m type="double" >-20.5</z-offset-m>
       <heading-offset-deg type="double">-90.0</heading-offset-deg>
-      <pitch-offset-deg type="double">-10.0</pitch-offset-deg>
+      <pitch-offset-deg type="double">-12.0</pitch-offset-deg>
       <from-model-idx type="int">0</from-model-idx>
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-      <default-field-of-view-deg type="double">55.0</default-field-of-view-deg>
+      <default-field-of-view-deg type="double">79.1</default-field-of-view-deg>
       <default-pitch-deg type="double">0</default-pitch-deg>
       <default-heading-deg type="double">0</default-heading-deg>
       <front-direction-deg type="double">0</front-direction-deg>
@@ -279,20 +456,20 @@
   </view>
 
   <view n="105">
-    <name>Passenger View</name>
+    <name>Left Passenger View</name>
     <!--<enabled type="bool" >true</enabled>-->
     <type>lookfrom</type>
     <internal type="bool">false</internal>
     <config>
       <from-model type="bool">true</from-model>
-      <x-offset-m type="double" >2.01</x-offset-m>
+      <x-offset-m type="double" >-2.01</x-offset-m>
       <y-offset-m type="double" >2.01</y-offset-m>
       <z-offset-m type="double" >4.51</z-offset-m>
-      <heading-offset-deg type="double">307.0</heading-offset-deg>
-      <pitch-offset-deg type="double">-18.2</pitch-offset-deg>
+      <heading-offset-deg type="double">-300.0</heading-offset-deg>
+      <pitch-offset-deg type="double">-12.8</pitch-offset-deg>
       <from-model-idx type="int">0</from-model-idx>
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-      <default-field-of-view-deg type="double">76.7</default-field-of-view-deg>
+      <default-field-of-view-deg type="double">100.0</default-field-of-view-deg>
       <default-pitch-deg type="double">0</default-pitch-deg>
       <default-heading-deg type="double">0</default-heading-deg>
       <front-direction-deg type="double">0</front-direction-deg>
@@ -308,21 +485,20 @@
   </view>
 
   <view n="106">
-    <name>Map Case View</name>
-    <enabled type="bool">false</enabled>
-    <internal type="bool">true</internal>
+    <name>Right Passenger View</name>
+    <!--<enabled type="bool" >true</enabled>-->
     <type>lookfrom</type>
+    <internal type="bool">false</internal>
     <config>
-      <heading-offset-deg>5.25</heading-offset-deg>
-      <pitch-offset-deg>-16.3</pitch-offset-deg>
-      <field-of-view>56.0</field-of-view>
       <from-model type="bool">true</from-model>
-      <x-offset-m >0.22</x-offset-m>
-      <y-offset-m >1.74</y-offset-m>
-      <z-offset-m >-22.3</z-offset-m>
+      <x-offset-m type="double" >2.01</x-offset-m>
+      <y-offset-m type="double" >2.01</y-offset-m>
+      <z-offset-m type="double" >4.51</z-offset-m>
+      <heading-offset-deg type="double">300.0</heading-offset-deg>
+      <pitch-offset-deg type="double">-12.8</pitch-offset-deg>
       <from-model-idx type="int">0</from-model-idx>
       <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-      <default-field-of-view-deg type="double">56.0</default-field-of-view-deg>
+      <default-field-of-view-deg type="double">100.0</default-field-of-view-deg>
       <default-pitch-deg type="double">0</default-pitch-deg>
       <default-heading-deg type="double">0</default-heading-deg>
       <front-direction-deg type="double">0</front-direction-deg>
@@ -336,7 +512,66 @@
       <dynamic-view type="bool">true</dynamic-view>
     </config>
   </view>
+
   <view n="107">
+    <name>Tail View</name>
+    <!--<enabled type="bool" >true</enabled>-->
+    <type>lookfrom</type>
+    <internal type="bool">false</internal>
+    <config>
+      <from-model type="bool">true</from-model>
+      <x-offset-m type="double" >0.0</x-offset-m>
+      <y-offset-m type="double" >8.7</y-offset-m>
+      <z-offset-m type="double" >11.09</z-offset-m>
+      <heading-offset-deg type="double">0.0</heading-offset-deg>
+      <pitch-offset-deg type="double">-30.0</pitch-offset-deg>
+      <from-model-idx type="int">0</from-model-idx>
+      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+      <default-field-of-view-deg type="double">100.0</default-field-of-view-deg>
+      <default-pitch-deg type="double">0</default-pitch-deg>
+      <default-heading-deg type="double">0</default-heading-deg>
+      <front-direction-deg type="double">0</front-direction-deg>
+      <front-left-direction-deg type="double">45</front-left-direction-deg>
+      <left-direction-deg type="double">90</left-direction-deg>
+      <back-left-direction-deg type="double">135</back-left-direction-deg>
+      <back-direction-deg type="double">180</back-direction-deg>
+      <back-right-direction-deg type="double">225</back-right-direction-deg>
+      <right-direction-deg type="double">270</right-direction-deg>
+      <front-right-direction-deg type="double">315</front-right-direction-deg>
+      <dynamic-view type="bool">true</dynamic-view>
+    </config>
+  </view>
+
+  <view n="108">
+    <name>Rear Gear View</name>
+    <!--<enabled type="bool" >true</enabled>-->
+    <type>lookfrom</type>
+    <internal type="bool">false</internal>
+    <config>
+      <from-model type="bool">true</from-model>
+      <x-offset-m type="double" >9.91</x-offset-m>
+      <y-offset-m type="double" >-0.39</y-offset-m>
+      <z-offset-m type="double" >5.71</z-offset-m>
+      <heading-offset-deg type="double">45.0</heading-offset-deg>
+      <pitch-offset-deg type="double">-12.8</pitch-offset-deg>
+      <from-model-idx type="int">0</from-model-idx>
+      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
+      <default-field-of-view-deg type="double">99.9</default-field-of-view-deg>
+      <default-pitch-deg type="double">0</default-pitch-deg>
+      <default-heading-deg type="double">0</default-heading-deg>
+      <front-direction-deg type="double">0</front-direction-deg>
+      <front-left-direction-deg type="double">45</front-left-direction-deg>
+      <left-direction-deg type="double">90</left-direction-deg>
+      <back-left-direction-deg type="double">135</back-left-direction-deg>
+      <back-direction-deg type="double">180</back-direction-deg>
+      <back-right-direction-deg type="double">225</back-right-direction-deg>
+      <right-direction-deg type="double">270</right-direction-deg>
+      <front-right-direction-deg type="double">315</front-right-direction-deg>
+      <dynamic-view type="bool">true</dynamic-view>
+    </config>
+  </view>
+
+  <view n="109">
     <name>Refuel Panel View</name>
     <enabled type="bool">false</enabled>
     <type>lookfrom</type>
@@ -364,93 +599,17 @@
       <dynamic-view type="bool">true</dynamic-view>
     </config>
   </view>
-  <view n="108">
-    <name>Passenger Door View</name>
-    <enabled type="bool">false</enabled>
-    <type>lookfrom</type>
-    <internal type="bool">false</internal>
-    <config>
-      <from-model type="bool">true</from-model>
-      <x-offset-m type="double" >-10</x-offset-m>
-      <y-offset-m type="double" >2.3</y-offset-m>
-      <z-offset-m type="double" >-11</z-offset-m>
-      <heading-offset-deg type="double">-110</heading-offset-deg>
-      <pitch-offset-deg type="double">0</pitch-offset-deg>
-      <from-model-idx type="int">0</from-model-idx>
-      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-      <default-field-of-view-deg type="double">49</default-field-of-view-deg>
-      <default-pitch-deg type="double">0</default-pitch-deg>
-      <default-heading-deg type="double">0</default-heading-deg>
-      <front-direction-deg type="double">0</front-direction-deg>
-      <front-left-direction-deg type="double">45</front-left-direction-deg>
-      <left-direction-deg type="double">90</left-direction-deg>
-      <back-left-direction-deg type="double">135</back-left-direction-deg>
-      <back-direction-deg type="double">180</back-direction-deg>
-      <back-right-direction-deg type="double">225</back-right-direction-deg>
-      <right-direction-deg type="double">270</right-direction-deg>
-      <front-right-direction-deg type="double">315</front-right-direction-deg>
-      <dynamic-view type="bool">true</dynamic-view>
-    </config>
-  </view>
-  <view n="109">
-    <name>Front Cargo Door View</name>
-    <enabled type="bool">false</enabled>
-    <type>lookfrom</type>
-    <internal type="bool">false</internal>
-    <config>
-      <from-model type="bool">true</from-model>
-      <x-offset-m type="double" >7</x-offset-m>
-      <y-offset-m type="double" >-0.5</y-offset-m>
-      <z-offset-m type="double" >-9</z-offset-m>
-      <heading-offset-deg type="double">60</heading-offset-deg>
-      <pitch-offset-deg type="double">10</pitch-offset-deg>
-      <from-model-idx type="int">0</from-model-idx>
-      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-      <default-field-of-view-deg type="double">49</default-field-of-view-deg>
-      <default-pitch-deg type="double">0</default-pitch-deg>
-      <default-heading-deg type="double">0</default-heading-deg>
-      <front-direction-deg type="double">0</front-direction-deg>
-      <front-left-direction-deg type="double">45</front-left-direction-deg>
-      <left-direction-deg type="double">90</left-direction-deg>
-      <back-left-direction-deg type="double">135</back-left-direction-deg>
-      <back-direction-deg type="double">180</back-direction-deg>
-      <back-right-direction-deg type="double">225</back-right-direction-deg>
-      <right-direction-deg type="double">270</right-direction-deg>
-      <front-right-direction-deg type="double">315</front-right-direction-deg>
-      <dynamic-view type="bool">true</dynamic-view>
-    </config>
-  </view>
-  <view n="111">
-    <name>Rear Cargo Door View</name>
-    <enabled type="bool">false</enabled>
-    <type>lookfrom</type>
-    <internal type="bool">false</internal>
-    <config>
-      <from-model type="bool">true</from-model>
-      <x-offset-m type="double" >7</x-offset-m>
-      <y-offset-m type="double" >-0.5</y-offset-m>
-      <z-offset-m type="double" >8.5</z-offset-m>
-      <heading-offset-deg type="double">50</heading-offset-deg>
-      <pitch-offset-deg type="double">10</pitch-offset-deg>
-      <from-model-idx type="int">0</from-model-idx>
-      <ground-level-nearplane-m type="double">0.5f</ground-level-nearplane-m>
-      <default-field-of-view-deg type="double">49</default-field-of-view-deg>
-      <default-pitch-deg type="double">0</default-pitch-deg>
-      <default-heading-deg type="double">0</default-heading-deg>
-      <front-direction-deg type="double">0</front-direction-deg>
-      <front-left-direction-deg type="double">45</front-left-direction-deg>
-      <left-direction-deg type="double">90</left-direction-deg>
-      <back-left-direction-deg type="double">135</back-left-direction-deg>
-      <back-direction-deg type="double">180</back-direction-deg>
-      <back-right-direction-deg type="double">225</back-right-direction-deg>
-      <right-direction-deg type="double">270</right-direction-deg>
-      <front-right-direction-deg type="double">315</front-right-direction-deg>
-      <dynamic-view type="bool">true</dynamic-view>
-    </config>
-  </view>
+
+
+
 
   <instrumentation>
     <path>Aircraft/tu154b/Systems/instrumentation-config.xml</path>
+
+    <tcas>
+        <name>tcas</name>
+        <number>0</number>
+     </tcas>
   </instrumentation>
   <realism>
 	  <false-radio-courses-enabled type="bool">false</false-radio-courses-enabled>
@@ -480,6 +639,24 @@
     <property-rule>
       <path>Aircraft/tu154b/Systems/property-rules.xml</path>
     </property-rule>
+
+    <wingflexer include="Systems/wingflexer-params.xml">
+    <!--<property-rule n="100">
+     <name>wing flexer property rule</name>
+     <path>Systems/wingflexer.xml</path>
+    </property-rule>-->
+      <a-fuselage-mps2 type="double">0</a-fuselage-mps2>
+      <d type="double">0</d>
+      <delta-sec type="double">0</delta-sec>
+      <f-lift-N type="double">0</f-lift-N>
+      <k type="double">0</k>
+      <m-wing-kg type="double">0</m-wing-kg>
+      <sink-rate-fps type="double">0</sink-rate-fps>
+      <z-m type="double">0</z-m>
+      <z-max-m type="double">0</z-max-m>
+      <z-ofs-m type="double">0</z-ofs-m>
+      <z-raw-m type="double">0</z-raw-m>
+    </wingflexer>
   </systems>
 
   <airport>
@@ -487,6 +664,102 @@
       <start-offset-m type="double">10</start-offset-m>
     </runways>
   </airport>
+
+  <previews>
+   <preview>
+    <type>exterior</type>
+    <splash type="bool">true</splash>
+    <path>gui/Splash/exterior/1.jpg</path>
+   </preview>
+   <preview>
+    <type>exterior</type>
+    <splash type="bool">true</splash>
+    <path>gui/Splash/exterior/2.jpg</path>
+   </preview>
+   <preview>
+    <type>exterior</type>
+    <splash type="bool">true</splash>
+    <path>gui/Splash/exterior/3.jpg</path>
+   </preview>
+   <preview>
+    <type>exterior</type>
+    <splash type="bool">true</splash>
+    <path>gui/Splash/exterior/4.jpg</path>
+   </preview>
+   <preview>
+    <type>exterior</type>
+    <splash type="bool">true</splash>
+    <path>gui/Splash/exterior/5.jpg</path>
+   </preview>
+   <preview>
+    <type>exterior</type>
+    <splash type="bool">true</splash>
+    <path>gui/Splash/exterior/6.jpg</path>
+   </preview>
+   <preview>
+    <type>exterior</type>
+    <splash type="bool">true</splash>
+    <path>gui/Splash/exterior/7.jpg</path>
+   </preview>
+   <preview>
+    <type>exterior</type>
+    <splash type="bool">true</splash>
+    <path>gui/Splash/exterior/8.jpg</path>
+   </preview>
+   <preview>
+    <type>panel</type>
+    <splash type="bool">true</splash>
+    <path>gui/Splash/panel/1.jpg</path>
+   </preview>
+   <preview>
+    <type>panel</type>
+    <splash type="bool">true</splash>
+    <path>gui/Splash/panel/2.jpg</path>
+   </preview>
+   <preview>
+    <type>panel</type>
+    <splash type="bool">true</splash>
+    <path>gui/Splash/panel/3.jpg</path>
+   </preview>
+   <preview>
+    <type>panel</type>
+    <splash type="bool">true</splash>
+    <path>gui/Splash/panel/4.jpg</path>
+   </preview>
+   <preview>
+    <type>art</type>
+    <splash type="bool">true</splash>
+    <path>gui/Splash/art/1.jpg</path>
+   </preview>
+   <preview>
+    <type>art</type>
+    <splash type="bool">true</splash>
+    <path>gui/Splash/art/2.jpg</path>
+   </preview>
+  </previews>
+
+  <rendering>
+    <als-secondary-lights>
+      <landing-light1-offset-deg type="float">2.5</landing-light1-offset-deg>
+      <landing-light2-offset-deg type="float">-2.5</landing-light2-offset-deg>
+      <landing-light3-offset-deg type="float">95</landing-light3-offset-deg>
+      <lightspot>
+        <dir type="float">0</dir>
+        <dir type="float">0</dir>
+        <dir type="float">0</dir>
+        <dir type="float">0</dir>
+        <dir type="float">0</dir>
+      </lightspot>
+    </als-secondary-lights>
+  </rendering>
+
+
+  <!--Save properties between sessions-->
+  <!--<aircraft-data>
+    <path>/instrumentation/comm/frequencies/selected-mhz</path>
+    <path>/instrumentation/comm[1]/frequencies/selected-mhz</path>
+  </aircraft-data>-->
+
 
 </sim>
 
@@ -590,8 +863,8 @@
  <fuel>
   <tank n="0"><name>Feed tank (1)</name></tank>
   <tank n="1"><name>Left wing inner tank (2 LEFT)</name></tank>
-  <tank n="2"><name>Right wing inner tank (2 RIGHT)</name></tank>
-  <tank n="3"><name>Left wing outer tank (3 LEFT)</name></tank>
+  <tank n="2"><name>Left wing outer tank (3 LEFT)</name></tank>
+  <tank n="3"><name>Right wing inner tank (2 RIGHT)</name></tank>
   <tank n="4"><name>Right wing outer tank (3 RIGHT)</name></tank>
   <tank n="5"><name>Ballast tank (4)</name></tank>
  </fuel>
@@ -677,6 +950,23 @@
   <turn-indicator>
     <serviceable type="bool">false</serviceable>
   </turn-indicator>
+
+  <tcas>                                <!-- http://wiki.flightgear.org/index.php/TCAS -->
+      <serviceable type="bool">true</serviceable>
+                                          <!-- TCAS ENABLE -->
+      <inputs>
+          <mode type="int">1</mode>       <!-- 0=off, 1=standby, 2=TA-only, 3=auto(TA/RA) -->
+      </inputs>
+      <!--<voice>
+          <file-prefix type="string">Aircraft/MyAircraft/Sounds/tcas/</file-prefix>
+      </voice>-->
+      <speaker>                           <!-- Speaker Configuration -->
+        <max-dist> 2 </max-dist>          <!-- Max. distance where speaker is heard -->
+        <reference-dist> 1 </reference-dist> <!-- Distance to pilot -->
+        <volume> 1.0 </volume>            <!-- Volume at reference distance -->
+      </speaker>
+    </tcas>
+
 </instrumentation>
 
 <controls>
@@ -689,52 +979,86 @@
 <!-- Nasal files/scripts -->
 <nasal>
 	<instruments>
-          <file>Aircraft/tu154b/Nasal/instruments.nas</file>
+    <file>Aircraft/tu154b/Nasal/instruments.nas</file>
 	</instruments>
+
 	<mapcase>
-          <file>Aircraft/tu154b/Nasal/mapcase.nas</file>
+    <file>Aircraft/tu154b/Nasal/mapcase.nas</file>
+    <file>Aircraft/tu154b/Nasal/ND.nas</file>
 	</mapcase>
-        <electrical>
-          <file>Aircraft/tu154b/Nasal/electrical.nas</file>
-        </electrical>
-        <engines>
-          <file>Aircraft/tu154b/Nasal/engines.nas</file>
-        </engines>
-        <warning>
-          <file>Aircraft/tu154b/Nasal/warn.nas</file>
-        </warning>
+
+  <electrical>
+    <file>Aircraft/tu154b/Nasal/electrical.nas</file>
+  </electrical>
+
+  <engines>
+    <file>Aircraft/tu154b/Nasal/engines.nas</file>
+  </engines>
+
+  <fuel>
+    <file>Aircraft/tu154b/Nasal/fuel.nas</file>
+  </fuel>
+
+  <warning>
+    <file>Aircraft/tu154b/Nasal/warn.nas</file>
+  </warning>
+
 	<absu>
-          <file>Aircraft/tu154b/Nasal/absu.nas</file>
-        </absu>
-        <view>
-          <file>Aircraft/tu154b/Nasal/view.nas</file>
-        </view>
-        <controls>
-          <file>Aircraft/tu154b/Nasal/controls.nas</file>
-        </controls>
-        <hydrosystems>
-          <file>Aircraft/tu154b/Nasal/hydrosystems.nas</file>
-        </hydrosystems>
-        <liveries>
-          <file>Aircraft/tu154b/Nasal/liveries.nas</file>
-        </liveries>
+    <file>Aircraft/tu154b/Nasal/absu.nas</file>
+  </absu>
+
+  <view>
+    <file>Aircraft/tu154b/Nasal/view.nas</file>
+  </view>
+
+  <controls>
+    <file>Aircraft/tu154b/Nasal/controls.nas</file>
+  </controls>
+
+  <hydrosystems>
+    <file>Aircraft/tu154b/Nasal/hydrosystems.nas</file>
+  </hydrosystems>
+
+  <liveries>
+    <file>Aircraft/tu154b/Nasal/liveries.nas</file>
+  </liveries>
+
 	<tyresmoke>
 	  <file>Aircraft/tu154b/Nasal/tyresmoke.nas</file>
-	 </tyresmoke>
+	</tyresmoke>
+
 	<friction>
 	  <file>Aircraft/tu154b/Nasal/friction.nas</file>
 	</friction>
-	<!--
-      <debug>
-  <file>Aircraft/tu154b/Nasal/debug.nas</file>
-        </debug>-->
 
-        <help>
-          <file>Aircraft/tu154b/Nasal/help.nas</file>
-        </help>
+	<!--<debug>
+    <file>Aircraft/tu154b/Nasal/debug.nas</file>
+  </debug>-->
+
+  <help>
+    <file>Aircraft/tu154b/Nasal/help.nas</file>
+  </help>
+
 	<contrail>
-          <file>Aircraft/tu154b/Nasal/contrail.nas</file>
-        </contrail>
+    <file>Aircraft/tu154b/Nasal/contrail.nas</file>
+  </contrail>
+
+  <lights>
+    <file>Aircraft/tu154b/Nasal/lights.nas</file>
+  </lights>
+
+  <model-3d>
+    <file>Aircraft/tu154b/Nasal/model-3d.nas</file>
+  </model-3d>
+
+  <replay-fix>
+    <file>Aircraft/tu154b/Nasal/replay-fix.nas</file>
+  </replay-fix>
+
+  <air-conditioning>
+    <file>Aircraft/tu154b/Nasal/air-conditioning.nas</file>
+  </air-conditioning>
+
 </nasal>
 
 <fdm>
@@ -801,30 +1125,22 @@
 
     </hs>
 
-    <tu154>
-      <gear>
-        <sw-main alias="/tu154/gear/sw-main"/>
-        <sw-emerg1 alias="/tu154/gear/sw-emerg1"/>
-        <sw-emerg2 alias="/tu154/gear/sw-emerg2"/>
-      </gear>
-    </tu154>
-
     <fuel>
-      <power-dc27-L
-          alias="/tu154/systems/electrical/buses/DC27-bus-L/volts"/>
-      <power-ac200-1L
-          alias="/tu154/systems/electrical/buses/AC3x200-bus-1L/volts"/>
-      <power-ac200-2
-          alias="/tu154/systems/electrical/buses/AC3x200-bus-2/volts"/>
-      <power-ac200-3L
-          alias="/tu154/systems/electrical/buses/AC3x200-bus-3L/volts"/>
-      <level-1-kg alias="/consumables/fuel/tank[0]/level-kg"/>
-      <level-2L-kg alias="/consumables/fuel/tank[1]/level-kg"/>
-      <level-2R-kg alias="/consumables/fuel/tank[2]/level-kg"/>
-      <level-3L-kg alias="/consumables/fuel/tank[3]/level-kg"/>
-      <level-3R-kg alias="/consumables/fuel/tank[4]/level-kg"/>
-      <level-4-kg alias="/consumables/fuel/tank[5]/level-kg"/>
-      <sw-apu alias="/tu154/switches/APU-starter-switch"/>
+      <sel-refuel-123 type="double">0</sel-refuel-123>
+      <sel-refuel-4 type="double">0</sel-refuel-4>
+      <sw-refuel type="double">0</sw-refuel>
+      <sw-refuel-1 type="double">0</sw-refuel-1>
+      <sw-refuel-2L type="double">0</sw-refuel-2L>
+      <sw-refuel-2R type="double">0</sw-refuel-2R>
+      <sw-refuel-3L type="double">0</sw-refuel-3L>
+      <sw-refuel-3R type="double">0</sw-refuel-3R>
+      <sw-refuel-4 type="double">0</sw-refuel-4>
+      <valve-refuel-1 type="double">0</valve-refuel-1>
+      <valve-refuel-2L type="double">0</valve-refuel-2L>
+      <valve-refuel-2R type="double">0</valve-refuel-2R>
+      <valve-refuel-3L type="double">0</valve-refuel-3L>
+      <valve-refuel-3R type="double">0</valve-refuel-3R>
+      <valve-refuel-4 type="double">0</valve-refuel-4>
     </fuel>
 
   </jsbsim>
@@ -888,8 +1204,8 @@
 
 <!--End developer keys biding-->
 
-    <key n="115">
-	    <name>s</name>
+    <key n="117">
+	    <name>u</name>
 	    <desc>Auto Startup</desc>
 	    <binding>
 		    <command>nasal</command>
@@ -903,8 +1219,8 @@
 	    </mod-up>
     </key>
 
-    <key n="100">
-      <name>d</name>
+    <key n="102">
+      <name>f</name>
       <desc>Autopilot on</desc>
       <binding>
         <command>nasal</command>
@@ -916,8 +1232,8 @@
       </binding>
     </key>
 
-    <key n="68">
-      <name>D</name>
+    <key n="70">
+      <name>F</name>
       <desc>Autothrottle on</desc>
       <binding>
         <command>nasal</command>
@@ -927,8 +1243,8 @@
       </binding>
     </key>
 
-    <key n="4">
-      <name>ctrl+D</name>
+    <key n="6">
+      <name>ctrl+F</name>
       <desc>All AP off</desc>
       <binding>
         <command>nasal</command>
@@ -939,56 +1255,6 @@
       </binding>
     </key>
 
-    <key n="103">
-      <name>g</name>
-      <desc>Gear handle up</desc>
-      <binding>
-        <command>property-assign</command>
-        <property>controls/gear/gear-down</property>
-        <value>0</value>
-        <condition>
-          <not>
-            <or>
-              <property>gear/gear/wow</property>
-              <property>tu154/gear/sw-emerg1</property>
-              <property>tu154/gear/sw-emerg2</property>
-            </or>
-          </not>
-        </condition>
-      </binding>
-      <binding>
-        <command>property-interpolate</command>
-        <property>tu154/gear/sw-main</property>
-        <value>-1</value>
-        <time>0.2</time>
-      </binding>
-    </key>
-    <key n="71">
-      <name>G</name>
-      <desc>Gear handle down</desc>
-      <binding>
-        <command>property-assign</command>
-        <property>controls/gear/gear-down</property>
-        <value>1</value>
-      </binding>
-      <binding>
-        <command>property-interpolate</command>
-        <property>tu154/gear/sw-main</property>
-        <value>1</value>
-        <time>0.2</time>
-      </binding>
-    </key>
-    <key n="7">
-      <name>ctrl+g</name>
-      <desc>Gear handle neutral</desc>
-      <binding>
-        <command>property-interpolate</command>
-        <property>tu154/gear/sw-main</property>
-        <value>0</value>
-        <time>0.2</time>
-      </binding>
-    </key>
-
 <!-- Nominal -->
     <key n="78">
       <name>N</name>
@@ -996,17 +1262,18 @@
       <binding>
         <command>property-assign</command>
         <property>/controls/engines/engine[0]/throttle</property>
-        <value>0.93</value>
+        <value>0.925</value>
       </binding>
       <binding>
         <command>property-assign</command>
         <property>/controls/engines/engine[1]/throttle</property>
-        <value>0.93</value>
+        <value>0.925</value>
       </binding>
       <binding>
         <command>property-assign</command>
         <property>/controls/engines/engine[2]/throttle</property>
-        <value>0.93</value>
+        <value>0.925</value>
+        <!--<value>0.93</value>-->
       </binding>
     </key>
 
@@ -1016,17 +1283,18 @@
       <binding>
         <command>property-assign</command>
         <property>/controls/engines/engine[0]/throttle</property>
-        <value>0.90</value>
+        <value>0.85</value>
       </binding>
       <binding>
         <command>property-assign</command>
         <property>/controls/engines/engine[1]/throttle</property>
-        <value>0.90</value>
+        <value>0.85</value>
       </binding>
       <binding>
         <command>property-assign</command>
         <property>/controls/engines/engine[2]/throttle</property>
-        <value>0.90</value>
+        <value>0.85</value>
+        <!--<value>0.90</value>-->
       </binding>
     </key>
 
@@ -1036,17 +1304,18 @@
       <binding>
         <command>property-assign</command>
         <property>/controls/engines/engine[0]/throttle</property>
-        <value>0.87</value>
+        <value>0.7</value>
       </binding>
       <binding>
         <command>property-assign</command>
         <property>/controls/engines/engine[1]/throttle</property>
-        <value>0.87</value>
+        <value>0.7</value>
       </binding>
       <binding>
         <command>property-assign</command>
         <property>/controls/engines/engine[2]/throttle</property>
-        <value>0.87</value>
+        <value>0.7</value>
+        <!--<value>0.87</value>-->
       </binding>
     </key>
 
@@ -1068,6 +1337,7 @@
         <command>property-assign</command>
         <property>/controls/engines/engine[2]/throttle</property>
         <value>0.0</value>
+        <!--<value>0.0</value>-->
       </binding>
     </key>
 
@@ -1131,7 +1401,7 @@
     </key>
      <key n="54">
       <name>6</name>
-      <desc>Passenger View</desc>
+      <desc>Left Passenger View</desc>
       <binding>
         <command>nasal</command>
         <script>view.forceView(5);</script>
@@ -1139,47 +1409,48 @@
     </key>
     <key n="55">
       <name>7</name>
-      <desc>Refuel Panel View</desc>
+      <desc>Right Passenger View</desc>
+      <binding>
+        <command>nasal</command>
+        <script>view.forceView(6);</script>
+      </binding>
+    </key>
+    <key n="56">
+      <name>8</name>
+      <desc>Tail View</desc>
       <binding>
         <command>nasal</command>
         <script>view.forceView(7);</script>
       </binding>
     </key>
-    <key n="127">
-      <name>Delete</name>
+    <key n="57">
+      <name>9</name>
+      <desc>Rear Gear view</desc>
+      <binding>
+        <command>nasal</command>
+        <script>view.forceView(8);</script>
+      </binding>
+    </key>
+    <key n="48">
+      <name>0</name>
+      <desc>Refuel Panel view</desc>
+      <binding>
+        <command>nasal</command>
+        <script>view.forceView(9);</script>
+      </binding>
+    </key>
+    <key n="77">
+      <name>M</name>
       <desc>Center aileron, elevator, and rudder</desc>
       <binding>
         <command>nasal</command>
         <script>controls.centerFlightControls()</script>
       </binding>
     </key>
-    <key n="109">
-      <name>m</name>
-      <desc>Map Case view</desc>
-      <repeatable>false</repeatable>
-      <binding>
-        <command>nasal</command>
-        <script>
-          var view_number = getprop("sim/current-view/view-number");
-          if (view_number > 0)
-              view_number -= getprop("tu154/mod-views/view-offset");
-          setprop("tu154/var/previous-view-number", view_number);
-          view.forceView(6);
-        </script>
-      </binding>
-      <mod-up>
-        <binding>
-          <command>nasal</command>
-          <script>
-            view.forceView(getprop("tu154/var/previous-view-number"));
-          </script>
-        </binding>
-      </mod-up>
-    </key>
 
 <!-- Reverser -->
- <key n="258">
-  <name>F2</name>
+ <key n="114">
+  <name>r</name>
   <desc>Full Reverser</desc>
   <repeatable>true</repeatable>
   <!--Start reverser-->
@@ -1222,9 +1493,6 @@
   <gear>
     <offset type="double" >0.15</offset>
     <gain type="double" >0.3048</gain>
-    <sw-main type="double">0</sw-main>
-    <sw-emerg1 type="double">0</sw-emerg1>
-    <sw-emerg2 type="double">0</sw-emerg2>
   </gear>
   <light>
     <instruments>
@@ -1266,9 +1534,11 @@
     </altimeter>
     <ark-15 n="0">
       <powered type="bool">false</powered>
+      <volume type="double">0</volume>
     </ark-15>
     <ark-15 n="1">
       <powered type="bool" >false</powered>
+      <volume type="double">0</volume>
     </ark-15>
     <dme>
       <distance type="double">0</distance>
@@ -1364,6 +1634,7 @@
     <distance type="double" >0</distance>
     <radial type="double" >0</radial>
     <twist type="double" >0</twist>
+    <volume type="double">0.2</volume>
   </rsbn>
     <b-8m>
       <outer type="int">0</outer>
@@ -1383,6 +1654,31 @@
       <adjust-speed type="int">1000</adjust-speed>
       <scale type="int">1</scale>
     </v-51>
+
+    <comm>
+      <freq type="double">0</freq>
+      <volume type="double">0.6</volume>
+    </comm>
+    <comm>
+      <freq type="double">0</freq>
+      <volume type="double">0.6</volume>
+    </comm>
+
+    <nav>
+      <volume type="double">0.2</volume>
+    </nav>
+    <nav>
+      <volume type="double">0.2</volume>
+    </nav>
+
+    <spu-7>
+      <source type="double">0</source>
+      <source-sec type="double">0</source-sec>
+      <power-sec type="bool">0</power-sec>
+      <ind-1 type="bool">1</ind-1>
+      <ind-2 type="bool">0</ind-2>
+      <volume type="double">1</volume>
+    </spu-7>
 
   </instrumentation>
 
@@ -1506,7 +1802,7 @@
       <z-offset-m >-21.75</z-offset-m>
       <field-of-view >40.0</field-of-view>
       <heading-offset-deg type="double">0.0</heading-offset-deg>
-      <pitch-offset-deg type="double">-21.0</pitch-offset-deg>
+      <pitch-offset-deg type="double">-24.75</pitch-offset-deg>
       <roll-offset-deg type="double">0.0</roll-offset-deg>
     </mod-view>
     <mod-view>
@@ -1530,13 +1826,14 @@
   </mod-views>
 
   <door>
-    <passe type="double">1</passe>
-    <cargo0 type="double">1</cargo0>
-    <cargo1 type="double">1</cargo1>
-    <window-left type="double">1</window-left>
-    <window-right type="double">1</window-right>
-    <refuel type="double">0</refuel>
-    <compartment-light>0.4</compartment-light>
+    <cargo0 type="double">0</cargo0>
+    <cargo1 type="double">0</cargo1>
+    <passe type="double">0</passe>
+    <refuel type ="float">0</refuel>
+    <window-left type ="float">0</window-left>
+    <window-right type ="float">0</window-right>
+    <window-left-sec type ="float">0</window-left-sec>
+    <window-right-sec type ="float">0</window-right-sec>
   </door>
 
   <wipers>
@@ -1546,8 +1843,115 @@
     <switch-right type="double">0</switch-right>
   </wipers>
 
-  <refuel>
-    <btn-check type="int">0</btn-check>
-  </refuel>
+  <air-cond>
+    <l-ovheat type="float">0</l-ovheat>
+    <l-press-left type="float">0</l-press-left>
+    <l-press-right type="float">0</l-press-right>
+    <l-cargo-ovheat type="float">0</l-cargo-ovheat>
+    <btn-check type="float">0</btn-check>
+    <pressure-sync type="bool">1</pressure-sync>
+    <sw>
+      <sw-sal-12 type="double">1</sw-sal-12>
+      <sw-eng-1 type="double">0</sw-eng-1>
+      <sw-eng-2 type="double">0</sw-eng-2>
+      <sw-eng-3 type="double">0</sw-eng-3>
+      <sw-art type="double">0</sw-art>
+      <sw-cargo type="double">0</sw-cargo>
+      <sw-srd type="double">0</sw-srd>
+      <sw-srd-cover type="double">0</sw-srd-cover>
+      <sw-psvp-l type="double">0</sw-psvp-l>
+      <sw-psvp-l-cover type="double">0</sw-psvp-l-cover>
+      <sw-psvp-r type="double">0</sw-psvp-r>
+      <sw-psvp-r-cover type="double">0</sw-psvp-r-cover>
+      <sw-sbros type="double">0</sw-sbros>
+      <sw-sbros-cover type="double">0</sw-sbros-cover>
+      <sw-ard type="double">0</sw-ard>
+      <sw-ard-cover type="double">0</sw-ard-cover>
+      <sw-nadduv type="double">0</sw-nadduv>
+    </sw>
+    <swt>
+      <swt-cabin-aut type="double">0</swt-cabin-aut>
+      <swt-cabin-hol type="double">0</swt-cabin-hol>
+      <swt-cabin-gor type="double">0</swt-cabin-gor>
+      <swt-sal-1-aut type="double">0</swt-sal-1-aut>
+      <swt-sal-1-hol type="double">0</swt-sal-1-hol>
+      <swt-sal-1-gor type="double">0</swt-sal-1-gor>
+      <swt-sal-2-aut type="double">0</swt-sal-2-aut>
+      <swt-sal-2-hol type="double">0</swt-sal-2-hol>
+      <swt-sal-2-gor type="double">0</swt-sal-2-gor>
+      <swt-th-left-aut type="double">0</swt-th-left-aut>
+      <swt-th-left-hol type="double">0</swt-th-left-hol>
+      <swt-th-left-gor type="double">0</swt-th-left-gor>
+      <swt-vvr-left-aut type="double">0</swt-vvr-left-aut>
+      <swt-vvr-left-hol type="double">0</swt-vvr-left-hol>
+      <swt-vvr-left-gor type="double">0</swt-vvr-left-gor>
+      <swt-th-right-aut type="double">0</swt-th-right-aut>
+      <swt-th-right-hol type="double">0</swt-th-right-hol>
+      <swt-th-right-gor type="double">0</swt-th-right-gor>
+      <swt-vvr-right-aut type="double">0</swt-vvr-right-aut>
+      <swt-vvr-right-hol type="double">0</swt-vvr-right-hol>
+      <swt-vvr-right-gor type="double">0</swt-vvr-right-gor>
+    </swt>
+    <sel>
+      <sel-cabin type="double">15</sel-cabin>
+      <sel-sal-1 type="double">15</sel-sal-1>
+      <sel-sal-2 type="double">15</sel-sal-2>
+      <sel-mag-left type="double">15</sel-mag-left>
+      <sel-mag-right type="double">15</sel-mag-right>
+      <sel-trub type="double">1</sel-trub>
+    </sel>
+    <prib>
+      <alt-m type="double">0</alt-m>
+      <delta-alt type="double">0</delta-alt>
+      <d-p type="double">0</d-p>
+      <t-cab type="double">0</t-cab>
+      <t-sal type="double">0</t-sal>
+      <t-trub type="double">0</t-trub>
+      <p-left type="double">0</p-left>
+      <p-right type="double">0</p-right>
+    </prib>
+    <variables>
+      <vs type="double">0</vs>
+      <d-p type="double">0</d-p>
+      <alt-m type="double">0</alt-m>
+      <t-cab type="double">0</t-cab>
+      <t-sal-1 type="double">0</t-sal-1>
+      <t-sal-2 type="double">0</t-sal-2>
+      <tt-dver type="double">0</tt-dver>
+      <tt-ekip type="double">0</tt-ekip>
+      <tt-sal-1 type="double">0</tt-sal-1>
+      <tt-sal-2 type="double">0</tt-sal-2>
+      <tt-mag-left type="double">0</tt-mag-left>
+      <tt-mag-right type="double">0</tt-mag-right>
+      <air-cons-l type="double">0</air-cons-l>
+      <air-cons-r type="double">0</air-cons-r>
+    </variables>
+  </air-cond>
 </tu154>
+
+<systems>
+  <electrical>
+    <outputs>
+      <efis type="bool">false</efis>
+    </outputs>
+  </electrical>
+</systems>
+
+<services>
+  <catering>
+    <position-norm type="double">0</position-norm>
+  </catering>
+  <deicing_truck>
+    <crane>
+      <position-norm type="double">0</position-norm>
+    </crane>
+    <deicing>
+      <position-norm type="double">0</position-norm>
+    </deicing>
+    <truck>
+      <position-norm type="double">0</position-norm>
+    </truck>
+  </deicing_truck>
+</services>
+
 </PropertyList>

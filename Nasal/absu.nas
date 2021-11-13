@@ -4,17 +4,17 @@
 # Novosibirsk, Russia
 # 2007 - 2008,2010,2013
 #
+# Modded by ShFsn, oct 2021
+#
 
 #var HEADING_DEVIATION_LIMIT = 20.0;
 #var GLIDESLOPE_DEVIATION_LIMIT = 10.0;
 var PITCH_YOKE_LIMIT = 0.5;
 var BANK_YOKE_LIMIT = 0.5;
 
-var absu_property_update = func {	# <-   handler begin here
+var absu_property_update_timer = maketimer (0.1, func {	# <-   handler begin here
 
 var param=0.0;
-
-settimer( absu_property_update, 0 );
 
 # pn-5 selected mode
 #var az1 = getprop("tu154/instrumentation/pn-5/az-1");
@@ -91,7 +91,7 @@ if( param == nil ) param = 0.0;
 setprop("fdm/jsbsim/gear/nose-wheel-steering", param);
 
 
-# PNP
+# PNP 
 
 
 # "Plane" handle
@@ -116,9 +116,9 @@ setprop("fdm/jsbsim/ap/input-heading-zk", param);
 
 
 var needles = getprop("tu154/switches/pn-5-strelki" );
-if( needles == nil )  needles = 0.0;
+if( needles == nil )  needles = 0.0; 
 if( needles != 0.0 )
-	{
+	{ 
 	# Directors
 	param = getprop("fdm/jsbsim/ap/pitch/gs-needle");	# Modified by Yurik nov 2103 for new ABSU version
 
@@ -128,14 +128,14 @@ if( needles != 0.0 )
 
 	param = getprop("fdm/jsbsim/ap/ils-out");	# Modified by Yurik nov 2103 for new ABSU version
 
-	if( param == nil )  param = 0.0;
+	if( param == nil )  param = 0.0; 
 	if( getprop("fdm/jsbsim/ap/roll-selector") != 5.0 ) param = 0.0;
 	setprop("tu154/instrumentation/pkp[0]/roll-director", param );
 	}
 else{
 	interpolate("tu154/instrumentation/pkp[0]/pitch-director", 0.3, 1.0 );
 	interpolate("tu154/instrumentation/pkp[0]/roll-director", 0.3, 1.0 );
-	}
+	}	
 
 # Modified by Yurik dec 2103 for new ABSU version
 # Glideslope auto switch
@@ -145,19 +145,24 @@ if( getprop("fdm/jsbsim/fcs/flap-pos-deg") > 40.0 )
       if( getprop("instrumentation/nav[0]/gs-needle-deflection") < 0.2 )
        if( getprop("instrumentation/nav[0]/gs-needle-deflection") > 0.0 )
 	absu_glideslope();
-
+		
 # Go around procedure
 if( getprop("fdm/jsbsim/ap/pitch-selector") == 5.0 )
     if( getprop("fdm/jsbsim/fcs/throttle-cmd-norm[0]") > 0.9 )
       if( getprop("instrumentation/nav[0]/gs-in-range") )
     		absu_start_go_around();
+    		
 
-
-}
+});
 
 
 
 # ABSU control
+
+var absu_stab_toggle = func {
+	if( getprop("fdm/jsbsim/ap/pitch-hold") and getprop("fdm/jsbsim/ap/roll-hold") ) absu_stab_b_off();
+	else absu_stab_on();
+}
 
 var absu_stab_on = func {
 if( absu_powered() == 0 ) return;
@@ -167,13 +172,13 @@ if( kren == nil ) kren = 0.0;
 var tang = getprop("tu154/switches/pu-46-tang");
 if( tang == nil ) tang = 0.0;
 
-	if( kren != 0  )
+	if( kren != 0  ) 
 	{
 	setprop("tu154/instrumentation/pu-46/stab", 1.0 );
 	absu_stab_roll();
 	setprop("fdm/jsbsim/ap/roll-hold", 1.0 );
 	}
-
+	
 	if( tang != 0  )
 	{
 	setprop("tu154/instrumentation/pu-46/stab", 1.0 );
@@ -195,18 +200,18 @@ var absu_stab_off = func {
 	if( getprop("tu154/instrumentation/pu-46/stab") ) state = state + 1;
 	if( getprop("tu154/instrumentation/pn-6/stab") ) state = state + 1;
 	if( state ) absu_alarm();
-
+	
 	setprop("fdm/jsbsim/ap/roll-selector", 0.0 );
 	setprop("fdm/jsbsim/ap/pitch-selector", 0.0 );
 	setprop("fdm/jsbsim/ap/pitch-hold", 0.0 );
 	setprop("fdm/jsbsim/ap/roll-hold", 0.0 );
 # Blue lamp on PU-46
 	setprop("tu154/instrumentation/pu-46/stab", 0.0 );
-# stop go around
+# stop go around 	
 	setprop("fdm/jsbsim/ap/go-around", 0.0);
         clr_pitch_lamp();
         clr_heading_lamp();
-
+	
 	if( absu_powered() == 1 )
 	{
 # PN-5 indicators
@@ -220,7 +225,41 @@ var absu_stab_off = func {
 	}
 }
 
-# switches on PN-5
+var absu_stab_b_off = func {
+# Autopilot state
+# Clear audio warning if interpolation of is stale
+	setprop("tu154/systems/warning/alarm/absu_warn", 0.0 );
+	var state = 0;
+	if( getprop("fdm/jsbsim/ap/pitch-hold") ) state = 1;
+	if( getprop("fdm/jsbsim/ap/roll-hold") ) state = state + 1;
+	if( getprop("tu154/instrumentation/pu-46/stab") ) state = state + 1;
+	if( state ) absu_alarm();
+	
+	#setprop("fdm/jsbsim/ap/roll-selector", 0.0 );
+	#setprop("fdm/jsbsim/ap/pitch-selector", 0.0 );
+	setprop("fdm/jsbsim/ap/pitch-hold", 0.0 );
+	setprop("fdm/jsbsim/ap/roll-hold", 0.0 );
+# Blue lamp on PU-46
+	setprop("tu154/instrumentation/pu-46/stab", 0.0 );
+# stop go around 	
+	setprop("fdm/jsbsim/ap/go-around", 0.0);
+        clr_pitch_lamp();
+        clr_heading_lamp();
+	
+	if( absu_powered() == 1 )
+	{
+# PN-5 indicators
+	setprop( "tu154/instrumentation/pn-5/pitch-state", 1 );
+	setprop( "tu154/instrumentation/pn-5/heading-state", 1 );
+	setprop("tu154/instrumentation/pn-5/sbros", 1.0 );
+	}
+	else{
+	setprop( "tu154/instrumentation/pn-5/pitch-state", 0 );
+	setprop( "tu154/instrumentation/pn-5/heading-state", 0 );
+	}
+}
+
+# switches on PN-5 
 # for XML animation
 var absu_stab_kren = func {
 
@@ -228,7 +267,7 @@ var state = getprop("tu154/instrumentation/pu-46/stab");
 if ( state == nil ) state = 0;
 if ( arg[0] != 0 )	# start roll stabilizer
 	{
-	if( state != 0 )
+	if( state != 0 ) 
 		{
 		absu_stab_roll();
 		setprop("fdm/jsbsim/ap/roll-hold", 1.0 );
@@ -249,7 +288,7 @@ else	# stop roll stabilizer
 		setprop( "tu154/instrumentation/pn-5/heading-state", 1 );
 		}
 	if( getprop("tu154/switches/pu-46-tang") != 1.0 )
-		 setprop("tu154/instrumentation/pu-46/stab", 0.0 );
+		 setprop("tu154/instrumentation/pu-46/stab", 0.0 ); 
 	}
 }
 
@@ -259,7 +298,7 @@ var state = getprop("tu154/instrumentation/pu-46/stab");
 if ( state == nil ) state = 0;
 if ( arg[0] != 0 )	# start pitch stabilizer
 	{
-	if( state != 0 ){
+	if( state != 0 ){ 
 		absu_stab_current_pitch();
 		setprop("fdm/jsbsim/ap/pitch-hold", 1.0 );
 		}
@@ -287,7 +326,7 @@ if( getprop("tu154/systems/absu/serviceable" ) == 1 ) return 1;
 else return 0;
 }
 
-var absu_stab_current_pitch = func{
+var absu_stab_current_pitch = func{	
 	setprop("fdm/jsbsim/ap/pitch-selector", 1.0 ); # 1 - stabilize pitch
 	setprop( "tu154/instrumentation/pn-5/pitch-state", 2 );
 	setprop("tu154/systems/electrical/indicators/stab-pitch", 1.0 );
@@ -341,14 +380,14 @@ setprop("tu154/instrumentation/pn-5/sbros", 1.0  );
 if( getprop("fdm/jsbsim/ap/pitch-selector" ) == 5 )
 	if( getprop("tu154/instrumentation/pu-46/stab" ) == 1.0 )
 		absu_stab_current_pitch(); # Glideslope mode -> stab current pitch
-
+		
 setprop("tu154/instrumentation/pn-5/gliss", 0.0  );
 setprop("tu154/systems/electrical/indicators/glideslope", 0.0 );
 
 setprop("tu154/systems/electrical/indicators/reject", 0.0 );
 
-if( getprop("tu154/instrumentation/pu-46/stab" ) == 1.0
-    and getprop("tu154/switches/pu-46-kren" ) == 1.0 )
+if( getprop("tu154/instrumentation/pu-46/stab" ) == 1.0 
+    and getprop("tu154/switches/pu-46-kren" ) == 1.0 ) 
     {
     absu_stab_roll();
     setprop("fdm/jsbsim/ap/roll-hold", 1.0 );
@@ -565,7 +604,7 @@ setlistener("tu154/systems/absu/serviceable", absu_shutdown, 0, 0 );
 setlistener("tu154/systems/absu/serviceable", absu_alarm, 0, 0 );
 setlistener("tu154/systems/warning/alarm/absu_warn", absu_alarm_watchdog, 0, 0 );
 
-absu_property_update();
+absu_property_update_timer.start ();
 
 # ********************** Go around procedure ********************************
 
@@ -575,23 +614,23 @@ var absu_start_go_around = func{
 	absu_stab_current_pitch();
 	# Modified by Yurik dec 2013
 	# for new AP JSBSim system
-
+	
 	setprop("fdm/jsbsim/ap/pitch-selector", 6.0);
 	setprop("fdm/jsbsim/ap/roll-selector", 1.0);
-
+	
 # Blank indicators, but stay button-lamps on PN-5 untouched
 	setprop("tu154/systems/electrical/indicators/nvu", 0.0 );
         setprop("tu154/systems/electrical/indicators/vor", 0.0 );
         setprop("tu154/systems/electrical/indicators/zk", 0.0 );
         setprop("tu154/systems/electrical/indicators/heading", 0.0 );
-
+        
 	setprop("tu154/systems/electrical/indicators/glideslope", 0.0 );
         setprop("tu154/systems/electrical/indicators/stab-pitch", 0.0 );
         setprop("tu154/systems/electrical/indicators/stab-h", 0.0 );
         setprop("tu154/systems/electrical/indicators/stab-v", 0.0 );
         setprop("tu154/systems/electrical/indicators/stab-m", 0.0 );
         setprop("tu154/systems/electrical/indicators/reject", 0.0 );
-
+        
        	setprop("tu154/systems/electrical/indicators/reject", 1.0 );
 	setprop("tu154/systems/electrical/indicators/stab-heading", 1.0 );
 }
@@ -639,9 +678,9 @@ if( param == 1.0 ) # power on ( mode "soglasovanie" )
 	absu_at_sogl(); # start "soglasovanie" cycle
 	return;
 	}
+	
 
-
-if( param == 2.0 ) # mode "podgotovka" off
+if( param == 2.0 ) # mode "podgotovka" off 
 	{
     if( getprop( "tu154/instrumentation/pn-6/mode" ) >= 1.0 )
 	{
@@ -693,16 +732,16 @@ if( getprop("tu154/instrumentation/pn-6/stab") == 0 ) # soglasovanie
         setprop("fdm/jsbsim/ap/at-hold-2", 0.0 );
 
 	var kias = getprop("instrumentation/airspeed-indicator/indicated-speed-kt");
-	if( kias != nil ) interpolate("tu154/instrumentation/pn-6/at-kt", kias, 0.3);
+	if( kias != nil ) interpolate("tu154/instrumentation/pn-6/at-kt", kias, 0.3); 
 	}
 else {
 	var kias = getprop("tu154/instrumentation/pn-6/at-kt");
 if( kias != nil ) setprop( "fdm/jsbsim/ap/input-at", kias*1.688 ); # from knots to fps
 	absu_at_check_thr(); # check off-line state
 
-	}
+	}	
 
-
+	
 }
 
 var absu_at_check = func{
@@ -714,6 +753,12 @@ if( getprop("tu154/instrumentation/pn-6/mode") > 2.0 )
 # 	setprop("tu154/instrumentation/pn-6/check-lamp", state );
 	}
 
+}
+
+#Switch AT mode on button "C"
+var absu_at_toggle = func{
+	if( getprop("tu154/instrumentation/pn-6/stab" ) ) absu_at_stop();
+	else absu_at_start();
 }
 
 # Start stabilize speed
@@ -798,11 +843,11 @@ if( mgvc == nil ) mgvc = 1;
 	    if( acpwr == nil ) return; # system not ready yet
 	    if( acpwr < 150.0 ) return;
 	    # hydrosystem fails or busters off
-	    if(  getprop("fdm/jsbsim/hs/busters-serviceable") < 2.5 ) return;
+	    if(  getprop("fdm/jsbsim/hs/busters-serviceable") < 2.5 ) return; 
 	    # MGV check
 	    var mgv = mgv1 + mgv2 + mgvc;
 	    if( mgv > 1 ) return;	# deny stab autopilot if all MGV failure
-	    # check hydropower of RA-56
+	    # check hydropower of RA-56 
 	    if( getprop("fdm/jsbsim/hs/ra-56-roll-serviceable") < 1.0 ) return;
 	    if( getprop("fdm/jsbsim/hs/ra-56-yaw-serviceable") < 1.0 ) return;
 	    if( getprop("fdm/jsbsim/hs/ra-56-pitch-serviceable") < 1.0 ) return;
@@ -822,9 +867,61 @@ if( mgvc == nil ) mgvc = 1;
 setlistener("tu154/switches/SAU-STU", absu_power, 0, 0 );
 # ============================== End AT-6 support ===========================
 
-gui.Dialog.new("/sim/gui/dialogs/Tu-154B-2/nav/dialog", "Aircraft/tu154b/Dialogs/nav.xml");
+#gui.Dialog.new("/sim/gui/dialogs/Tu-154B-2/nav/dialog", "Aircraft/tu154b/Dialogs/nav.xml");
 
 
 setprop("sim/menubar/default/menu[3]/enabled", 0 );
 
 print("ABSU started, default autopilot disabled");
+
+
+# Smoothing AT output
+var autothrottle_smooth = maketimer(0.01, func(){
+      x1 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[0]");
+      x2 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[1]");
+      x3 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[2]");
+      a1 = getprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[0]");
+      a2 = getprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[1]");
+      a3 = getprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[2]");
+      h1 = getprop("fdm/jsbsim/ap/at-hold-0");
+      h2 = getprop("fdm/jsbsim/ap/at-hold-1");
+      h3 = getprop("fdm/jsbsim/ap/at-hold-2");
+      if ( x1 == nil ) { return; }
+      if ( x2 == nil ) { return; }
+      if ( x3 == nil ) { return; }
+      if ( a1 == nil ) { return; }
+      if ( a2 == nil ) { return; }
+      if ( a3 == nil ) { return; }
+      if ( h1 == nil ) { return; }
+      if ( h2 == nil ) { return; }
+      if ( h3 == nil ) { return; }
+
+      space = 0.0025;
+
+      if ( h1 == 1 ) {
+      if ( a1 - x1 > -space and a1 - x1 < space) { a1 = x1; }
+      else { 
+            if (a1 > x1) { a1 -= space; }
+            else { a1 += space; }
+      }
+      } else { a1 = x1; }
+      if ( h2 == 1 ) {
+      if ( a2 - x2 > -space and a2 - x2 < space) { a2 = x2; }
+      else { 
+            if (a2 > x2) { a2 -= space; }
+            else { a2 += space; }
+      }
+      } else { a2 = x2; }
+      if ( h3 == 1 ) {
+      if ( a3 - x3 > -space and a3 - x3 < space) { a3 = x3; }
+      else { 
+            if (a3 > x3) { a3 -= space; }
+            else { a3 += space; }
+      }
+      } else { a3 = x3; }
+
+      setprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[0]", a1);
+      setprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[1]", a2);
+      setprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[2]", a3);
+});
+autothrottle_smooth.start();

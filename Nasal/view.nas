@@ -7,16 +7,18 @@
 # Novosibirsk, Russia
 # mar 2008
 #
-# Custom views
+# Modded by ShFsn, oct 2021
+#
+# Custom views 
 #
 
 var modview_active = 0;
 
 
 #	Modified by Yurik may 2013
-#	Take from system FGDATA/Nasal/view.nas
+#	Take from system FGDATA/Nasal/view.nas 
 #	Add flag check for sub-view error fix.
-#
+#	
 
 ##
 # Handler.  Step to the next (force=1) or next enabled view.
@@ -69,7 +71,7 @@ var modView  = func{
 	var mode = arg[0];
 	if( mode == nil ) mode = 0;
 	modview_active = mode;		# Set global ModView flag
-	# get mod view coordinates
+	# get mod view coordinates	
 	var mv = props.globals.getNode("tu154/mod-views").getChildren("mod-view");
 	if( mode == 1 )
 	{
@@ -82,17 +84,17 @@ var modView  = func{
 	setprop("tu154/var/save-pitch", getprop("sim/current-view/pitch-offset-deg") );
 	setprop("tu154/var/save-heading",getprop("sim/current-view/heading-offset-deg"));
 	setprop("tu154/var/save-roll",getprop("sim/current-view/roll-offset-deg"));
-# set modified view
+# set modified view	
 	setprop("sim/current-view/x-offset-m", mv[n].getNode("x-offset-m").getValue() );
 	setprop("sim/current-view/y-offset-m", mv[n].getNode("y-offset-m").getValue() );
 	setprop("sim/current-view/z-offset-m", mv[n].getNode("z-offset-m").getValue() );
 	setprop("sim/current-view/field-of-view",
 		mv[n].getNode("field-of-view").getValue() );
-	setprop("sim/current-view/pitch-offset-deg",
+	setprop("sim/current-view/pitch-offset-deg", 
 		mv[n].getNode("pitch-offset-deg").getValue() );
-	setprop("sim/current-view/heading-offset-deg",
+	setprop("sim/current-view/heading-offset-deg", 
 		mv[n].getNode("heading-offset-deg").getValue() );
-	setprop("sim/current-view/roll-offset-deg",
+	setprop("sim/current-view/roll-offset-deg", 
 		mv[n].getNode("roll-offset-deg").getValue() );
 
 	return;
@@ -100,7 +102,7 @@ var modView  = func{
 	else
 	{
 	setprop("tu154/mod-views/mod", 0 );
-# save modified view
+# save modified view	
 
 #	mv[n].getNode("x-offset-m").setValue(getprop("sim/current-view/x-offset-m"));
 #	mv[n].getNode("y-offset-m").setValue(getprop("sim/current-view/y-offset-m"));
@@ -113,7 +115,7 @@ var modView  = func{
 # 		getprop("sim/current-view/heading-offset-deg"));
 # 	mv[n].getNode("roll-offset-deg").setValue(
 # 		getprop("sim/current-view/roll-offset-deg"));
-
+				
 	setprop("sim/current-view/x-offset-m", getprop("tu154/var/save-x") );
 	setprop("sim/current-view/y-offset-m", getprop("tu154/var/save-y") );
 	setprop("sim/current-view/z-offset-m", getprop("tu154/var/save-z") );
@@ -128,7 +130,7 @@ var modView  = func{
 
 var fe_view = {
 	start: func {
-		setprop("sim/current-view/config/heading-offset-deg",
+		setprop("sim/current-view/config/heading-offset-deg", 
 			getprop("sim/view[104]/config/heading-offset-deg"));
 		},
 };
@@ -168,3 +170,40 @@ setprop("/sim/sound/volume", getprop("tu154/volume") );
 setlistener("/sim/signals/fdm-initialized", load_exterior, 0, 0 );
 
 print("View registered");
+
+
+
+# Redefining view parameters
+view_checker = func{
+      internal = getprop("/sim/current-view/internal");
+      vnr = getprop("/sim/current-view/view-number-raw");
+      wind_l = getprop("/tu154/door/window-left");
+      wind_r = getprop("/tu154/door/window-right");
+      if( internal == nil ) { return; }
+      if( vnr == nil ) { return; }
+      if( wind_l == nil ) { return; }
+      if( wind_r == nil ) { return; }
+
+      setprop("/sim/sound/window-open", 0);
+      if( internal == 1 or vnr == 105 or vnr == 106 ) {
+            setprop("/sim/sound/internal", 1);
+            setprop("/sim/sound/external", 0);
+      }
+      else {
+            setprop("/sim/sound/internal", 0);
+            setprop("/sim/sound/external", 1);
+      }
+      #settimer( view_checker, 0.1 );
+
+      if( vnr == 105 or vnr == 106 ) {
+            setprop("/sim/sound/pax", 1);
+      }
+      else {
+            setprop("/sim/sound/pax", 0);
+            if( wind_l != 0 or wind_r != 0 ) { setprop("/sim/sound/window-open", 1); }
+      }
+}
+setlistener("sim/current-view/view-number", view_checker);
+setlistener("tu154/door/window-right", view_checker);
+setlistener("tu154/door/window-left", view_checker);
+

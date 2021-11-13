@@ -30,7 +30,7 @@
       <greater-than>
         <property>engines/engine[2]/n2</property>
         <value>95.0</value>
-      </greater-than>
+      </greater-than>      
       <property>fdm/jsbsim/fcs/wow</property>
     </condition>
     <mode>once</mode>
@@ -56,7 +56,7 @@
     <greater-than>
       <property>tu154/systems/electrical/buses/AC3x200-bus-3L/volts</property>
       <value>150.0</value>
-    </greater-than>
+    </greater-than> 
     <not><property>tu154/lamps/gen-1-failure</property></not>
     <not><property>tu154/lamps/gen-2-failure</property></not>
     <not><property>tu154/lamps/gen-3-failure</property></not>
@@ -152,7 +152,7 @@
     <y>-1</y>
     <z>1.5</z>
   </position>
-</voice>
+</voice> 
 
 <voice>
   <name>sp_ready</name>
@@ -209,10 +209,10 @@
   <name>gear_hs</name>
   <path>Aircraft/tu154b/Sound/voice/BI_Neutr_l.wav</path>
   <condition>
-    <equals>
+    <greater-than>
       <property>tu154/systems/warning/voice/gear-hs-state</property>
-      <value>1</value>
-    </equals>
+      <value>1.0</value>
+    </greater-than>
   </condition>
   <mode>once</mode>
   <position>
@@ -226,26 +226,10 @@
   <name>gear_neutr</name>
   <path>Aircraft/tu154b/Sound/voice/2P_Neutr_l.wav</path>
   <condition>
-    <equals>
-      <property>tu154/gear/sw-main</property>
-      <value>0</value>
-    </equals>
-  </condition>
-  <mode>once</mode>
-  <position>
-    <x>-1</x>
-    <y>-1</y>
-    <z>1.5</z>
-  </position>
-</voice>
-<voice>
-  <name>gear_neutr_emerg2</name>
-  <path>Aircraft/tu154b/Sound/voice/2P_Neutr_l.wav</path>
-  <condition>
-    <equals>
-      <property>tu154/gear/sw-emerg2</property>
-      <value>0</value>
-    </equals>
+    <greater-than>
+      <property>tu154/systems/warning/voice/gear-hs-state</property>
+      <value>1.14</value>
+    </greater-than>
   </condition>
   <mode>once</mode>
   <position>
@@ -270,7 +254,7 @@
     <y>0</y>
     <z>1.5</z>
   </position>
-</voice>
+</voice> 
 
 <voice>
   <name>s_flaps_deploy</name>
@@ -287,7 +271,7 @@
     <y>0</y>
     <z>1.5</z>
   </position>
-</voice>
+</voice> 
 
 <voice>
   <name>s_flaps_28</name>
@@ -304,7 +288,7 @@
     <y>0</y>
     <z>1.5</z>
   </position>
-</voice>
+</voice> 
 
 <voice>
   <name>s_flaps_full</name>
@@ -354,8 +338,8 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice>
-
+</voice> 
+  
 <voice>
     <name>s_v_2</name>
     <path>Aircraft/tu154b/Sound/voice/St_V2.wav</path>
@@ -668,7 +652,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice>
+</voice> 
 
 <voice>
     <name>s_h_200</name>
@@ -685,7 +669,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice>
+</voice> 
 
 <voice>
     <name>s_h_150</name>
@@ -702,7 +686,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice>
+</voice> 
 
 <voice>
     <name>s_h_120</name>
@@ -719,8 +703,8 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice>
-
+</voice> 
+ 
 <voice>
     <name>s_h_100</name>
     <path>Aircraft/tu154b/Sound/voice/St_H_100.wav</path>
@@ -736,7 +720,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice>
+</voice> 
 
   <voice>
     <name>s_h_oz</name>
@@ -772,7 +756,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice>
+</voice> 
 
 <voice>
     <name>s_h_60</name>
@@ -789,7 +773,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice>
+</voice> 
 
 <voice>
     <name>s_h_ch</name>
@@ -806,7 +790,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice>
+</voice> 
 
 <voice>
     <name>s_h_40</name>
@@ -823,7 +807,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice>
+</voice> 
 
 <voice>
     <name>s_h_30</name>
@@ -840,7 +824,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice>
+</voice> 
 
 <voice>
     <name>s_h_20</name>
@@ -857,7 +841,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice>
+</voice> 
 
 <voice>
     <name>s_h_10</name>
@@ -875,7 +859,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice>
+</voice> 
 
 <voice>
     <name>s_h_6</name>
@@ -893,7 +877,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice>
+</voice> 
 
 <voice>
     <name>s_h_3</name>
@@ -911,7 +895,7 @@
       <y>0</y>
       <z>1.5</z>
     </position>
-</voice>
+</voice> 
 <voice>
   <name>s_h_1</name>
   <path>Aircraft/tu154b/Sound/voice/St_H_1.wav</path>
@@ -929,7 +913,7 @@
     <z>1.5</z>
   </position>
 </voice>
-<!--PNK sound-->
+<!--PNK sound-->  
 <pnk>
   <name>rv1_altitude</name>
   <path>Aircraft/tu154b/Sound/misc/telefony.wav</path>
@@ -957,7 +941,7 @@
 <!--************************************ EFFECTS **************************************-->
 <gear>
   <name>gear up</name>
-  <path>Aircraft/tu154b/Sound/misc/154_gearup_l.wav</path>
+  <path>Aircraft/tu154b/Sound/misc/TYGEARUP.wav</path>
   <condition>
     <less-than>
       <property>gear/gear[1]/position-norm</property>
@@ -970,11 +954,11 @@
     <y>0</y>
     <z>-2.5</z>
   </position>
-</gear>
+</gear> 
 
 <gear>
   <name>gear down</name>
-  <path>Aircraft/tu154b/Sound/misc/154_geardown_l.wav</path>
+  <path>Aircraft/tu154b/Sound/misc/TYGEARDN.wav</path>
   <condition>
     <greater-than>
       <property>gear/gear[1]/position-norm</property>
@@ -987,11 +971,11 @@
     <y>0</y>
     <z>-2.5</z>
   </position>
-</gear>
+</gear> 
 
 <gear>
   <name>wow nose</name>
-  <path>Aircraft/tu154b/Sound/misc/nos_154.wav</path>
+  <path>Aircraft/tu154b/Sound/misc/osn_154.wav</path>
   <condition>
     <property>gear/gear[0]/wow</property>
     <property>gear/gear[0]/position-norm</property>
@@ -1002,7 +986,12 @@
     <y>0.0</y>
     <z>-2.5</z>
   </position>
-</gear>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>1.0</factor>
+    <offset>0.0</offset>
+  </volume>
+</gear> 
 <gear>
   <name>wow left</name>
   <path>Aircraft/tu154b/Sound/misc/osn_154.wav</path>
@@ -1016,7 +1005,12 @@
     <y>5.75</y>
     <z>-2.5</z>
   </position>
-</gear>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>1.0</factor>
+    <offset>0.0</offset>
+  </volume>
+</gear> 
 <gear>
   <name>wow right</name>
   <path>Aircraft/tu154b/Sound/misc/osn_154.wav</path>
@@ -1030,18 +1024,23 @@
     <y>-5.75</y>
     <z>-2.5</z>
   </position>
-</gear>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>1.0</factor>
+    <offset>0.0</offset>
+  </volume>
+</gear> 
 
 <gear>
-  <name>roll sound</name>
-  <path>Aircraft/tu154b/Sound/misc/drb_154.wav</path>
+  <name>roll sound1</name>
+  <path>Aircraft/tu154b/Sound/misc/bnroll2.wav</path>
   <condition>
     <or>
      <property>gear/gear[0]/wow</property>
      <property>gear/gear[1]/wow</property>
      <property>gear/gear[2]/wow</property>
     </or>
-    <property>sim/current-view/internal</property>
+    <property>sim/sound/internal</property>
     <property>gear/gear[1]/position-norm</property>
   </condition>
   <mode>looped</mode>
@@ -1052,17 +1051,65 @@
   </position>
   <volume>
     <property>velocities/groundspeed-kt</property>
-    <factor>0.004</factor>
+    <factor>0.003</factor>
     <offset>0.0</offset>
   </volume>
 </gear>
+<gear>
+  <name>roll sound2</name>
+  <path>Aircraft/tu154b/Sound/misc/bnroll2.wav</path>
+  <condition>
+    <or>
+     <property>gear/gear[0]/wow</property>
+     <property>gear/gear[1]/wow</property>
+     <property>gear/gear[2]/wow</property>
+    </or>
+    <property>sim/sound/internal</property>
+    <property>gear/gear[1]/position-norm</property>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>3</x>
+    <y>0</y>
+    <z>-2.5</z>
+  </position>
+  <volume>
+    <property>velocities/groundspeed-kt</property>
+    <factor>0.003</factor>
+    <offset>0.0</offset>
+  </volume>
+</gear> 
+<gear>
+  <name>roll sound3</name>
+  <path>Aircraft/tu154b/Sound/misc/bnroll2.wav</path>
+  <condition>
+    <or>
+     <property>gear/gear[0]/wow</property>
+     <property>gear/gear[1]/wow</property>
+     <property>gear/gear[2]/wow</property>
+    </or>
+    <property>sim/sound/internal</property>
+    <property>gear/gear[1]/position-norm</property>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>3</x>
+    <y>0</y>
+    <z>-2.5</z>
+  </position>
+  <volume>
+    <property>velocities/groundspeed-kt</property>
+    <factor>0.003</factor>
+    <offset>0.0</offset>
+  </volume>
+</gear> 
 
 <gear>
   <name>bump sound nose</name>
-  <path>Aircraft/tu154b/Sound/misc/drb_154.wav</path>
+  <path>Aircraft/tu154b/Sound/misc/bnroll2.wav</path>
   <condition>
     <property>gear/gear[0]/wow</property>
-    <property>sim/current-view/internal</property>
+    <property>sim/sound/internal</property>
     <property>gear/gear[0]/position-norm</property>
   </condition>
   <mode>looped</mode>
@@ -1084,10 +1131,10 @@
 </gear>
 <gear>
   <name>bump sound left</name>
-  <path>Aircraft/tu154b/Sound/misc/drb_154.wav</path>
+  <path>Aircraft/tu154b/Sound/misc/bnroll2.wav</path>
   <condition>
     <property>gear/gear[1]/wow</property>
-    <property>sim/current-view/internal</property>
+    <property>sim/sound/internal</property>
     <property>gear/gear[1]/position-norm</property>
   </condition>
   <mode>looped</mode>
@@ -1109,10 +1156,10 @@
 </gear>
 <gear>
   <name>bump sound right</name>
-  <path>Aircraft/tu154b/Sound/misc/drb_154.wav</path>
+  <path>Aircraft/tu154b/Sound/misc/bnroll2.wav</path>
   <condition>
     <property>gear/gear[2]/wow</property>
-    <property>sim/current-view/internal</property>
+    <property>sim/sound/internal</property>
     <property>gear/gear[2]/position-norm</property>
   </condition>
   <mode>looped</mode>
@@ -1138,10 +1185,8 @@
   <name>electrical</name>
   <path>Aircraft/tu154b/Sound/misc/el_loop.wav</path>
   <condition>
-      <or>
-        <property>tu154/systems/electrical/suppliers/battery_charge</property>
-        <property>tu154/switches/main-battery</property>
-      </or>
+    <property>tu154/systems/electrical/suppliers/battery_charge</property>
+    <property>sim/current-view/internal</property>
   </condition>
   <mode>looped</mode>
   <position>
@@ -1150,7 +1195,8 @@
     <z>-0.5</z>
   </position>
   <volume>
-    <offset type="double">1.0</offset>
+    <property>tu154/systems/electrical/suppliers/battery_charge</property>
+    <factor>0.2</factor>
   </volume>
 </electrical>
 
@@ -1162,7 +1208,7 @@
     <property>engines/engine[0]/running</property>
     <greater-than>
       <property>fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad</property>
-      <value>1.57</value>
+      <value>0.0</value>
     </greater-than>
   </condition>
   <mode>looped</mode>
@@ -1178,14 +1224,82 @@
     <inner-angle>90.0</inner-angle>
     <outer-angle>180.0</outer-angle>
     <outer-gain>0.0</outer-gain>
-  </orientation>
-  <volume>
+  </orientation>    
+  <!--<volume>
     <property>engines/engine[0]/n2</property>
+  </volume>-->
+  <volume>
+    <property>fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad</property>
+    <factor>0.43</factor>
   </volume>
   <volume>
-    <property>sim/current-view/internal</property>
-    <factor>-0.7</factor>
-    <offset>1</offset>
+    <property>sim/sound/external</property>
+    <factor>1</factor>
+  </volume>
+</revers> 
+<revers>
+  <name>revers_1_int</name>
+  <path>Sounds/rumble.wav</path>
+  <condition>
+    <property>engines/engine[0]/running</property>
+    <greater-than>
+      <property>fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad</property>
+      <value>0.0</value>
+    </greater-than>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <orientation>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+    <inner-angle>90.0</inner-angle>
+    <outer-angle>180.0</outer-angle>
+    <outer-gain>0.0</outer-gain>
+  </orientation>    
+  <!--<volume>
+    <property>engines/engine[0]/n2</property>
+  </volume>-->
+  <volume>
+    <property>fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad</property>
+    <factor>0.43</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>0.3</factor>
+  </volume>
+</revers> 
+<revers>
+  <name>revers_1_common</name>
+  <path>Sounds/rumble.wav</path>
+  <condition>
+    <property>engines/engine[0]/running</property>
+    <greater-than>
+      <property>fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad</property>
+      <value>0.0</value>
+    </greater-than>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <!--<orientation>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+    <inner-angle>90.0</inner-angle>
+    <outer-angle>180.0</outer-angle>
+    <outer-gain>0.0</outer-gain>
+  </orientation>-->
+  <volume>
+    <property>fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad</property>
+    <factor>0.43</factor>
   </volume>
 </revers>
 <revers>
@@ -1195,7 +1309,7 @@
     <property>engines/engine[2]/running</property>
     <greater-than>
       <property>fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad</property>
-      <value>1.57</value>
+      <value>0.0</value>
     </greater-than>
   </condition>
   <mode>looped</mode>
@@ -1211,16 +1325,236 @@
     <inner-angle>90.0</inner-angle>
     <outer-angle>180.0</outer-angle>
     <outer-gain>0.0</outer-gain>
-  </orientation>
-  <volume>
+  </orientation>    
+  <!--<volume>
     <property>engines/engine[2]/n2</property>
+  </volume>-->
+  <volume>
+    <property>fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad</property>
+    <factor>0.43</factor>
   </volume>
   <volume>
-    <property>sim/current-view/internal</property>
-    <factor>-0.7</factor>
-    <offset>1</offset>
+    <property>sim/sound/external</property>
+    <factor>1.0</factor>
+  </volume>
+</revers> 
+<revers>
+  <name>revers_3_int</name>
+  <path>Sounds/rumble.wav</path>
+  <condition>
+    <property>engines/engine[2]/running</property>
+    <greater-than>
+      <property>fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad</property>
+      <value>0.0</value>
+    </greater-than>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <orientation>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+    <inner-angle>90.0</inner-angle>
+    <outer-angle>180.0</outer-angle>
+    <outer-gain>0.0</outer-gain>
+  </orientation>    
+  <!--<volume>
+    <property>engines/engine[2]/n2</property>
+  </volume>-->
+  <volume>
+    <property>fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad</property>
+    <factor>0.43</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>0.3</factor>
+  </volume>
+</revers> 
+<revers>
+  <name>revers_3_common</name>
+  <path>Sounds/rumble.wav</path>
+  <condition>
+    <property>engines/engine[2]/running</property>
+    <greater-than>
+      <property>fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad</property>
+      <value>0.0</value>
+    </greater-than>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <!--<orientation>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+    <inner-angle>90.0</inner-angle>
+    <outer-angle>180.0</outer-angle>
+    <outer-gain>0.0</outer-gain>
+  </orientation>-->
+  <volume>
+    <property>fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad</property>
+    <factor>0.43</factor>
   </volume>
 </revers>
+
+<!--Reverses pax-->
+<revers>
+  <name>revers_1_p</name>
+  <path>Sounds/rumble.wav</path>
+  <condition>
+    <property>engines/engine[0]/running</property>
+    <greater-than>
+      <property>fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad</property>
+      <value>0.0</value>
+    </greater-than>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <orientation>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+    <inner-angle>90.0</inner-angle>
+    <outer-angle>180.0</outer-angle>
+    <outer-gain>0.0</outer-gain>
+  </orientation>    
+  <!--<volume>
+    <property>engines/engine[0]/n2</property>
+  </volume>-->
+  <volume>
+    <property>fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad</property>
+    <factor>0.43</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/pax</property>
+    <factor>0.35</factor>
+  </volume>
+</revers> 
+<revers>
+  <name>revers_3_p</name>
+  <path>Sounds/rumble.wav</path>
+  <condition>
+    <property>engines/engine[2]/running</property>
+    <greater-than>
+      <property>fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad</property>
+      <value>0.0</value>
+    </greater-than>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <orientation>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+    <inner-angle>90.0</inner-angle>
+    <outer-angle>180.0</outer-angle>
+    <outer-gain>0.0</outer-gain>
+  </orientation>    
+  <!--<volume>
+    <property>engines/engine[2]/n2</property>
+  </volume>-->
+  <volume>
+    <property>fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad</property>
+    <factor>0.43</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/pax</property>
+    <factor>0.35</factor>
+  </volume>
+</revers> 
+
+<!--Reverses with opened windows-->
+<revers>
+  <name>revers_1_c</name>
+  <path>Sounds/rumble.wav</path>
+  <condition>
+    <property>engines/engine[0]/running</property>
+    <greater-than>
+      <property>fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad</property>
+      <value>0.0</value>
+    </greater-than>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <orientation>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+    <inner-angle>90.0</inner-angle>
+    <outer-angle>180.0</outer-angle>
+    <outer-gain>0.0</outer-gain>
+  </orientation>    
+  <!--<volume>
+    <property>engines/engine[0]/n2</property>
+  </volume>-->
+  <volume>
+    <property>fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad</property>
+    <factor>0.43</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/external</property>
+    <factor>0.23</factor>
+  </volume>
+</revers> 
+<revers>
+  <name>revers_3_c</name>
+  <path>Sounds/rumble.wav</path>
+  <condition>
+    <property>engines/engine[2]/running</property>
+    <greater-than>
+      <property>fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad</property>
+      <value>0.0</value>
+    </greater-than>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <orientation>
+    <x>-1.0</x>
+    <y>0.0</y>
+    <z>0.0</z>
+    <inner-angle>90.0</inner-angle>
+    <outer-angle>180.0</outer-angle>
+    <outer-gain>0.0</outer-gain>
+  </orientation>    
+  <!--<volume>
+    <property>engines/engine[2]/n2</property>
+  </volume>-->
+  <volume>
+    <property>fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad</property>
+    <factor>0.43</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/window-open</property>
+    <factor>0.23</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>1</factor>
+  </volume>
+</revers> 
 
 <!--STOP ENGINES internal-->
 <engine>
@@ -1236,7 +1570,7 @@
     <z>1.5</z>
   </position>
   <volume>
-    <property>sim/current-view/internal</property>
+    <property>sim/sound/internal</property>
     <factor>0.4</factor>
   </volume>
 </engine>
@@ -1253,7 +1587,7 @@
     <z>3.5</z>
   </position>
   <volume>
-    <property>sim/current-view/internal</property>
+    <property>sim/sound/internal</property>
     <factor>0.4</factor>
   </volume>
 </engine>
@@ -1270,7 +1604,59 @@
     <z>1.5</z>
   </position>
   <volume>
-    <property>sim/current-view/internal</property>
+    <property>sim/sound/internal</property>
+    <factor>0.4</factor>
+  </volume>
+</engine>
+<!--STOP ENGINES internal passengers additional-->
+<engine>
+  <name>int_stop_engine_1_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_shut.wav</path>
+  <condition>
+    <not><property>engines/engine[0]/running</property></not>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/pax</property>
+    <factor>0.4</factor>
+  </volume>
+</engine>
+<engine>
+  <name>int_stop_engine_2_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_shut.wav</path>
+  <condition>
+    <not><property>engines/engine[1]/running</property></not>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/pax</property>
+    <factor>0.4</factor>
+  </volume>
+</engine>
+<engine>
+  <name>int_stop_engine_3_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_shut.wav</path>
+  <condition>
+    <not><property>engines/engine[2]/running</property></not>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/pax</property>
     <factor>0.4</factor>
   </volume>
 </engine>
@@ -1288,9 +1674,8 @@
     <z>1.5</z>
   </position>
   <volume>
-    <property>sim/current-view/internal</property>
-    <factor>-0.8</factor>
-    <offset>0.8</offset>
+    <property>sim/sound/external</property>
+    <factor>0.8</factor>
   </volume>
 </engine>
 <engine>
@@ -1306,9 +1691,8 @@
     <z>3.5</z>
   </position>
   <volume>
-    <property>sim/current-view/internal</property>
-    <factor>-0.8</factor>
-    <offset>0.8</offset>
+    <property>sim/sound/external</property>
+    <factor>0.8</factor>
   </volume>
 </engine>
 <engine>
@@ -1324,9 +1708,72 @@
     <z>1.5</z>
   </position>
   <volume>
-    <property>sim/current-view/internal</property>
-    <factor>-0.8</factor>
-    <offset>0.8</offset>
+    <property>sim/sound/external</property>
+    <factor>0.8</factor>
+  </volume>
+</engine>
+<!--STOP ENGINES with opened window-->
+<engine>
+  <name>ext_stop_engine_1_c</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_shut.wav</path>
+  <condition>
+    <not><property>engines/engine[0]/running</property></not>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/window-open</property>
+    <factor>0.27</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>1</factor>
+  </volume>
+</engine>
+<engine>
+  <name>ext_stop_engine_2_c</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_shut.wav</path>
+  <condition>
+    <not><property>engines/engine[1]/running</property></not>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/window-open</property>
+    <factor>0.27</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>1</factor>
+  </volume>
+</engine>
+<engine>
+  <name>ext_stop_engine_3_c</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_shut.wav</path>
+  <condition>
+    <not><property>engines/engine[2]/running</property></not>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/window-open</property>
+    <factor>0.27</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>1</factor>
   </volume>
 </engine>
 <!--START ENGINES internal-->
@@ -1343,7 +1790,7 @@
     <z>1.5</z>
   </position>
   <volume>
-    <property>sim/current-view/internal</property>
+    <property>sim/sound/internal</property>
     <factor>0.3</factor>
   </volume>
 </engine>
@@ -1360,7 +1807,7 @@
     <z>3.5</z>
   </position>
   <volume>
-    <property>sim/current-view/internal</property>
+    <property>sim/sound/internal</property>
     <factor>0.3</factor>
   </volume>
 </engine>
@@ -1377,7 +1824,179 @@
     <z>1.5</z>
   </position>
   <volume>
-    <property>sim/current-view/internal</property>
+    <property>sim/sound/internal</property>
+    <factor>0.3</factor>
+  </volume>
+</engine>
+<engine>
+  <name>int_starter_disc_1</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_2strt.wav</path>
+  <condition>
+    <greater-than>
+      <property>engines/engine[0]/n2</property>
+      <value>35</value>
+    </greater-than>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>0.3</factor>
+  </volume>
+</engine>
+<engine>
+  <name>int_starter_disc_2</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_2strt.wav</path>
+  <condition>
+    <greater-than>
+      <property>engines/engine[1]/n2</property>
+      <value>35</value>
+    </greater-than>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>0.3</factor>
+  </volume>
+</engine>
+<engine>
+  <name>int_starter_disc_3</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_2strt.wav</path>
+  <condition>
+    <greater-than>
+      <property>engines/engine[2]/n2</property>
+      <value>35</value>
+    </greater-than>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>0.3</factor>
+  </volume>
+</engine>
+<!--START ENGINES internal passengers additional-->
+<engine>
+  <name>int_start_engine_1_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_1strt.wav</path>
+  <condition>
+    <property>controls/engines/engine[0]/starter</property>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/pax</property>
+    <factor>0.3</factor>
+  </volume>
+</engine>
+<engine>
+  <name>int_start_engine_2_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_1strt.wav</path>
+  <condition>
+    <property>controls/engines/engine[1]/starter</property>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/pax</property>
+    <factor>0.3</factor>
+  </volume>
+</engine>
+<engine>
+  <name>int_start_engine_3_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_1strt.wav</path>
+  <condition>
+    <property>controls/engines/engine[2]/starter</property>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/pax</property>
+    <factor>0.3</factor>
+  </volume>
+</engine>
+<engine>
+  <name>int_starter_disc_1_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_2strt.wav</path>
+  <condition>
+    <greater-than>
+      <property>engines/engine[0]/n2</property>
+      <value>35</value>
+    </greater-than>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/pax</property>
+    <factor>0.3</factor>
+  </volume>
+</engine>
+<engine>
+  <name>int_starter_disc_2_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_2strt.wav</path>
+  <condition>
+    <greater-than>
+      <property>engines/engine[1]/n2</property>
+      <value>35</value>
+    </greater-than>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/pax</property>
+    <factor>0.3</factor>
+  </volume>
+</engine>
+<engine>
+  <name>int_starter_disc_3_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_2strt.wav</path>
+  <condition>
+    <greater-than>
+      <property>engines/engine[2]/n2</property>
+      <value>35</value>
+    </greater-than>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/pax</property>
     <factor>0.3</factor>
   </volume>
 </engine>
@@ -1395,9 +2014,8 @@
     <z>1.5</z>
   </position>
   <volume>
-    <property>sim/current-view/internal</property>
-    <factor>-0.8</factor>
-    <offset>0.8</offset>
+    <property>sim/sound/external</property>
+    <factor>0.8</factor>
   </volume>
 </engine>
 <engine>
@@ -1413,9 +2031,8 @@
     <z>3.5</z>
   </position>
   <volume>
-    <property>sim/current-view/internal</property>
-    <factor>-0.8</factor>
-    <offset>0.8</offset>
+    <property>sim/sound/external</property>
+    <factor>0.8</factor>
   </volume>
 </engine>
 <engine>
@@ -1431,9 +2048,205 @@
     <z>1.5</z>
   </position>
   <volume>
-    <property>sim/current-view/internal</property>
-    <factor>-0.8</factor>
-    <offset>0.8</offset>
+    <property>sim/sound/external</property>
+    <factor>0.8</factor>
+  </volume>
+</engine>
+<engine>
+  <name>ext_starter_disc_1</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_2strt.wav</path>
+  <condition>
+    <greater-than>
+      <property>engines/engine[0]/n2</property>
+      <value>35</value>
+    </greater-than>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/external</property>
+    <factor>0.5</factor>
+  </volume>
+</engine>
+<engine>
+  <name>ext_starter_disc_2</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_2strt.wav</path>
+  <condition>
+    <greater-than>
+      <property>engines/engine[1]/n2</property>
+      <value>35</value>
+    </greater-than>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/external</property>
+    <factor>0.5</factor>
+  </volume>
+</engine>
+<engine>
+  <name>ext_starter_disc_3</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_2strt.wav</path>
+  <condition>
+    <greater-than>
+      <property>engines/engine[2]/n2</property>
+      <value>35</value>
+    </greater-than>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/external</property>
+    <factor>0.5</factor>
+  </volume>
+</engine>
+
+<!--START ENGINES with opened window-->
+<engine>
+  <name>ext_start_engine_1_c</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_1strt.wav</path>
+  <condition>
+    <property>controls/engines/engine[0]/starter</property>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/window-open</property>
+    <factor>0.27</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>1</factor>
+  </volume>
+</engine>
+<engine>
+  <name>ext_start_engine_2_c</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_1strt.wav</path>
+  <condition>
+    <property>controls/engines/engine[1]/starter</property>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/window-open</property>
+    <factor>0.27</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>1</factor>
+  </volume>
+</engine>
+<engine>
+  <name>ext_start_engine_3_c</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_1strt.wav</path>
+  <condition>
+    <property>controls/engines/engine[2]/starter</property>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/window-open</property>
+    <factor>0.27</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>1</factor>
+  </volume>
+</engine>
+<engine>
+  <name>ext_starter_disc_1_c</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_2strt.wav</path>
+  <condition>
+    <greater-than>
+      <property>engines/engine[0]/n2</property>
+      <value>35</value>
+    </greater-than>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/window-open</property>
+    <factor>0.27</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>0.5</factor>
+  </volume>
+</engine>
+<engine>
+  <name>ext_starter_disc_2_c</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_2strt.wav</path>
+  <condition>
+    <greater-than>
+      <property>engines/engine[1]/n2</property>
+      <value>35</value>
+    </greater-than>  
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/window-open</property>
+    <factor>0.27</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>0.5</factor>
+  </volume>
+</engine>
+<engine>
+  <name>ext_starter_disc_3_c</name>
+  <path>Aircraft/tu154b/Sound/engine/xnk8_2strt.wav</path>
+  <condition>
+    <greater-than>
+      <property>engines/engine[2]/n2</property>
+      <value>35</value>
+    </greater-than>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>sim/sound/window-open</property>
+    <factor>0.27</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>0.5</factor>
   </volume>
 </engine>
 
@@ -1451,9 +2264,9 @@
     <z>3</z>
   </position>
   <volume>
-    <property>sim/current-view/internal</property>
-    <factor>-0.5</factor>
-    <offset>1</offset>
+    <property>sim/sound/external</property>
+    <factor>0.5</factor>
+    <offset>0.5</offset>
   </volume>
 </engine>
 <engine>
@@ -1469,9 +2282,9 @@
     <z>3</z>
   </position>
   <volume>
-    <property>sim/current-view/internal</property>
-    <factor>-0.5</factor>
-    <offset>1</offset>
+    <property>sim/sound/external</property>
+    <factor>0.5</factor>
+    <offset>0.5</offset>
   </volume>
 </engine>
 <engine>
@@ -1487,9 +2300,125 @@
     <z>3</z>
   </position>
   <volume>
-    <property>sim/current-view/internal</property>
-    <factor>-0.5</factor>
-    <offset>1</offset>
+    <property>sim/sound/external</property>
+    <factor>0.5</factor>
+    <offset>0.5</offset>
+  </volume>
+</engine>
+<!--**************** Additional APU sounds for passenger views *********************-->
+<!--<engine>
+  <name>apu_start_p</name>
+  <path>Aircraft/tu154b/Sound/misc/vsu_strt.wav</path>
+  <condition>
+    <property>controls/engines/engine[3]/starter</property>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3</z>
+  </position>
+  <volume>
+    <property>sim/sound/pax</property>
+    <factor>0.5</factor>
+  </volume>
+</engine>
+<engine>
+  <name>apu_loop_p</name>
+  <path>Aircraft/tu154b/Sound/misc/vsu_act.wav</path>
+  <condition>
+    <property>engines/engine[3]/running</property>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3</z>
+  </position>
+  <volume>
+    <property>sim/sound/pax</property>
+    <factor>0.5</factor>
+  </volume>
+</engine>
+<engine>
+  <name>apu_stop_p</name>
+  <path>Aircraft/tu154b/Sound/misc/vsu_shut.wav</path>
+  <condition>
+    <not><property>engines/engine[3]/running</property></not>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3</z>
+  </position>
+  <volume>
+    <property>sim/sound/pax</property>
+    <factor>0.5</factor>
+  </volume>
+</engine>-->
+<!--**************** APU sounds with opened window *********************-->
+<engine>
+  <name>apu_start_c</name>
+  <path>Aircraft/tu154b/Sound/misc/vsu_strt.wav</path>
+  <condition>
+    <property>controls/engines/engine[3]/starter</property>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3</z>
+  </position>
+  <volume>
+    <property>sim/sound/window-open</property>
+    <factor>0.5</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>1</factor>
+  </volume>
+</engine>
+<engine>
+  <name>apu_loop_c</name>
+  <path>Aircraft/tu154b/Sound/misc/vsu_act.wav</path>
+  <condition>
+    <property>engines/engine[3]/running</property>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3</z>
+  </position>
+  <volume>
+    <property>sim/sound/window-open</property>
+    <factor>0.5</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>1</factor>
+  </volume>
+</engine>
+<engine>
+  <name>apu_stop_c</name>
+  <path>Aircraft/tu154b/Sound/misc/vsu_shut.wav</path>
+  <condition>
+    <not><property>engines/engine[3]/running</property></not>
+  </condition>
+  <mode>once</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3</z>
+  </position>
+  <volume>
+    <property>sim/sound/window-open</property>
+    <factor>0.5</factor>
+  </volume>
+  <volume>
+    <property>sim/sound/internal</property>
+    <factor>1</factor>
   </volume>
 </engine>
 
@@ -1499,8 +2428,11 @@
   <name>jet_whine_1_5</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_a12.wav</path>
   <condition>
-    <property>sim/current-view/internal</property>
-    <property>engines/engine[0]/running</property>
+    <property>sim/sound/internal</property>
+    <or>
+      <property>engines/engine[0]/running</property>
+      <property>controls/engines/engine[0]/starter</property>
+    </or>
   </condition>
   <mode>looped</mode>
   <position>
@@ -1527,8 +2459,11 @@
   <name>jet_whine_1_6</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_a13.wav</path>
   <condition>
-    <property>sim/current-view/internal</property>
-    <property>engines/engine[0]/running</property>
+    <property>sim/sound/internal</property>
+    <or>
+      <property>engines/engine[0]/running</property>
+      <property>controls/engines/engine[0]/starter</property>
+    </or>
   </condition>
   <mode>looped</mode>
   <position>
@@ -1548,8 +2483,11 @@
   <name>combustion_1_3</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_a23.wav</path>
   <condition>
-    <property>sim/current-view/internal</property>
-    <property>engines/engine[0]/running</property>
+    <property>sim/sound/internal</property>
+    <or>
+      <property>engines/engine[0]/running</property>
+      <property>controls/engines/engine[0]/starter</property>
+    </or>
   </condition>
   <mode>looped</mode>
   <position>
@@ -1576,8 +2514,122 @@
   <name>combustion_1_4</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_a21.wav</path>
   <condition>
-    <property>sim/current-view/internal</property>
-    <property>engines/engine[0]/running</property>
+    <property>sim/sound/internal</property>
+    <or>
+      <property>engines/engine[0]/running</property>
+      <property>controls/engines/engine[0]/starter</property>
+    </or>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>engines/engine[0]/n2</property>
+    <factor type="double">0.001</factor>
+    <offset type="double">0.01</offset>
+    <min>0.0</min>
+    <max>0.5</max>
+  </volume>
+</engine>
+<!--************************* PASSENGER ENGINE 1 SOUND *******************************-->
+<engine>
+  <name>jet_whine_1_5_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_a12.wav</path>
+  <condition>
+    <property>sim/sound/pax</property>
+    <or>
+      <property>engines/engine[0]/running</property>
+      <property>controls/engines/engine[0]/starter</property>
+    </or>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+    <pitch>
+    <property>engines/engine[0]/n2</property>
+    <factor>0.016</factor>
+    <offset>0.0</offset>
+    <min>0.5</min>
+    <max>1.6</max>
+  </pitch>
+  <volume>
+    <property>engines/engine[0]/n2</property>
+    <factor type="double">0.001</factor>
+    <offset type="double">0.01</offset>
+    <min>0.0</min>
+    <max>0.5</max>
+  </volume>
+</engine>
+<engine>
+  <name>jet_whine_1_6_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_a13.wav</path>
+  <condition>
+    <property>sim/sound/pax</property>
+    <or>
+      <property>engines/engine[0]/running</property>
+      <property>controls/engines/engine[0]/starter</property>
+    </or>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>engines/engine[0]/n2</property>
+    <factor type="double">0.001</factor>
+    <offset type="double">0.01</offset>
+    <min>0.0</min>
+    <max>0.5</max>
+  </volume>
+</engine>
+<engine>
+  <name>combustion_1_3_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_a23.wav</path>
+  <condition>
+    <property>sim/sound/pax</property>
+    <or>
+      <property>engines/engine[0]/running</property>
+      <property>controls/engines/engine[0]/starter</property>
+    </or>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>3.0</y>
+    <z>1.5</z>
+  </position>
+  <pitch>
+    <property>engines/engine[0]/n2</property>
+    <factor>0.012</factor>
+    <offset>0.0</offset>
+    <min>0.67</min>
+    <max>1.26</max>
+  </pitch>
+  <volume>
+    <property>engines/engine[0]/n2</property>
+    <factor type="double">0.001</factor>
+    <offset type="double">0.01</offset>
+    <min>0.0</min>
+    <max>0.5</max>
+  </volume>
+</engine>
+<engine>
+  <name>combustion_1_4_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_a21.wav</path>
+  <condition>
+    <property>sim/sound/pax</property>
+    <or>
+      <property>engines/engine[0]/running</property>
+      <property>controls/engines/engine[0]/starter</property>
+    </or>
   </condition>
   <mode>looped</mode>
   <position>
@@ -1598,8 +2650,11 @@
   <name>jet_whine_2_5</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_a12.wav</path>
   <condition>
-    <property>sim/current-view/internal</property>
-    <property>engines/engine[1]/running</property>
+    <property>sim/sound/internal</property>
+    <or>
+      <property>engines/engine[1]/running</property>
+      <property>controls/engines/engine[1]/starter</property>
+    </or>
   </condition>
   <mode>looped</mode>
   <position>
@@ -1626,8 +2681,11 @@
   <name>jet_whine_2_6</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_a13.wav</path>
   <condition>
-    <property>sim/current-view/internal</property>
-    <property>engines/engine[1]/running</property>
+    <property>sim/sound/internal</property>
+    <or>
+      <property>engines/engine[1]/running</property>
+      <property>controls/engines/engine[1]/starter</property>
+    </or>
   </condition>
   <mode>looped</mode>
   <position>
@@ -1647,8 +2705,11 @@
   <name>combustion_2_3</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_a23.wav</path>
   <condition>
-    <property>sim/current-view/internal</property>
-    <property>engines/engine[1]/running</property>
+    <property>sim/sound/internal</property>
+    <or>
+      <property>engines/engine[1]/running</property>
+      <property>controls/engines/engine[1]/starter</property>
+    </or>
   </condition>
   <mode>looped</mode>
   <position>
@@ -1675,8 +2736,122 @@
   <name>combustion_2_4</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_a21.wav</path>
   <condition>
-    <property>sim/current-view/internal</property>
-    <property>engines/engine[1]/running</property>
+    <property>sim/sound/internal</property>
+    <or>
+      <property>engines/engine[1]/running</property>
+      <property>controls/engines/engine[1]/starter</property>
+    </or>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3.5</z>
+  </position>
+  <volume>
+    <property>engines/engine[1]/n2</property>
+    <factor type="double">0.001</factor>
+    <offset type="double">0.01</offset>
+    <min>0.0</min>
+    <max>0.5</max>
+  </volume>
+</engine>
+<!--************************* PASSENGER ENGINE 2 SOUND *******************************-->
+<engine>
+  <name>jet_whine_2_5_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_a12.wav</path>
+  <condition>
+    <property>sim/sound/pax</property>
+    <or>
+      <property>engines/engine[1]/running</property>
+      <property>controls/engines/engine[1]/starter</property>
+    </or>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3.5</z>
+  </position>
+  <pitch>
+    <property>engines/engine[1]/n2</property>
+    <factor>0.016</factor>
+    <offset>0.0</offset>
+    <min>0.5</min>
+    <max>1.6</max>
+  </pitch>
+  <volume>
+    <property>engines/engine[1]/n2</property>
+    <factor type="double">0.001</factor>
+    <offset type="double">0.01</offset>
+    <min>0.0</min>
+    <max>0.5</max>
+  </volume>
+</engine>
+<engine>
+  <name>jet_whine_2_6_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_a13.wav</path>
+  <condition>
+    <property>sim/sound/pax</property>
+    <or>
+      <property>engines/engine[1]/running</property>
+      <property>controls/engines/engine[1]/starter</property>
+    </or>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3.5</z>
+  </position>
+  <volume>
+    <property>engines/engine[1]/n2</property>
+    <factor type="double">0.001</factor>
+    <offset type="double">0.01</offset>
+    <min>0.0</min>
+    <max>0.5</max>
+  </volume>
+</engine>
+<engine>
+  <name>combustion_2_3_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_a23.wav</path>
+  <condition>
+    <property>sim/sound/pax</property>
+    <or>
+      <property>engines/engine[1]/running</property>
+      <property>controls/engines/engine[1]/starter</property>
+    </or>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>0.0</y>
+    <z>3.5</z>
+  </position>
+  <pitch>
+    <property>engines/engine[1]/n2</property>
+    <factor>0.012</factor>
+    <offset>0.0</offset>
+    <min>0.67</min>
+    <max>1.26</max>
+  </pitch>
+  <volume>
+    <property>engines/engine[1]/n2</property>
+    <factor type="double">0.001</factor>
+    <offset type="double">0.01</offset>
+    <min>0.0</min>
+    <max>0.5</max>
+  </volume>
+</engine>
+<engine>
+  <name>combustion_2_4_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_a21.wav</path>
+  <condition>
+    <property>sim/sound/pax</property>
+    <or>
+      <property>engines/engine[1]/running</property>
+      <property>controls/engines/engine[1]/starter</property>
+    </or>
   </condition>
   <mode>looped</mode>
   <position>
@@ -1697,8 +2872,11 @@
   <name>jet_whine_3_5</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_a12.wav</path>
   <condition>
-    <property>sim/current-view/internal</property>
-    <property>engines/engine[2]/running</property>
+    <property>sim/sound/internal</property>
+    <or>
+      <property>engines/engine[2]/running</property>
+      <property>controls/engines/engine[2]/starter</property>
+    </or>
   </condition>
   <mode>looped</mode>
   <position>
@@ -1725,8 +2903,11 @@
   <name>jet_whine_3_6</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_a13.wav</path>
   <condition>
-    <property>sim/current-view/internal</property>
-    <property>engines/engine[2]/running</property>
+    <property>sim/sound/internal</property>
+    <or>
+      <property>engines/engine[2]/running</property>
+      <property>controls/engines/engine[2]/starter</property>
+    </or>
   </condition>
   <mode>looped</mode>
   <position>
@@ -1746,8 +2927,11 @@
   <name>combustion_3_3</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_a23.wav</path>
   <condition>
-    <property>sim/current-view/internal</property>
-    <property>engines/engine[2]/running</property>
+    <property>sim/sound/internal</property>
+    <or>
+      <property>engines/engine[2]/running</property>
+      <property>controls/engines/engine[2]/starter</property>
+    </or>
   </condition>
   <mode>looped</mode>
   <position>
@@ -1774,8 +2958,122 @@
   <name>combustion_3_4</name>
   <path>Aircraft/tu154b/Sound/engine/nk8_a21.wav</path>
   <condition>
-    <property>sim/current-view/internal</property>
-    <property>engines/engine[2]/running</property>
+    <property>sim/sound/internal</property>
+    <or>
+      <property>engines/engine[2]/running</property>
+      <property>controls/engines/engine[2]/starter</property>
+    </or>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>engines/engine[2]/n2</property>
+    <factor type="double">0.001</factor>
+    <offset type="double">0.01</offset>
+    <min>0.0</min>
+    <max>0.5</max>
+  </volume>
+</engine>
+<!--************************* PASSENGER ENGINE 3 SOUND *******************************-->
+<engine>
+  <name>jet_whine_3_5_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_a12.wav</path>
+  <condition>
+    <property>sim/sound/pax</property>
+    <or>
+      <property>engines/engine[2]/running</property>
+      <property>controls/engines/engine[2]/starter</property>
+    </or>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <pitch>
+    <property>engines/engine[2]/n2</property>
+    <factor>0.016</factor>
+    <offset>0.0</offset>
+    <min>0.5</min>
+    <max>1.6</max>
+  </pitch>
+  <volume>
+    <property>engines/engine[2]/n2</property>
+    <factor type="double">0.001</factor>
+    <offset type="double">0.01</offset>
+    <min>0.0</min>
+    <max>0.5</max>
+  </volume>
+</engine>
+<engine>
+  <name>jet_whine_3_6_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_a13.wav</path>
+  <condition>
+    <property>sim/sound/pax</property>
+    <or>
+      <property>engines/engine[2]/running</property>
+      <property>controls/engines/engine[2]/starter</property>
+    </or>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <volume>
+    <property>engines/engine[2]/n2</property>
+    <factor type="double">0.001</factor>
+    <offset type="double">0.01</offset>
+    <min>0.0</min>
+    <max>0.5</max>
+  </volume>
+</engine>
+<engine>
+  <name>combustion_3_3_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_a23.wav</path>
+  <condition>
+    <property>sim/sound/pax</property>
+    <or>
+      <property>engines/engine[2]/running</property>
+      <property>controls/engines/engine[2]/starter</property>
+    </or>
+  </condition>
+  <mode>looped</mode>
+  <position>
+    <x>37.0</x>
+    <y>-3.0</y>
+    <z>1.5</z>
+  </position>
+  <pitch>
+    <property>engines/engine[2]/n2</property>
+    <factor>0.012</factor>
+    <offset>0.0</offset>
+    <min>0.67</min>
+    <max>1.26</max>
+  </pitch>
+  <volume>
+    <property>engines/engine[2]/n2</property>
+    <factor type="double">0.001</factor>
+    <offset type="double">0.01</offset>
+    <min>0.0</min>
+    <max>0.5</max>
+  </volume>
+</engine>
+<engine>
+  <name>combustion_3_4_p</name>
+  <path>Aircraft/tu154b/Sound/engine/nk8_a21.wav</path>
+  <condition>
+    <property>sim/sound/pax</property>
+    <or>
+      <property>engines/engine[2]/running</property>
+      <property>controls/engines/engine[2]/starter</property>
+    </or>
   </condition>
   <mode>looped</mode>
   <position>
@@ -1797,8 +3095,11 @@
     <name>jet_whine_1_1</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa11.wav</path>
     <condition>
-      <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[0]/running</property>
+      <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[0]/running</property>
+        <property>controls/engines/engine[0]/starter</property>
+      </or>
     </condition>
     <mode>looped</mode>
     <position>
@@ -1825,8 +3126,11 @@
     <name>jet_whine_1_2</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa12.wav</path>
     <condition>
-      <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[0]/running</property>
+      <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[0]/running</property>
+        <property>controls/engines/engine[0]/starter</property>
+      </or>
     </condition>
     <mode>looped</mode>
     <position>
@@ -1853,8 +3157,11 @@
     <name>jet_whine_1_3</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa13.wav</path>
     <condition>
-      <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[0]/running</property>
+      <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[0]/running</property>
+        <property>controls/engines/engine[0]/starter</property>
+      </or>
     </condition>
     <mode>looped</mode>
     <position>
@@ -1877,13 +3184,16 @@
       <max>1.78</max>
     </pitch>
   </engine>
-
+  
   <engine>
     <name>jet_whine_1_4</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa14.wav</path>
     <condition>
-      <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[0]/running</property>
+      <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[0]/running</property>
+        <property>controls/engines/engine[0]/starter</property>
+      </or>
     </condition>
     <mode>looped</mode>
     <position>
@@ -1904,13 +3214,16 @@
       <offset>0.0</offset>
     </pitch>
   </engine>
-
+  
   <engine>
     <name>combustion_1_1</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa21.wav</path>
     <condition>
-      <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[0]/running</property>
+      <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[0]/running</property>
+        <property>controls/engines/engine[0]/starter</property>
+      </or>
     </condition>
     <mode>looped</mode>
     <position>
@@ -1926,13 +3239,16 @@
       <max>0.25</max>
     </volume>
   </engine>
-
+  
   <engine>
     <name>combustion_1_2</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa22.wav</path>
     <condition>
-      <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[0]/running</property>
+      <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[0]/running</property>
+        <property>controls/engines/engine[0]/starter</property>
+      </or>
     </condition>
     <mode>looped</mode>
     <position>
@@ -1957,8 +3273,11 @@
     <name>rumble_1</name>
     <path>Sounds/rumble.wav</path>
     <condition>
-      <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[0]/running</property>
+      <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[0]/running</property>
+        <property>controls/engines/engine[0]/starter</property>
+      </or>
     </condition>
     <mode>looped</mode>
     <position>
@@ -1973,7 +3292,7 @@
       <inner-angle>90.0</inner-angle>
       <outer-angle>150.0</outer-angle>
       <outer-gain>0.0</outer-gain>
-    </orientation>
+    </orientation>    
     <volume>
       <property>engines/engine[0]/n2</property>
       <factor type="double">0.01</factor>
@@ -1986,8 +3305,11 @@
     <name>jet_whine_2_1</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa11.wav</path>
     <condition>
-      <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[1]/running</property>
+      <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[1]/running</property>
+        <property>controls/engines/engine[1]/starter</property>
+      </or>
     </condition>
     <mode>looped</mode>
     <position>
@@ -2014,8 +3336,11 @@
     <name>jet_whine_2_2</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa12.wav</path>
     <condition>
-      <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[1]/running</property>
+      <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[1]/running</property>
+        <property>controls/engines/engine[1]/starter</property>
+      </or>
     </condition>
     <mode>looped</mode>
     <position>
@@ -2042,9 +3367,11 @@
     <name>jet_whine_2_3</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa13.wav</path>
     <condition>
-      <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[1]/running</property>
-    </condition>
+      <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[1]/running</property>
+        <property>controls/engines/engine[1]/starter</property>
+      </or>    </condition>
     <mode>looped</mode>
     <position>
       <x>37.0</x>
@@ -2066,13 +3393,16 @@
       <max>1.78</max>
     </pitch>
   </engine>
-
+  
   <engine>
     <name>jet_whine_2_4</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa14.wav</path>
     <condition>
-      <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[1]/running</property>
+      <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[1]/running</property>
+        <property>controls/engines/engine[1]/starter</property>
+      </or>
     </condition>
     <mode>looped</mode>
     <position>
@@ -2093,13 +3423,16 @@
       <offset>0.0</offset>
     </pitch>
   </engine>
-
+  
   <engine>
     <name>combustion_2_1</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa21.wav</path>
     <condition>
-      <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[1]/running</property>
+      <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[1]/running</property>
+        <property>controls/engines/engine[1]/starter</property>
+      </or>
     </condition>
     <mode>looped</mode>
     <position>
@@ -2115,13 +3448,16 @@
       <max>0.25</max>
     </volume>
   </engine>
-
+  
   <engine>
     <name>combustion_2_2</name>
     <path>Aircraft/tu154b/Sound/engine/xtaa22.wav</path>
     <condition>
-      <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[1]/running</property>
+      <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[1]/running</property>
+        <property>controls/engines/engine[1]/starter</property>
+      </or>
     </condition>
     <mode>looped</mode>
     <position>
@@ -2146,8 +3482,11 @@
     <name>rumble_2</name>
     <path>Sounds/rumble.wav</path>
     <condition>
-      <not><property>sim/current-view/internal</property></not>
-      <property>engines/engine[1]/running</property>
+      <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[1]/running</property>
+        <property>controls/engines/engine[1]/starter</property>
+      </or>
     </condition>
     <mode>looped</mode>
     <position>
@@ -2162,20 +3501,23 @@
       <inner-angle>90.0</inner-angle>
       <outer-angle>150.0</outer-angle>
       <outer-gain>0.0</outer-gain>
-    </orientation>
+    </orientation>    
     <volume>
       <property>engines/engine[1]/n2</property>
       <factor type="double">0.01</factor>
       <offset type="double">0.0</offset>
     </volume>
-  </engine>
+  </engine>   
 <!--************************* ENGINE 3 EXTERNAL SOUND *******************************-->
 <engine>
    <name>jet_whine_3_1</name>
    <path>Aircraft/tu154b/Sound/engine/xtaa11.wav</path>
    <condition>
-     <not><property>sim/current-view/internal</property></not>
-     <property>engines/engine[2]/running</property>
+     <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[2]/running</property>
+        <property>controls/engines/engine[2]/starter</property>
+      </or>
    </condition>
    <mode>looped</mode>
    <position>
@@ -2202,8 +3544,11 @@
    <name>jet_whine_3_2</name>
    <path>Aircraft/tu154b/Sound/engine/xtaa12.wav</path>
    <condition>
-     <not><property>sim/current-view/internal</property></not>
-     <property>engines/engine[2]/running</property>
+     <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[2]/running</property>
+        <property>controls/engines/engine[2]/starter</property>
+      </or>
    </condition>
    <mode>looped</mode>
    <position>
@@ -2230,8 +3575,11 @@
    <name>jet_whine_3_3</name>
    <path>Aircraft/tu154b/Sound/engine/xtaa13.wav</path>
    <condition>
-     <not><property>sim/current-view/internal</property></not>
-     <property>engines/engine[2]/running</property>
+     <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[2]/running</property>
+        <property>controls/engines/engine[2]/starter</property>
+      </or>
    </condition>
    <mode>looped</mode>
    <position>
@@ -2254,13 +3602,16 @@
      <max>1.78</max>
    </pitch>
  </engine>
-
+  
  <engine>
    <name>jet_whine_3_4</name>
    <path>Aircraft/tu154b/Sound/engine/xtaa14.wav</path>
    <condition>
-     <not><property>sim/current-view/internal</property></not>
-     <property>engines/engine[2]/running</property>
+     <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[2]/running</property>
+        <property>controls/engines/engine[2]/starter</property>
+      </or>
    </condition>
    <mode>looped</mode>
    <position>
@@ -2281,13 +3632,16 @@
      <offset>0.0</offset>
    </pitch>
  </engine>
-
+ 
  <engine>
    <name>combustion_3_1</name>
    <path>Aircraft/tu154b/Sound/engine/xtaa21.wav</path>
    <condition>
-     <not><property>sim/current-view/internal</property></not>
-     <property>engines/engine[2]/running</property>
+     <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[2]/running</property>
+        <property>controls/engines/engine[2]/starter</property>
+      </or>
    </condition>
    <mode>looped</mode>
    <position>
@@ -2303,13 +3657,16 @@
      <max>0.25</max>
    </volume>
  </engine>
-
+ 
  <engine>
    <name>combustion_3_2</name>
    <path>Aircraft/tu154b/Sound/engine/xtaa22.wav</path>
    <condition>
-     <not><property>sim/current-view/internal</property></not>
-     <property>engines/engine[2]/running</property>
+     <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[2]/running</property>
+        <property>controls/engines/engine[2]/starter</property>
+      </or>
    </condition>
    <mode>looped</mode>
    <position>
@@ -2334,8 +3691,11 @@
    <name>rumble_3</name>
    <path>Sounds/rumble.wav</path>
    <condition>
-     <not><property>sim/current-view/internal</property></not>
-     <property>engines/engine[2]/running</property>
+     <not><property>sim/sound/internal</property></not>
+      <or>
+        <property>engines/engine[2]/running</property>
+        <property>controls/engines/engine[2]/starter</property>
+      </or>
    </condition>
    <mode>looped</mode>
    <position>
@@ -2350,7 +3710,7 @@
      <inner-angle>90.0</inner-angle>
      <outer-angle>150.0</outer-angle>
      <outer-gain>0.0</outer-gain>
-   </orientation>
+   </orientation>    
    <volume>
      <property>engines/engine[2]/n2</property>
      <factor type="double">0.01</factor>
@@ -2358,8 +3718,658 @@
    </volume>
   </engine>
 
-<!--********************************* END ENGINES SOUND ******************************-->
+  <!--************************* ENGINE 1 WINDOW SOUND *******************************-->
+<engine>
+    <name>jet_whine_1_1_c</name>
+    <path>Aircraft/tu154b/Sound/engine/xtaa11.wav</path>
+    <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[0]/running</property>
+        <property>controls/engines/engine[0]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>37.0</x>
+      <y>3.0</y>
+      <z>1.5</z>
+    </position>
+    <volume>
+      <property>engines/engine[0]/n2</property>
+      <factor type="double">0.003</factor>
+      <offset type="double">0.016</offset>
+      <min>0.0</min>
+      <max>0.08</max>
+    </volume>
+    <pitch>
+      <property>engines/engine[0]/n2</property>
+      <factor>0.0082</factor>
+      <offset>0.3</offset>
+      <min>0.5</min>
+      <max>1.127</max>
+    </pitch>
+  </engine>
+  <engine>
+    <name>jet_whine_1_2_c</name>
+    <path>Aircraft/tu154b/Sound/engine/xtaa12.wav</path>
+    <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[0]/running</property>
+        <property>controls/engines/engine[0]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>37.0</x>
+      <y>3.0</y>
+      <z>1.5</z>
+    </position>
+    <volume>
+      <property>engines/engine[0]/n2</property>
+     <factor type="double">0.0008</factor>
+     <offset type="double">0.0</offset>
+     <min>0.0</min>
+     <max>0.07</max>
+    </volume>
+    <pitch>
+      <property>engines/engine[0]/n2</property>
+      <factor>0.0156</factor>
+      <offset>0.22</offset>
+      <min>0.38</min>
+      <max>1.23</max>
+    </pitch>
+  </engine>
+  <engine>
+    <name>jet_whine_1_3_c</name>
+    <path>Aircraft/tu154b/Sound/engine/xtaa13.wav</path>
+    <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[0]/running</property>
+        <property>controls/engines/engine[0]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>37.0</x>
+      <y>3.0</y>
+      <z>1.5</z>
+    </position>
+    <volume>
+      <property>engines/engine[0]/n2</property>
+      <factor type="double">0.0013</factor>
+      <offset type="double">0.0</offset>
+      <min>0.0</min>
+      <max>0.117</max>
+    </volume>
+    <pitch>
+      <property>engines/engine[0]/n2</property>
+      <factor>0.018</factor>
+      <offset>0.0</offset>
+      <min>0.23</min>
+      <max>1.78</max>
+    </pitch>
+  </engine>
+  
+  <engine>
+    <name>jet_whine_1_4_c</name>
+    <path>Aircraft/tu154b/Sound/engine/xtaa14.wav</path>
+    <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[0]/running</property>
+        <property>controls/engines/engine[0]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>37.0</x>
+      <y>3.0</y>
+      <z>1.5</z>
+    </position>
+    <volume>
+      <property>engines/engine[0]/n2</property>
+      <factor type="double">0.0013</factor>
+      <offset type="double">0.0</offset>
+      <min>0.0</min>
+      <max>0.117</max>
+    </volume>
+    <pitch>
+      <property>engines/engine[0]/n2</property>
+      <factor>0.0167</factor>
+      <offset>0.0</offset>
+    </pitch>
+  </engine>
+  
+  <engine>
+    <name>combustion_1_1_c</name>
+    <path>Aircraft/tu154b/Sound/engine/xtaa21.wav</path>
+    <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[0]/running</property>
+        <property>controls/engines/engine[0]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>37.0</x>
+      <y>3.0</y>
+      <z>1.5</z>
+    </position>
+    <volume>
+      <property>engines/engine[0]/n2</property>
+      <factor type="double">0.001</factor>
+      <offset type="double">0.0</offset>
+      <min>0.0</min>
+      <max>0.08</max>
+    </volume>
+  </engine>
+  
+  <engine>
+    <name>combustion_1_2_c</name>
+    <path>Aircraft/tu154b/Sound/engine/xtaa22.wav</path>
+    <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[0]/running</property>
+        <property>controls/engines/engine[0]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>37.0</x>
+      <y>3.0</y>
+      <z>1.5</z>
+    </position>
+    <volume>
+      <property>engines/engine[0]/n2</property>
+     <factor type="double">0.0013</factor>
+     <offset type="double">0.0</offset>
+     <min>0.0</min>
+     <max>0.13</max>
+    </volume>
+    <pitch>
+      <property>engines/engine[0]/n2</property>
+      <factor>0.013</factor>
+      <offset>0.0</offset>
+    </pitch>
+  </engine>
+  <engine>
+    <name>rumble_1_c</name>
+    <path>Sounds/rumble.wav</path>
+    <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[0]/running</property>
+        <property>controls/engines/engine[0]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>37.0</x>
+      <y>3.0</y>
+      <z>1.5</z>
+    </position>
+    <orientation>
+      <x>1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+      <inner-angle>90.0</inner-angle>
+      <outer-angle>150.0</outer-angle>
+      <outer-gain>0.0</outer-gain>
+    </orientation>    
+    <volume>
+      <property>engines/engine[0]/n2</property>
+      <factor type="double">0.003</factor>
+      <offset type="double">0.0</offset>
+    </volume>
+  </engine>
+<!--************************* ENGINE 2 WINDOW SOUND *******************************-->
 
+<engine>
+    <name>jet_whine_2_1_c</name>
+    <path>Aircraft/tu154b/Sound/engine/xtaa11.wav</path>
+    <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[1]/running</property>
+        <property>controls/engines/engine[1]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>37.0</x>
+      <y>0.0</y>
+      <z>3.5</z>
+    </position>
+    <volume>
+      <property>engines/engine[1]/n2</property>
+      <factor type="double">0.003</factor>
+      <offset type="double">0.016</offset>
+      <min>0.0</min>
+      <max>0.08</max>
+    </volume>
+    <pitch>
+      <property>engines/engine[1]/n2</property>
+      <factor>0.0082</factor>
+      <offset>0.3</offset>
+      <min>0.5</min>
+      <max>1.127</max>
+    </pitch>
+  </engine>
+  <engine>
+    <name>jet_whine_2_2_c</name>
+    <path>Aircraft/tu154b/Sound/engine/xtaa12.wav</path>
+    <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[1]/running</property>
+        <property>controls/engines/engine[1]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>37.0</x>
+      <y>0.0</y>
+      <z>3.5</z>
+    </position>
+    <volume>
+      <property>engines/engine[1]/n2</property>
+     <factor type="double">0.0008</factor>
+     <offset type="double">0.0</offset>
+     <min>0.0</min>
+     <max>0.07</max>
+    </volume>
+    <pitch>
+      <property>engines/engine[1]/n2</property>
+      <factor>0.0156</factor>
+      <offset>0.22</offset>
+      <min>0.38</min>
+      <max>1.23</max>
+    </pitch>
+  </engine>
+  <engine>
+    <name>jet_whine_2_3_c</name>
+    <path>Aircraft/tu154b/Sound/engine/xtaa13.wav</path>
+    <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[1]/running</property>
+        <property>controls/engines/engine[1]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>37.0</x>
+      <y>0.0</y>
+      <z>3.5</z>
+    </position>
+    <volume>
+      <property>engines/engine[1]/n2</property>
+      <factor type="double">0.0013</factor>
+      <offset type="double">0.0</offset>
+      <min>0.0</min>
+      <max>0.117</max>
+    </volume>
+    <pitch>
+      <property>engines/engine[1]/n2</property>
+      <factor>0.018</factor>
+      <offset>0.0</offset>
+      <min>0.23</min>
+      <max>1.78</max>
+    </pitch>
+  </engine>
+  
+  <engine>
+    <name>jet_whine_2_4_c</name>
+    <path>Aircraft/tu154b/Sound/engine/xtaa14.wav</path>
+    <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[1]/running</property>
+        <property>controls/engines/engine[1]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>37.0</x>
+      <y>0.0</y>
+      <z>3.5</z>
+    </position>
+    <volume>
+      <property>engines/engine[1]/n2</property>
+      <factor type="double">0.0013</factor>
+      <offset type="double">0.0</offset>
+      <min>0.0</min>
+      <max>0.117</max>
+    </volume>
+    <pitch>
+      <property>engines/engine[1]/n2</property>
+      <factor>0.0167</factor>
+      <offset>0.0</offset>
+    </pitch>
+  </engine>
+  
+  <engine>
+    <name>combustion_2_1_c</name>
+    <path>Aircraft/tu154b/Sound/engine/xtaa21.wav</path>
+    <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[1]/running</property>
+        <property>controls/engines/engine[1]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>37.0</x>
+      <y>0.0</y>
+      <z>3.5</z>
+    </position>
+    <volume>
+      <property>engines/engine[1]/n2</property>
+      <factor type="double">0.001</factor>
+      <offset type="double">0.0</offset>
+      <min>0.0</min>
+      <max>0.08</max>
+    </volume>
+  </engine>
+  
+  <engine>
+    <name>combustion_2_2_c</name>
+    <path>Aircraft/tu154b/Sound/engine/xtaa22.wav</path>
+    <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[1]/running</property>
+        <property>controls/engines/engine[1]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>37.0</x>
+      <y>0.0</y>
+      <z>3.5</z>
+    </position>
+    <volume>
+      <property>engines/engine[1]/n2</property>
+     <factor type="double">0.0013</factor>
+     <offset type="double">0.0</offset>
+     <min>0.0</min>
+     <max>0.13</max>
+    </volume>
+    <pitch>
+      <property>engines/engine[1]/n2</property>
+      <factor>0.013</factor>
+      <offset>0.0</offset>
+    </pitch>
+  </engine>
+  <engine>
+    <name>rumble_2_c</name>
+    <path>Sounds/rumble.wav</path>
+    <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[1]/running</property>
+        <property>controls/engines/engine[1]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+    </condition>
+    <mode>looped</mode>
+    <position>
+      <x>37.0</x>
+      <y>0.0</y>
+      <z>3.5</z>
+    </position>
+    <orientation>
+      <x>1.0</x>
+      <y>0.0</y>
+      <z>0.0</z>
+      <inner-angle>90.0</inner-angle>
+      <outer-angle>150.0</outer-angle>
+      <outer-gain>0.0</outer-gain>
+    </orientation>    
+    <volume>
+      <property>engines/engine[1]/n2</property>
+      <factor type="double">0.003</factor>
+      <offset type="double">0.0</offset>
+    </volume>
+  </engine>   
+<!--************************* ENGINE 3 WINDOW SOUND *******************************-->
+<engine>
+   <name>jet_whine_3_1_c</name>
+   <path>Aircraft/tu154b/Sound/engine/xtaa11.wav</path>
+   <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[2]/running</property>
+        <property>controls/engines/engine[2]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+   </condition>
+   <mode>looped</mode>
+   <position>
+     <x>37.0</x>
+     <y>-3.0</y>
+     <z>1.5</z>
+   </position>
+   <volume>
+     <property>engines/engine[2]/n2</property>
+      <factor type="double">0.003</factor>
+      <offset type="double">0.016</offset>
+      <min>0.0</min>
+      <max>0.08</max>
+   </volume>
+   <pitch>
+     <property>engines/engine[2]/n2</property>
+     <factor>0.0082</factor>
+     <offset>0.3</offset>
+     <min>0.5</min>
+     <max>1.127</max>
+   </pitch>
+ </engine>
+ <engine>
+   <name>jet_whine_3_2_c</name>
+   <path>Aircraft/tu154b/Sound/engine/xtaa12.wav</path>
+   <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[2]/running</property>
+        <property>controls/engines/engine[2]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+   </condition>
+   <mode>looped</mode>
+   <position>
+     <x>37.0</x>
+     <y>-3.0</y>
+     <z>1.5</z>
+   </position>
+   <volume>
+     <property>engines/engine[2]/n2</property>
+     <factor type="double">0.0008</factor>
+     <offset type="double">0.0</offset>
+     <min>0.0</min>
+     <max>0.07</max>
+   </volume>
+   <pitch>
+     <property>engines/engine[2]/n2</property>
+     <factor>0.0156</factor>
+     <offset>0.22</offset>
+     <min>0.38</min>
+     <max>1.23</max>
+   </pitch>
+ </engine>
+ <engine>
+   <name>jet_whine_3_3_c</name>
+   <path>Aircraft/tu154b/Sound/engine/xtaa13.wav</path>
+   <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[2]/running</property>
+        <property>controls/engines/engine[2]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+   </condition>
+   <mode>looped</mode>
+   <position>
+     <x>37.0</x>
+     <y>-3.0</y>
+     <z>1.5</z>
+   </position>
+   <volume>
+     <property>engines/engine[2]/n2</property>
+      <factor type="double">0.0013</factor>
+      <offset type="double">0.0</offset>
+      <min>0.0</min>
+      <max>0.117</max>
+   </volume>
+   <pitch>
+     <property>engines/engine[2]/n2</property>
+     <factor>0.018</factor>
+     <offset>0.0</offset>
+     <min>0.23</min>
+     <max>1.78</max>
+   </pitch>
+ </engine>
+  
+ <engine>
+   <name>jet_whine_3_4_c</name>
+   <path>Aircraft/tu154b/Sound/engine/xtaa14.wav</path>
+   <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[2]/running</property>
+        <property>controls/engines/engine[2]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+   </condition>
+   <mode>looped</mode>
+   <position>
+     <x>37.0</x>
+     <y>-3.0</y>
+     <z>1.5</z>
+   </position>
+   <volume>
+     <property>engines/engine[2]/n2</property>
+      <factor type="double">0.0013</factor>
+      <offset type="double">0.0</offset>
+      <min>0.0</min>
+      <max>0.117</max>
+   </volume>
+   <pitch>
+     <property>engines/engine[2]/n2</property>
+     <factor>0.0167</factor>
+     <offset>0.0</offset>
+   </pitch>
+ </engine>
+ 
+ <engine>
+   <name>combustion_3_1_c</name>
+   <path>Aircraft/tu154b/Sound/engine/xtaa21.wav</path>
+   <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[2]/running</property>
+        <property>controls/engines/engine[2]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+   </condition>
+   <mode>looped</mode>
+   <position>
+     <x>37.0</x>
+     <y>-3.0</y>
+     <z>1.5</z>
+   </position>
+   <volume>
+     <property>engines/engine[2]/n2</property>
+      <factor type="double">0.001</factor>
+      <offset type="double">0.0</offset>
+      <min>0.0</min>
+      <max>0.08</max>
+   </volume>
+ </engine>
+ 
+ <engine>
+   <name>combustion_3_2_c</name>
+   <path>Aircraft/tu154b/Sound/engine/xtaa22.wav</path>
+   <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[2]/running</property>
+        <property>controls/engines/engine[2]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+   </condition>
+   <mode>looped</mode>
+   <position>
+     <x>37.0</x>
+     <y>-3.0</y>
+     <z>1.5</z>
+   </position>
+   <volume>
+     <property>engines/engine[2]/n2</property>
+     <factor type="double">0.0013</factor>
+     <offset type="double">0.0</offset>
+     <min>0.0</min>
+     <max>0.13</max>
+   </volume>
+   <pitch>
+     <property>engines/engine[2]/n2</property>
+     <factor>0.013</factor>
+     <offset>0.0</offset>
+   </pitch>
+ </engine>
+ <engine>
+   <name>rumble_3_c</name>
+   <path>Sounds/rumble.wav</path>
+   <condition>
+      <property>sim/sound/window-open</property>
+      <or>
+        <property>engines/engine[2]/running</property>
+        <property>controls/engines/engine[2]/starter</property>
+      </or>
+      <property>sim/sound/internal</property>
+   </condition>
+   <mode>looped</mode>
+   <position>
+     <x>37.0</x>
+     <y>-3.0</y>
+     <z>1.5</z>
+   </position>
+   <orientation>
+     <x>1.0</x>
+     <y>0.0</y>
+     <z>0.0</z>
+     <inner-angle>90.0</inner-angle>
+     <outer-angle>150.0</outer-angle>
+     <outer-gain>0.0</outer-gain>
+   </orientation>    
+   <volume>
+     <property>engines/engine[2]/n2</property>
+      <factor type="double">0.003</factor>
+      <offset type="double">0.0</offset>
+   </volume>
+  </engine>
+  
+<!--********************************* END ENGINES SOUND ******************************-->
+  
 <!--Signals-->
 <horn>
     <name>horn_const</name>
@@ -2396,7 +4406,7 @@
       <offset type="double">0.5</offset>
     </volume>
   </horn>
-
+  
   <dynamic>
     <name>dynamic_const</name>
     <path>Aircraft/tu154b/Sound/misc/dinamik.wav</path>
@@ -2414,7 +4424,7 @@
       <offset type="double">0.5</offset>
     </volume>
   </dynamic>
-
+  
   <dynamic>
     <name>dynamic_pulse</name>
     <path>Aircraft/tu154b/Sound/misc/dinamik_pr.wav</path>
@@ -2440,7 +4450,7 @@
       <not><property>tu154/systems/warning/alarm/const</property></not>
       <not><property>tu154/systems/warning/alarm/enabled</property></not>
       <property>tu154/systems/warning/alarm/absu_warn</property>
-      <property>sim/current-view/internal</property>
+      <property>sim/sound/internal</property>
     </condition>
     <mode>looped</mode>
     <position>
@@ -2452,7 +4462,7 @@
       <offset type="double">0.5</offset>
     </volume>
   </dynamic>
-
+  
   <marker>
     <name>inner</name>
     <path>Aircraft/tu154b/Sound/misc/omi_1.wav</path>
@@ -2487,7 +4497,7 @@
       <offset type="double">0.5</offset>
     </volume>
   </marker>
-
+  
   <marker>
     <name>outer</name>
     <path>Aircraft/tu154b/Sound/misc/omi_3.wav</path>
@@ -2635,7 +4645,7 @@
     </volume>
   </windows>
 
-  <wipers>
+  <!--<wipers>
     <name>left windshield wiper</name>
     <path>Aircraft/tu154b/Sound/misc/wiper.wav</path>
     <condition>
@@ -2662,8 +4672,194 @@
       <y>1</y>
       <z>1.5</z>
     </position>
-  </wipers>
+  </wipers>-->
+
+  <!--Cabin alerts-->
+  <cabin>
+    <name>seat belts</name>
+    <path>Aircraft/tu154b/Sound/misc/cab_call.wav</path>
+    <condition>
+      <or>
+        <equals>
+          <property>tu154/switches/fasten-seat-belts</property>
+          <value>1</value>
+        </equals>
+        <equals>
+          <property>tu154/switches/fasten-seat-belts</property>
+          <value>0</value>
+        </equals>
+      </or>
+    </condition>
+    <mode>once</mode>
+    <!--<position>
+      <x>-1</x>
+      <y>-1</y>
+      <z>1.5</z>
+    </position>-->
+    <volume>
+      <property>tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+      <value>0.037</value>
+    </volume>
+    <volume>
+      <property>sim/sound/internal</property>
+      <factor>0.5</factor>
+    </volume>
+  </cabin>
+  <cabin>
+    <name>seat belts p</name>
+    <path>Aircraft/tu154b/Sound/misc/cab_call.wav</path>
+    <condition>
+      <or>
+        <equals>
+          <property>tu154/switches/fasten-seat-belts</property>
+          <value>1</value>
+        </equals>
+        <equals>
+          <property>tu154/switches/fasten-seat-belts</property>
+          <value>0</value>
+        </equals>
+      </or>
+    </condition>
+    <mode>once</mode>
+    <!--<position>
+      <x>-1</x>
+      <y>-1</y>
+      <z>1.5</z>
+    </position>-->
+    <volume>
+      <property>tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+      <value>0.037</value>
+    </volume>
+    <volume>
+      <property>sim/sound/pax</property>
+      <factor>0.5</factor>
+    </volume>
+  </cabin>
+
+  <cabin>
+    <name>no smoking</name>
+    <path>Aircraft/tu154b/Sound/misc/cab_call.wav</path>
+    <condition>
+      <or>
+        <equals>
+          <property>tu154/switches/no-smoking</property>
+          <value>1</value>
+        </equals>
+        <equals>
+          <property>tu154/switches/no-smoking</property>
+          <value>0</value>
+        </equals>
+      </or>
+    </condition>
+    <mode>once</mode>
+    <!--<position>
+      <x>-1</x>
+      <y>-1</y>
+      <z>1.5</z>
+    </position>-->
+    <volume>
+      <property>tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+      <value>0.037</value>
+    </volume>
+    <volume>
+      <property>sim/sound/internal</property>
+      <factor>0.5</factor>
+    </volume>
+  </cabin>
+  <cabin>
+    <name>no smoking p</name>
+    <path>Aircraft/tu154b/Sound/misc/cab_call.wav</path>
+    <condition>
+      <or>
+        <equals>
+          <property>tu154/switches/no-smoking</property>
+          <value>1</value>
+        </equals>
+        <equals>
+          <property>tu154/switches/no-smoking</property>
+          <value>0</value>
+        </equals>
+      </or>
+    </condition>
+    <mode>once</mode>
+    <!--<position>
+      <x>-1</x>
+      <y>-1</y>
+      <z>1.5</z>
+    </position>-->
+    <volume>
+      <property>tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+      <value>0.037</value>
+    </volume>
+    <volume>
+      <property>sim/sound/pax</property>
+      <factor>0.5</factor>
+    </volume>
+  </cabin>
+
+  <cabin>
+    <name>exits</name>
+    <path>Aircraft/tu154b/Sound/misc/cab_call.wav</path>
+    <condition>
+      <or>
+        <equals>
+          <property>tu154/switches/exit</property>
+          <value>1</value>
+        </equals>
+        <equals>
+          <property>tu154/switches/exit</property>
+          <value>0</value>
+        </equals>
+      </or>
+    </condition>
+    <mode>once</mode>
+    <!--<position>
+      <x>-1</x>
+      <y>-1</y>
+      <z>1.5</z>
+    </position>-->
+    <volume>
+      <property>tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+      <value>0.037</value>
+    </volume>
+    <volume>
+      <property>sim/sound/internal</property>
+      <factor>0.5</factor>
+    </volume>
+  </cabin>
+  <cabin>
+    <name>exits p</name>
+    <path>Aircraft/tu154b/Sound/misc/cab_call.wav</path>
+    <condition>
+      <or>
+        <equals>
+          <property>tu154/switches/exit</property>
+          <value>1</value>
+        </equals>
+        <equals>
+          <property>tu154/switches/exit</property>
+          <value>0</value>
+        </equals>
+      </or>
+    </condition>
+    <mode>once</mode>
+    <!--<position>
+      <x>-1</x>
+      <y>-1</y>
+      <z>1.5</z>
+    </position>-->
+    <volume>
+      <property>tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+      <value>0.037</value>
+    </volume>
+    <volume>
+      <property>sim/sound/pax</property>
+      <factor>0.5</factor>
+    </volume>
+  </cabin>
 
 </fx> 
 
 </PropertyList>
+
+

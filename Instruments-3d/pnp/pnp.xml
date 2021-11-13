@@ -28,11 +28,13 @@
   <animation>
     <type>material</type>
     <object-name>cover</object-name>
-    <emission>
-      <red-prop>tu154/light/panel/ext-red</red-prop>
-      <green-prop>tu154/light/panel/ext-green</green-prop>
-      <blue-prop>tu154/light/panel/ext-blue</blue-prop>
-    </emission>
+    <object-name>plane_sym_handle</object-name>
+    <object-name>heading_sym_handle</object-name>
+  <emission>
+    <red-prop>sim/model/cabin-lighting/vnesh</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh</blue-prop>
+  </emission>
   </animation>
 
   <!-- Internal instrument lighting -->  
@@ -47,8 +49,6 @@
     <object-name>dkm</object-name>
     <object-name>drift</object-name>
     <object-name>plane_sym</object-name>
-    <object-name>plane_sym_handle</object-name>
-    <object-name>heading_sym_handle</object-name>
     <object-name>dig_plane_ones</object-name>
     <object-name>dig_plane_dec</object-name>
     <object-name>dig_plane_hund</object-name>
@@ -59,9 +59,9 @@
     <object-name>blanker_g</object-name>
     <object-name>blanker_ks</object-name>
     <emission>
-      <red-prop>tu154/light/instruments/int-red</red-prop>
-      <green-prop>tu154/light/instruments/int-green</green-prop>
-      <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+      <red-prop>sim/model/cabin-lighting/prib</red-prop>
+      <green-prop>sim/model/cabin-lighting/prib</green-prop>
+      <blue-prop>sim/model/cabin-lighting/prib-2</blue-prop>
     </emission>
   </animation>
   <!--Yellow color-->
@@ -73,8 +73,8 @@
     <object-name>heading_marker_180</object-name>
     <object-name>heading_marker_270</object-name>
     <emission>
-      <red-prop>tu154/light/instruments/int-red</red-prop>
-      <green-prop>tu154/light/instruments/int-green</green-prop>
+      <red-prop>sim/model/cabin-lighting/prib</red-prop>
+      <green-prop>sim/model/cabin-lighting/prib</green-prop>
     </emission>
   </animation>
   <!--Red color-->
@@ -83,7 +83,7 @@
     <object-name>blanker_dkm</object-name>
     <object-name>blanker_heading</object-name>
     <emission>
-      <red-prop>tu154/light/instruments/int-red</red-prop>
+      <red-prop>sim/model/cabin-lighting/prib</red-prop>
     </emission>
   </animation>
   <animation>
