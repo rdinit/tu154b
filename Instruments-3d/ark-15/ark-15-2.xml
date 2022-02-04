@@ -442,7 +442,7 @@
   <object-name>hs_1_2</object-name>
   <visible>false</visible>
   <action>
-    <button>3</button>
+    <button>4</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
@@ -461,7 +461,7 @@
   <object-name>hs_1_2</object-name>
   <visible>false</visible>
   <action>
-    <button>4</button>
+    <button>3</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
@@ -479,7 +479,7 @@
   <object-name>hs_1_4</object-name>
   <visible>false</visible>
   <action>
-    <button>3</button>
+    <button>4</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
@@ -497,7 +497,7 @@
   <object-name>hs_1_4</object-name>
   <visible>false</visible>
   <action>
-    <button>4</button>
+    <button>3</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
@@ -515,7 +515,7 @@
   <object-name>hs_1_6</object-name>
   <visible>false</visible>
   <action>
-    <button>3</button>
+    <button>4</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
@@ -533,7 +533,7 @@
   <object-name>hs_1_6</object-name>
   <visible>false</visible>
   <action>
-    <button>4</button>
+    <button>3</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
@@ -552,7 +552,7 @@
   <object-name>hs_2_2</object-name>
   <visible>false</visible>
   <action>
-    <button>3</button>
+    <button>4</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
@@ -570,7 +570,7 @@
   <object-name>hs_2_2</object-name>
   <visible>false</visible>
   <action>
-    <button>4</button>
+    <button>3</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
@@ -588,7 +588,7 @@
   <object-name>hs_2_4</object-name>
   <visible>false</visible>
   <action>
-    <button>3</button>
+    <button>4</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
@@ -606,7 +606,7 @@
   <object-name>hs_2_3</object-name>
   <visible>false</visible>
   <action>
-    <button>4</button>
+    <button>3</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
@@ -624,7 +624,7 @@
   <object-name>hs_2_6</object-name>
   <visible>false</visible>
   <action>
-    <button>3</button>
+    <button>4</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
@@ -642,7 +642,7 @@
   <object-name>hs_2_6</object-name>
   <visible>false</visible>
   <action>
-    <button>4</button>
+    <button>3</button>
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>

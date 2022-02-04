@@ -614,14 +614,27 @@
 
 <!--Flap handle-->
 <animation>
+  <type>translate</type>
+  <object-name>flaps_handle</object-name>
+  <property>sim/model/constants/one</property>
+  <factor>0.01</factor>
+  <axis>
+    <x>-1</x>
+    <y>0</y>
+    <z>-0.6</z>
+  </axis>
+</animation>
+
+<animation>
   <type>rotate</type>
   <object-name>flaps_handle</object-name>
   <property>controls/flight/flaps</property>
-  <factor>45.0</factor>
+  <offset-deg>-20</offset-deg>
+  <factor>93.0</factor>
   <center>
-    <x-m>0.688</x-m>
+    <x-m>0.695</x-m>
     <y-m>0.0</y-m>
-    <z-m>1.335</z-m>
+    <z-m>1.337</z-m>
   </center>
   <axis>
     <x>0.0</x>
@@ -639,7 +652,7 @@
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
-      <script>controls.flapsDown(1)</script>
+      <script>controls.flapsDown(-1)</script>
     </binding>
   </action>  
   <action>
@@ -647,7 +660,7 @@
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
-      <script>controls.flapsDown(-1)</script>
+      <script>controls.flapsDown(1)</script>
     </binding>
   </action>  
   <action>
@@ -655,7 +668,7 @@
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
-      <script>controls.flapsDown(1)</script>
+      <script>controls.flapsDown(-1)</script>
     </binding>
   </action>
   <action>
@@ -663,7 +676,7 @@
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
-      <script>controls.flapsDown(-1)</script>
+      <script>controls.flapsDown(1)</script>
     </binding>
   </action>
 </animation>
@@ -736,7 +749,7 @@
   <object-name>stab_auto_handle</object-name>  
   <visible>true</visible>
   <action>
-    <button>0</button>
+    <button>1</button>
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
@@ -754,7 +767,7 @@
     </binding>
   </action>
   <action>
-    <button>1</button>
+    <button>0</button>
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
@@ -770,7 +783,7 @@
     </binding>
   </action>
   <action>
-    <button>3</button>
+    <button>4</button>
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
@@ -788,7 +801,7 @@
     </binding>
   </action>
   <action>
-    <button>4</button>
+    <button>3</button>
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>

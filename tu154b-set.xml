@@ -134,6 +134,10 @@
   <file type="string">85363-AFL</file>
  </livery>
 
+ <constants>
+  <one type="float">1</one>
+ </constants>
+
  <pushback>
   <kp type="double">2000</kp>
   <ki type="double">500</ki>
