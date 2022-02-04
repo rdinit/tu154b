@@ -8,7 +8,7 @@
 #    	yurik.nsk@gmail.com						   #
 ############################################################################-->
 
-<PropertyList>
+<PropertyList include="Aircraft/tu154b/Systems/walker-include.xml">
 
  <sim>
 	 <description>Tupolev Tu-154B-2 airliner</description>
@@ -131,6 +131,14 @@
   <kd type="double">0</kd>
   <position-norm type="double">0</position-norm>
  </pushback>
+
+ <map>
+  <default_exit>
+   <x-offset-m type ="float">-4.25</x-offset-m>
+   <y-offset-m type ="float">-8</y-offset-m>
+  </default_exit>
+ </map>
+
 </model>
 
 <flight-model>jsb</flight-model>
