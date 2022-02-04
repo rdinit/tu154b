@@ -1514,11 +1514,11 @@
   </mod-views>
 
   <door>
-    <passe type="double">1</passe>
-    <cargo0 type="double">1</cargo0>
-    <cargo1 type="double">1</cargo1>
-    <window-left type="double">1</window-left>
-    <window-right type="double">1</window-right>
+    <passe type="double">0</passe>
+    <cargo0 type="double">0</cargo0>
+    <cargo1 type="double">0</cargo1>
+    <window-left type="double">0</window-left>
+    <window-right type="double">0</window-right>
     <refuel type="double">0</refuel>
     <compartment-light>0.4</compartment-light>
   </door>
