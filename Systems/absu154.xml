@@ -1463,7 +1463,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           <test value="ap/at-pid">
             ap/at-hold-0 == 1
           </test>
-          <output>fcs/at-throttle-cmd-norm[0]</output>
+          <output>fcs/xat-throttle-cmd-norm[0]</output>
         </switch>
 
         <switch name="ap/at-thr-switched-1">
@@ -1471,7 +1471,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           <test value="ap/at-pid">
             ap/at-hold-1 == 1
           </test>
-          <output>fcs/at-throttle-cmd-norm[1]</output>
+          <output>fcs/xat-throttle-cmd-norm[1]</output>
         </switch>
 
         <switch name="ap/at-thr-switched-2">
@@ -1482,7 +1482,7 @@ There is a system for enchance pitch control. It read pitch trimmer position and
           <test value="ap/at-pid">
             ap/at-hold-2 == 1
           </test>
-          <output>fcs/at-throttle-cmd-norm[2]</output>
+          <output>fcs/xat-throttle-cmd-norm[2]</output>
         </switch>
 
       </channel>

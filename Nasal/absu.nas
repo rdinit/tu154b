@@ -4,6 +4,8 @@
 # Novosibirsk, Russia
 # 2007 - 2008,2010,2013
 #
+# Modded by ShFsn, oct 2021
+#
 
 #var HEADING_DEVIATION_LIMIT = 20.0;
 #var GLIDESLOPE_DEVIATION_LIMIT = 10.0;
@@ -822,9 +824,61 @@ if( mgvc == nil ) mgvc = 1;
 setlistener("tu154/switches/SAU-STU", absu_power, 0, 0 );
 # ============================== End AT-6 support ===========================
 
-gui.Dialog.new("/sim/gui/dialogs/Tu-154B-2/nav/dialog", "Aircraft/tu154b/Dialogs/nav.xml");
+#gui.Dialog.new("/sim/gui/dialogs/Tu-154B-2/nav/dialog", "Aircraft/tu154b/Dialogs/nav.xml");
 
 
 setprop("sim/menubar/default/menu[3]/enabled", 0 );
 
 print("ABSU started, default autopilot disabled");
+
+
+# Smoothing AT output
+var autothrottle_smooth = maketimer(0.01, func(){
+      x1 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[0]");
+      x2 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[1]");
+      x3 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[2]");
+      a1 = getprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[0]");
+      a2 = getprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[1]");
+      a3 = getprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[2]");
+      h1 = getprop("fdm/jsbsim/ap/at-hold-0");
+      h2 = getprop("fdm/jsbsim/ap/at-hold-1");
+      h3 = getprop("fdm/jsbsim/ap/at-hold-2");
+      if ( x1 == nil ) { return; }
+      if ( x2 == nil ) { return; }
+      if ( x3 == nil ) { return; }
+      if ( a1 == nil ) { return; }
+      if ( a2 == nil ) { return; }
+      if ( a3 == nil ) { return; }
+      if ( h1 == nil ) { return; }
+      if ( h2 == nil ) { return; }
+      if ( h3 == nil ) { return; }
+
+      space = 0.0025;
+
+      if ( h1 == 1 ) {
+      if ( a1 - x1 > -space and a1 - x1 < space) { a1 = x1; }
+      else { 
+            if (a1 > x1) { a1 -= space; }
+            else { a1 += space; }
+      }
+      } else { a1 = x1; }
+      if ( h2 == 1 ) {
+      if ( a2 - x2 > -space and a2 - x2 < space) { a2 = x2; }
+      else { 
+            if (a2 > x2) { a2 -= space; }
+            else { a2 += space; }
+      }
+      } else { a2 = x2; }
+      if ( h3 == 1 ) {
+      if ( a3 - x3 > -space and a3 - x3 < space) { a3 = x3; }
+      else { 
+            if (a3 > x3) { a3 -= space; }
+            else { a3 += space; }
+      }
+      } else { a3 = x3; }
+
+      setprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[0]", a1);
+      setprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[1]", a2);
+      setprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[2]", a3);
+});
+autothrottle_smooth.start();
