@@ -26,15 +26,15 @@
 	 <help>
 	   <title>Tu-154B-2</title>
    	   <key>
-	    <name>s</name>
-	    <desc>Autostart</desc>
+	    <name>u</name>
+	    <desc>Autostart (aUtostart)</desc>
 	   </key>
 	   <key>
-	    <name>d/D/Ctrl+D</name>
-	    <desc>AP On/Autothrottle On/AP-AT Off </desc>
+	    <name>f/Shift+F/Ctrl+F</name>
+	    <desc>AP On/Autothrottle On/AP-AT Off (F - autoFlight)</desc>
 	   </key>
 	   <key>
-	    <name>N/n/Ctrl+N/*</name>
+	    <name>Shift+N/n/Ctrl+N/*</name>
 	    <desc>Set nominal/0.85/0.7/0.0 thrust</desc>
 	   </key>
 	   <key>
@@ -42,21 +42,17 @@
 	    <desc>Spoilers control</desc>
 	   </key>
 	   <key>
-	    <name>F2</name>
-	    <desc>Thrust reverser On</desc>
+	    <name>r</name>
+	    <desc>Thrust reverser On (ReveRseR)</desc>
 	   </key>
 	   <key>
-	    <name>Delete</name>
-	    <desc>Center aileron, elevator, and rudder</desc>
+	    <name>Shift+M</name>
+	    <desc>Center aileron, elevator, and rudder (in Middle)</desc>
 	   </key>
-	   <key>
-	    <name>m</name>
-	    <desc>Map case zoom-in</desc>
-	   </key>
-	   <key>
-	    <name>ctrl+g</name>
-	    <desc>Gear handle neutral</desc>
-	   </key>
+     <key>
+      <name>g/Shift+G/Ctrl+G</name>
+      <desc>Gear up, down, neutral</desc>
+     </key>
      <key>
       <name>1-0</name>
       <desc>Fast Views Switches</desc>
@@ -989,8 +985,8 @@
 
 <!--End developer keys biding-->
 
-    <key n="115">
-	    <name>s</name>
+    <key n="117">
+	    <name>u</name>
 	    <desc>Auto Startup</desc>
 	    <binding>
 		    <command>nasal</command>
@@ -1004,8 +1000,8 @@
 	    </mod-up>
     </key>
 
-    <key n="100">
-      <name>d</name>
+    <key n="102">
+      <name>f</name>
       <desc>Autopilot on</desc>
       <binding>
         <command>nasal</command>
@@ -1017,8 +1013,8 @@
       </binding>
     </key>
 
-    <key n="68">
-      <name>D</name>
+    <key n="70">
+      <name>F</name>
       <desc>Autothrottle on</desc>
       <binding>
         <command>nasal</command>
@@ -1028,8 +1024,8 @@
       </binding>
     </key>
 
-    <key n="4">
-      <name>ctrl+D</name>
+    <key n="6">
+      <name>ctrl+F</name>
       <desc>All AP off</desc>
       <binding>
         <command>nasal</command>
@@ -1280,8 +1276,8 @@
     </key>
 
 <!-- Reverser -->
- <key n="258">
-  <name>F2</name>
+ <key n="114">
+  <name>r</name>
   <desc>Full Reverser</desc>
   <repeatable>true</repeatable>
   <!--Start reverser-->
