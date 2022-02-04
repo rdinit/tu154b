@@ -7333,11 +7333,11 @@
     <binding>
       <command>nasal</command>
       <script>
-        var pos = getprop("tu154/door/window-left");
+        var pos = getprop("tu154/door/window-left-sec");
         if (pos) {
-            interpolate("tu154/door/window-left", 0, pos * 2);
+            interpolate("tu154/door/window-left-sec", 0, pos * 2);
         } else {
-            interpolate("tu154/door/window-left", 1, 2);
+            interpolate("tu154/door/window-left-sec", 1, 2);
         }
       </script>
     </binding>
@@ -7472,11 +7472,11 @@
     <binding>
       <command>nasal</command>
       <script>
-        var pos = getprop("tu154/door/window-right");
+        var pos = getprop("tu154/door/window-right-sec");
         if (pos) {
-            interpolate("tu154/door/window-right", 0, pos * 2);
+            interpolate("tu154/door/window-right-sec", 0, pos * 2);
         } else {
-            interpolate("tu154/door/window-right", 1, 2);
+            interpolate("tu154/door/window-right-sec", 1, 2);
         }
       </script>
     </binding>

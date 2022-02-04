@@ -145,6 +145,14 @@
 
 <sound>
   <path>Aircraft/tu154b/Sound/sound.xml</path>
+  <internal type="bool">true</internal>
+  <external type="bool">false</external>
+  <pax type="bool">false</pax>
+  <window-open type="bool">false</window-open>
+  <loud-ext type="bool">true</loud-ext>
+  <voices>
+    <copilot type="string"></copilot>
+  </voices>
 </sound>
 
   <checklists include="tu154b-checklists.xml"/>
@@ -716,8 +724,13 @@
           <file>Aircraft/tu154b/Nasal/help.nas</file>
         </help>
 	<contrail>
-          <file>Aircraft/tu154b/Nasal/contrail.nas</file>
-        </contrail>
+    <file>Aircraft/tu154b/Nasal/contrail.nas</file>
+  </contrail>
+
+  <model-3d>
+    <file>Aircraft/tu154b/Nasal/model-3d.nas</file>
+  </model-3d>
+
 </nasal>
 
 <fdm>
@@ -1519,6 +1532,8 @@
     <cargo1 type="double">0</cargo1>
     <window-left type="double">0</window-left>
     <window-right type="double">0</window-right>
+    <window-left-sec type="double">0</window-left-sec>
+    <window-right-sec type="double">0</window-right-sec>
     <refuel type="double">0</refuel>
     <compartment-light>0.4</compartment-light>
   </door>

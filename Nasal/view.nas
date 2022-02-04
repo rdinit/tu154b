@@ -7,7 +7,9 @@
 # Novosibirsk, Russia
 # mar 2008
 #
-# Custom views
+# Modded by ShFsn, oct 2021
+#
+# Custom views 
 #
 
 var modview_active = 0;
@@ -168,3 +170,40 @@ setprop("/sim/sound/volume", getprop("tu154/volume") );
 setlistener("/sim/signals/fdm-initialized", load_exterior, 0, 0 );
 
 print("View registered");
+
+
+
+# Redefining view parameters
+view_checker = func{
+      internal = getprop("/sim/current-view/internal");
+      vnr = getprop("/sim/current-view/view-number-raw");
+      wind_l = getprop("/tu154/door/window-left");
+      wind_r = getprop("/tu154/door/window-right");
+      if( internal == nil ) { return; }
+      if( vnr == nil ) { return; }
+      if( wind_l == nil ) { return; }
+      if( wind_r == nil ) { return; }
+
+      setprop("/sim/sound/window-open", 0);
+      if( internal == 1 or vnr == 105 or vnr == 106 ) {
+            setprop("/sim/sound/internal", 1);
+            setprop("/sim/sound/external", 0);
+      }
+      else {
+            setprop("/sim/sound/internal", 0);
+            setprop("/sim/sound/external", 1);
+      }
+      #settimer( view_checker, 0.1 );
+
+      if( vnr == 105 or vnr == 106 ) {
+            setprop("/sim/sound/pax", 1);
+      }
+      else {
+            setprop("/sim/sound/pax", 0);
+            if( wind_l != 0 or wind_r != 0 ) { setprop("/sim/sound/window-open", 1); }
+      }
+}
+setlistener("sim/current-view/view-number", view_checker);
+setlistener("tu154/door/window-right", view_checker);
+setlistener("tu154/door/window-left", view_checker);
+
