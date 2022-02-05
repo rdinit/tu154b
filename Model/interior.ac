@@ -61331,7 +61331,7 @@ refs 3
 0 0.313236 0.130255
 1 0.316169 0.129952
 2 0.316325 0.137632
-kids 2
+kids 15
 OBJECT poly
 name "mapcase"
 numvert 4
@@ -61355,6 +61355,253 @@ numvert 4
 0.5555 0.567800 -0.286045
 0.5555 0.752295 -0.096028
 0.5555 0.752295 -0.286045
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+0 0 0
+1 1 0
+3 1 1
+2 0 1
+kids 0
+OBJECT poly
+name "ndplace"
+crease 79.0
+texture "NavDisplay/NDplace.png"
+texrep 1 1
+numvert 4
+0.556 0.567800 -0.096028
+0.556 0.567800 -0.286045
+0.556 0.752295 -0.096028
+0.556 0.752295 -0.286045
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+0 0 0
+1 1 0
+3 1 1
+2 0 1
+kids 0
+OBJECT poly
+name "ndrange"
+crease 79.0
+texture "NavDisplay/ndrng.png"
+texrep 1 1
+numvert 4
+0.5555 0.507 -0.257
+0.5555 0.507 -0.277
+0.5555 0.519 -0.257
+0.5555 0.519 -0.277
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+0 0 0
+1 1 0
+3 1 1
+2 0 1
+kids 0
+OBJECT poly
+name "ndwx"
+crease 79.0
+texture "NavDisplay/ndwx.png"
+texrep 1 1
+numvert 4
+0.5555 0.507 -0.184
+0.5555 0.507 -0.204
+0.5555 0.519 -0.184
+0.5555 0.519 -0.204
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+0 0 0
+1 1 0
+3 1 1
+2 0 1
+kids 0
+OBJECT poly
+name "ndterr"
+crease 79.0
+texture "NavDisplay/ndterr.png"
+texrep 1 1
+numvert 4
+0.5555 0.507 -0.155
+0.5555 0.507 -0.175
+0.5555 0.519 -0.155
+0.5555 0.519 -0.175
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+0 0 0
+1 1 0
+3 1 1
+2 0 1
+kids 0
+OBJECT poly
+name "ndtfc"
+crease 79.0
+texture "NavDisplay/ndtfc.png"
+texrep 1 1
+numvert 4
+0.5555 0.507 -0.206
+0.5555 0.507 -0.226
+0.5555 0.519 -0.206
+0.5555 0.519 -0.226
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+0 0 0
+1 1 0
+3 1 1
+2 0 1
+kids 0
+OBJECT poly
+name "ndctr"
+crease 79.0
+texture "NavDisplay/ndctr.png"
+texrep 1 1
+numvert 4
+0.5555 0.507 -0.228
+0.5555 0.507 -0.248
+0.5555 0.519 -0.228
+0.5555 0.519 -0.248
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+0 0 0
+1 1 0
+3 1 1
+2 0 1
+kids 0
+OBJECT poly
+name "ndap"
+crease 79.0
+texture "NavDisplay/ndap.png"
+texrep 1 1
+numvert 4
+0.5555 0.507 -0.133
+0.5555 0.507 -0.153
+0.5555 0.519 -0.133
+0.5555 0.519 -0.153
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+0 0 0
+1 1 0
+3 1 1
+2 0 1
+kids 0
+OBJECT poly
+name "ndrange_h"
+crease 79.0
+texture "NavDisplay/nd_h.png"
+texrep 1 1
+numvert 4
+0.5555 0.507 -0.257
+0.5555 0.507 -0.277
+0.5555 0.519 -0.257
+0.5555 0.519 -0.277
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+0 0 0
+1 1 0
+3 1 1
+2 0 1
+kids 0
+OBJECT poly
+name "ndwx_h"
+crease 79.0
+texture "NavDisplay/nd_h.png"
+texrep 1 1
+numvert 4
+0.5555 0.507 -0.184
+0.5555 0.507 -0.204
+0.5555 0.519 -0.184
+0.5555 0.519 -0.204
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+0 0 0
+1 1 0
+3 1 1
+2 0 1
+kids 0
+OBJECT poly
+name "ndterr_h"
+crease 79.0
+texture "NavDisplay/nd_h.png"
+texrep 1 1
+numvert 4
+0.5555 0.507 -0.155
+0.5555 0.507 -0.175
+0.5555 0.519 -0.155
+0.5555 0.519 -0.175
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+0 0 0
+1 1 0
+3 1 1
+2 0 1
+kids 0
+OBJECT poly
+name "ndtfc_h"
+crease 79.0
+texture "NavDisplay/nd_h.png"
+texrep 1 1
+numvert 4
+0.5555 0.507 -0.206
+0.5555 0.507 -0.226
+0.5555 0.519 -0.206
+0.5555 0.519 -0.226
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+0 0 0
+1 1 0
+3 1 1
+2 0 1
+kids 0
+OBJECT poly
+name "ndctr_h"
+crease 79.0
+texture "NavDisplay/nd_h.png"
+texrep 1 1
+numvert 4
+0.5555 0.507 -0.228
+0.5555 0.507 -0.248
+0.5555 0.519 -0.228
+0.5555 0.519 -0.248
+numsurf 1
+SURF 0x10
+mat 0
+refs 4
+0 0 0
+1 1 0
+3 1 1
+2 0 1
+kids 0
+OBJECT poly
+name "ndap_h"
+crease 79.0
+texture "NavDisplay/nd_h.png"
+texrep 1 1
+numvert 4
+0.5555 0.507 -0.133
+0.5555 0.507 -0.153
+0.5555 0.519 -0.133
+0.5555 0.519 -0.153
 numsurf 1
 SURF 0x10
 mat 0

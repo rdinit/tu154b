@@ -3821,6 +3821,140 @@
   </hovered>
 </animation>
 
+<!--************************* Nav Display ***************************-->
+<animation>
+  <type>blend</type>
+  <object-name>ndplace</object-name>
+  <object-name>ndrange</object-name>
+  <object-name>ndwx</object-name>
+  <object-name>ndterr</object-name>
+  <object-name>ndtfc</object-name>
+  <object-name>ndctr</object-name>
+  <object-name>ndap</object-name>
+  <property>sim/model/nav-display/show</property>
+  <factor>-1</factor>
+  <offset>1</offset>
+</animation>
+<!-- Traffic -->
+<animation>
+  <type>pick</type>
+  <object-name>ndtfc_h</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/tfc</property>
+    </binding>
+  </action>
+</animation>
+<!-- Weather -->
+<animation>
+  <type>pick</type>
+  <object-name>ndwx_h</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/wxr</property>
+    </binding>
+  </action>
+</animation>
+<!-- Terrain -->
+<animation>
+  <type>pick</type>
+  <object-name>ndterr_h</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/terr</property>
+    </binding>
+  </action>
+</animation>
+<!-- Airports -->
+<animation>
+  <type>pick</type>
+  <object-name>ndap_h</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/arpt</property>
+    </binding>
+  </action>
+</animation>
+<!-- Center -->
+<animation>
+  <type>pick</type>
+  <object-name>ndctr_h</object-name>
+  <visible>true</visible>
+  <action>
+    <button>0</button>
+    <binding>
+      <command>property-toggle</command>
+      <property>/instrumentation/efis/inputs/nd-centered</property>
+    </binding>
+  </action>
+</animation>
+<!-- Range -->
+<animation>
+  <type>pick</type>
+  <object-name>ndrange_h</object-name>
+  <condition>
+    <less-than>
+      <property>/instrumentation/efis/inputs/range-nm</property>
+      <value>640</value>
+    </less-than>
+  </condition>
+  <action>
+    <button>4</button>
+    <!--  scroll down -->
+    <repeatable>false</repeatable>   
+    <binding>
+      <command>property-cycle</command>
+      <property>/instrumentation/efis/inputs/range-nm</property>
+      <value>10</value>
+      <value>20</value>
+      <value>40</value>
+      <value>80</value>
+      <value>160</value>
+      <value>320</value>
+      <value>640</value>
+    </binding>   
+  </action>
+</animation>
+<animation>
+  <type>pick</type>
+  <object-name>ndrange_h</object-name>
+  <condition>
+    <greater-than>
+      <property>/instrumentation/efis/inputs/range-nm</property>
+      <value>10</value>
+    </greater-than>
+  </condition>
+  <action>
+    <button>3</button>
+    <!--  scroll up -->
+    <repeatable>false</repeatable>
+    <binding>
+      <command>property-cycle</command>
+      <property>/instrumentation/efis/inputs/range-nm</property>
+      <value>640</value>
+      <value>320</value>
+      <value>160</value>
+      <value>80</value>
+      <value>40</value>
+      <value>20</value>
+      <value>10</value>              
+    </binding>   
+  </action>
+</animation>
+<!--************************* END Nav Display ***************************-->
+
 <!--*************************** END PANELS ****************************-->
 
 <!--*************************** PUSHBACK ****************************-->
@@ -6494,6 +6628,40 @@
     <green-prop>sim/model/cabin-lighting/prib</green-prop>
     <blue-prop>sim/model/cabin-lighting/prib-2</blue-prop>
     <factor>0.5</factor>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>ndplace</object-name>
+  <condition>
+    <not>
+      <property>sim/rendering/rembrandt/enabled</property>
+    </not>
+  </condition>
+  <emission>
+    <red-prop>sim/model/cabin-lighting/lamps</red-prop>
+    <green-prop>sim/model/cabin-lighting/lamps</green-prop>
+    <blue-prop>sim/model/cabin-lighting/lamps</blue-prop>
+    <factor>1.5</factor>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>ndrange</object-name>
+  <object-name>ndwx</object-name>
+  <object-name>ndterr</object-name>
+  <object-name>ndtfc</object-name>
+  <object-name>ndctr</object-name>
+  <object-name>ndap</object-name>
+  <condition>
+    <not>
+      <property>sim/rendering/rembrandt/enabled</property>
+    </not>
+  </condition>
+  <emission>
+    <red-prop>sim/model/cabin-lighting/lamps</red-prop>
+    <green-prop>sim/model/cabin-lighting/lamps</green-prop>
+    <blue-prop>sim/model/cabin-lighting/lamps</blue-prop>
   </emission>
 </animation>
 

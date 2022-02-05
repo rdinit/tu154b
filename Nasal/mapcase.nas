@@ -29,6 +29,7 @@ var filenames = [
     "Instruments-3d/mapcase/Vstall.png",
     "Instruments-3d/mapcase/kts2kmph.png",
     "Instruments-3d/mapcase/back-course.png",
+    "Instruments-3d/mapcase/black.png",
 ];
 
 var images = {};

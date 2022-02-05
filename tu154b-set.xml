@@ -148,6 +148,10 @@
   <prib-2 type="double" >0.0</prib-2>
  </cabin-lighting>
 
+ <nav-display>
+  <show type="bool">true</show>
+ </nav-display>
+
 </model>
 
 <flight-model>jsb</flight-model>
@@ -455,6 +459,11 @@
 
   <instrumentation>
     <path>Aircraft/tu154b/Systems/instrumentation-config.xml</path>
+
+    <tcas>
+        <name>tcas</name>
+        <number>0</number>
+     </tcas>
   </instrumentation>
   <realism>
 	  <false-radio-courses-enabled type="bool">false</false-radio-courses-enabled>
@@ -770,6 +779,23 @@
   <turn-indicator>
     <serviceable type="bool">false</serviceable>
   </turn-indicator>
+
+  <tcas>                                <!-- http://wiki.flightgear.org/index.php/TCAS -->
+      <serviceable type="bool">true</serviceable>
+                                          <!-- TCAS ENABLE -->
+      <inputs>
+          <mode type="int">1</mode>       <!-- 0=off, 1=standby, 2=TA-only, 3=auto(TA/RA) -->
+      </inputs>
+      <!--<voice>
+          <file-prefix type="string">Aircraft/MyAircraft/Sounds/tcas/</file-prefix>
+      </voice>-->
+      <speaker>                           <!-- Speaker Configuration -->
+        <max-dist> 2 </max-dist>          <!-- Max. distance where speaker is heard -->
+        <reference-dist> 1 </reference-dist> <!-- Distance to pilot -->
+        <volume> 1.0 </volume>            <!-- Volume at reference distance -->
+      </speaker>
+    </tcas>
+
 </instrumentation>
 
 <controls>
@@ -787,6 +813,7 @@
 
 	<mapcase>
     <file>Aircraft/tu154b/Nasal/mapcase.nas</file>
+    <file>Aircraft/tu154b/Nasal/ND.nas</file>
 	</mapcase>
 
   <electrical>
@@ -1667,4 +1694,12 @@
     <btn-check type="int">0</btn-check>
   </refuel>
 </tu154>
+
+<systems>
+  <electrical>
+    <outputs>
+      <efis type="bool">false</efis>
+    </outputs>
+  </electrical>
+</systems>
 </PropertyList>
