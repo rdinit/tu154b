@@ -5636,8 +5636,8 @@
   </center>
   <axis>
    <x>1</x>
-   <y>0</y>
-   <z>0</z>
+   <y>0.05</y>
+   <z>-0.05</z>
   </axis>
  </animation>
  
@@ -5654,7 +5654,7 @@
   </center>
   <axis>
    <x>1</x>
-   <y>0</y>
+   <y>0.05</y>
    <z>0</z>
   </axis>
  </animation>
@@ -5672,8 +5672,8 @@
   </center>
   <axis>
    <x>1</x>
-   <y>0</y>
-   <z>0</z>
+   <y>-0.05</y>
+   <z>-0.05</z>
   </axis>
  </animation>
  
@@ -5690,7 +5690,7 @@
   </center>
   <axis>
    <x>1</x>
-   <y>0</y>
+   <y>-0.05</y>
    <z>0</z>
   </axis>
  </animation>
@@ -5723,6 +5723,23 @@
    <x-m>10.12460</x-m>
    <y-m>0.000089</y-m>
    <z-m>2.36410</z-m>
+  </center>
+  <axis>
+   <x>1</x>
+   <y>0</y>
+   <z>0</z>
+  </axis>
+ </animation>
+ 
+ <animation>
+  <type>spin</type>
+  <object-name>apu_fan</object-name>
+  <property>engines/engine[3]/n1</property>
+  <factor>10</factor>
+  <center>
+   <x-m>10.12460</x-m>
+   <y-m>0.000089</y-m>
+   <z-m>3.36410</z-m>
   </center>
   <axis>
    <x>1</x>
