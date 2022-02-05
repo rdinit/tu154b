@@ -23,6 +23,26 @@
 </animation>
 <!--Indicators-->
 <animation>
+  <type>select</type>
+  <object-name>text</object-name>
+  <condition>
+    <greater-than>
+      <property>/tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+      <value>10</value>
+    </greater-than>
+  </condition>
+</animation>
+<animation>
+  <type>select</type>
+  <object-name>text_back</object-name>
+  <condition>
+    <less-than>
+      <property>/tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+      <value>10</value>
+    </less-than>
+  </condition>
+</animation>
+<animation>
   <type>material</type>
   <object-name>text</object-name>
   <emission>

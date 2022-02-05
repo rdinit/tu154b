@@ -47,6 +47,18 @@
 
 <!--Indicators-->
 <animation>
+  <type>select</type>
+  <object-name>text_1</object-name>
+  <object-name>text_2</object-name>
+  <object-name>text_3</object-name>
+  <condition>
+    <greater-than>
+      <property>/tu154/systems/electrical/buses/DC27-bus-Lv/volts</property>
+      <value>10</value>
+    </greater-than>
+  </condition>
+</animation>
+<animation>
   <type>material</type>
   <object-name>text_1</object-name>
   <emission>
