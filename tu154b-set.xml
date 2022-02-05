@@ -110,6 +110,7 @@
 
 
 
+<gui n="0" include="gui/it-gui.xml"/>
 <gui>
   <style>
     <colors>
