@@ -29,6 +29,67 @@
   </condition>
 </animation>
 
+<!--Wing Flexer-->
+<!--Left Wing Inner-->
+<animation>
+  <type>rotate</type>
+  <object-name>MESH135_1</object-name>
+  <object-name>l_pct_lea2</object-name>
+  <object-name>l_pct_lea0</object-name>
+  <object-name>MESH191</object-name>
+  <object-name>left_nav</object-name>
+  <object-name>l_pct_tra7</object-name>
+  <object-name>l_pct_tra5</object-name>
+  <object-name>l_spoiler0</object-name>
+  <object-name>l_spoiler_</object-name>
+  <object-name>ailer_interc_left</object-name>
+  <object-name>aileron_left</object-name>
+  <object-name>navlight_l</object-name>
+  <object-name>l_pct_tr14</object-name>
+  <property>sim/systems/wingflexer/z-m</property>
+  <center>
+    <x-m>0.375</x-m>
+    <y-m>-6.5</y-m>
+    <z-m>0.3</z-m>
+  </center>
+  <axis>
+    <x>-1.0</x>
+    <y>-0.4</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<!--Right Wing Inner-->
+<animation>
+  <type>rotate</type>
+  <object-name>MESH91_1</object-name>
+  <object-name>r_pct_lea2</object-name>
+  <object-name>r_pct_lea0</object-name>
+  <object-name>MESH197</object-name>
+  <object-name>right_nav</object-name>
+  <object-name>r_pct_tra3</object-name>
+  <object-name>r_pct_tra8</object-name>
+  <object-name>r_spoiler0</object-name>
+  <object-name>r_spoiler_</object-name>
+  <object-name>ailer_interc_right</object-name>
+  <object-name>r_pct_tr11</object-name>
+  <object-name>r_pct_tr12</object-name>
+  <object-name>aileron_right</object-name>
+  <object-name>navlight_r</object-name>
+  <property>sim/systems/wingflexer/z-m</property>
+  <center>
+    <x-m>0.375</x-m>
+    <y-m>6.5</y-m>
+    <z-m>0.3</z-m>
+  </center>
+  <axis>
+    <x>1.0</x>
+    <y>-0.4</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+
+<!-- ########### End of wings and wingflex ############ -->
+
 <!--Passengers shake-->
   <animation>
     <type>translate</type>

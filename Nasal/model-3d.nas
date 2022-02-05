@@ -205,3 +205,63 @@ setlistener("/systems/shake/effect", func {
             theShakeEffect();
       }
 }, 0, 0);
+
+
+################################################# Wingflex #################################################
+var z1 = getprop("/sim/systems/wingflexer/z-m");
+var z2 = getprop("/sim/systems/wingflexer/z-m");
+var dt = 0.025;
+
+var wngflx = func {
+
+    if (getprop("/sim/replay/time") == 0) {
+    # fuselage z (up) acceleration in m/s^2 we get -g in unaccelerated flight, and large negative numbers on touchdown
+
+    #setprop("/sim/systems/wingflexer/a-fuselage-mps2", getprop("/accelerations/pilot/z-accel-fps_sec") * 0.3048);            #
+    setprop("/sim/systems/wingflexer/a-fuselage-mps2", getprop("/accelerations/n-z-cg-fps_sec") * 9.8176);            #
+
+
+    # compute k and d
+
+    setprop("/sim/systems/wingflexer/k", getprop("/sim/systems/wingflexer/params/K") * getprop("/sim/systems/wingflexer/params/m-wing-dry-kg"));
+
+    setprop("/sim/systems/wingflexer/d", getprop("/sim/systems/wingflexer/params/D") * getprop("/sim/systems/wingflexer/params/m-wing-dry-kg"));
+
+
+    # lift force. Convert to N and use 1/2 (one wing only)
+
+    setprop("/sim/systems/wingflexer/f-lift-N", getprop("/sim/systems/wingflexer/params/lift-node-lbs") * getprop("environment/gravitational-acceleration-mps2") * 0.226796);                   #
+
+
+    # z_ofs = g * mass_dry_kg / k
+
+    setprop("/sim/systems/wingflexer/z-ofs-m", (getprop("/sim/systems/wingflexer/params/m-wing-dry-kg") * getprop("environment/gravitational-acceleration-mps2")) / getprop("/sim/systems/wingflexer/k"));
+
+
+    # compute total mass of one wing, using the average fuel mass in all wing tanks. The weighting factor should be lumped into fuel_frac. mass = mass_dry_kg + fuel_frac * sum_i (fuel_node_i_kg)
+
+    setprop("/sim/systems/wingflexer/m-wing-kg", getprop("/sim/systems/wingflexer/params/m-wing-dry-kg") + (getprop("/sim/systems/wingflexer/params/fuel-frac") * (getprop("/sim/systems/wingflexer/params/fuel-node-1-kg") + getprop("/sim/systems/wingflexer/params/fuel-node-2-kg") + getprop("/sim/systems/wingflexer/params/fuel-node-3-kg") + getprop("/sim/systems/wingflexer/params/fuel-node-4-kg"))));
+
+
+    # integrate discretised equation of motion
+    # reverse sign of F_l because z in JSBsim body coordinate system points down
+    # z = (2 * z1 - z2 + dt * ((d * z1 + dt * (-F_lift - k * z1)) / m_wing + dt * accel)) / (1 + d * dt / m_wing)
+
+    z = (2 * z1 - z2 + dt * ((getprop("/sim/systems/wingflexer/d") * z1 + dt * (-getprop("/sim/systems/wingflexer/f-lift-N") - getprop("/sim/systems/wingflexer/k") * z1)) / getprop("/sim/systems/wingflexer/m-wing-kg") + dt * getprop("/sim/systems/wingflexer/a-fuselage-mps2"))) / (1 + getprop("/sim/systems/wingflexer/d") * dt / getprop("/sim/systems/wingflexer/m-wing-kg"));
+
+    z2 = z1;
+    z1 = z;
+
+    z = z * getprop("/sim/systems/wingflexer/params/z-fac");
+    z = z + 0.7585 / 20 * getprop("/sim/systems/wingflexer/params/z-fac");
+    if (math.abs(z) > 1) {
+        if (z >= 0) { z = math.sqrt(z - 0.555) * 1.5; }
+        else { z = -math.sqrt(math.abs(z) - 0.555) * 1.5; }
+    }
+
+    setprop("/sim/systems/wingflexer/z-m", z);
+    }
+
+    settimer(wngflx, dt);
+}
+settimer(wngflx, 0);
