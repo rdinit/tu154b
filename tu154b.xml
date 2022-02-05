@@ -424,7 +424,7 @@
                 <z> 0 </z>
             </location>
             <capacity unit="KG">6600</capacity>
-            <contents unit="KG">4000</contents>
+            <contents unit="KG">500</contents>
         </tank>
     </propulsion>
 
