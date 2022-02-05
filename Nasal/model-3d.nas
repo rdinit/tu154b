@@ -151,3 +151,57 @@ deicing = func{
 ext_power_autoconnect = func{
       if ( getprop("/tu154/switches/APU-RAP-selector") == 2 ) { setprop("/sim/model/ground-services/ext-power", 1); }
 } setlistener("/tu154/switches/APU-RAP-selector", ext_power_autoconnect);
+
+
+############################################# Tu-154B-2 Rollshake ##############################################
+#
+# Copyright (c) 2020 Josh Davidson (Octal450)
+
+var shakeEffect = props.globals.initNode("/systems/shake/effect", 0, "BOOL");
+var shake = props.globals.initNode("/systems/shake/shaking", 0, "DOUBLE");
+var shakext = props.globals.initNode("/systems/shake/shakingext", 0, "DOUBLE");
+var sf = 0;
+
+var theShakeEffect = func {
+      if (getprop("/systems/shake/effect") == 1) {
+            n = 100000;
+            max = 80;
+            ext = 2.5;
+            sf = getprop("/velocities/groundspeed-kt") / n;
+            if (sf > max / n) { sf = max / n; }
+            interpolate("/systems/shake/shaking", sf, 0.03);
+            settimer(func {
+                  interpolate("/systems/shake/shaking", -sf * 2, 0.03); 
+                  if (getprop("/sim/sound/pax") == 1) {
+                        interpolate("/systems/shake/shakingext", -sf * 2 * ext, 0.03);
+                  } else {
+                        settimer(func {
+                              setprop("/systems/shake/shakingext", 0);
+                        }, 0.2);
+                  }
+            }, 0.06);
+            settimer(func {
+                  interpolate("/systems/shake/shaking", sf, 0.03);
+                  if (getprop("/sim/sound/pax") == 1) {
+                        interpolate("/systems/shake/shakingext", sf * ext, 0.03);
+                  } else {
+                        settimer(func {
+                              setprop("/systems/shake/shakingext", 0);
+                        }, 0.2);
+                  }
+            }, 0.12);
+            settimer(theShakeEffect, 0.09);     
+      } else {
+#           shake.setValue(0);
+#           shakeEffect.setBoolValue(0);
+            settimer(func {
+                  setprop("/systems/shake/shaking", 0);
+                  setprop("/systems/shake/shakingext", 0);
+            }, 0.2);
+      }         
+}
+setlistener("/systems/shake/effect", func {
+      if (shakeEffect.getBoolValue()) {
+            theShakeEffect();
+      }
+}, 0, 0);
