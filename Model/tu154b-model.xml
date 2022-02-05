@@ -4624,16 +4624,79 @@
 <!--Pressure movement-->
 <animation>
   <type>translate</type>
-  <object-name>c_wheel_Ob</object-name>
+  <object-name>c_gear_ME0</object-name>
+  <object-name>c_gear_Ob1</object-name>
   <property>gear/gear[0]/compression-norm</property>
   <interpolation>
-    <entry><ind>	0.0</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	1.0</ind>	<dep>	-0.272</dep></entry>
+    <entry><ind>  0.0</ind> <dep> 0.0</dep></entry>
+    <entry><ind>  1.0</ind> <dep> -0.136</dep></entry>
+    <entry><ind>  2.1</ind> <dep> -0.272</dep></entry>
   </interpolation>
   <axis>
     <x>0.9</x>
     <y>0.0</y>
     <z>0.1</z>
+  </axis>
+</animation>
+
+<animation>
+  <type>rotate</type>
+  <object-name>c_gear_ME1</object-name>
+  <property>gear/gear[0]/compression-norm</property>
+  <interpolation>
+    <entry><ind>  0.0</ind> <dep> 0.0</dep></entry>
+    <entry><ind>  1.0</ind> <dep> 18.0</dep></entry>
+    <entry><ind>  2.1</ind> <dep> 10.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-16.5885</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.3333</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>c_gear_Ob1</object-name>
+  <property>gear/gear[0]/compression-norm</property>
+  <interpolation>
+    <entry><ind>  0.0</ind> <dep> 0.0</dep></entry>
+    <entry><ind>  1.0</ind> <dep> 40.0</dep></entry>
+    <entry><ind>  2.1</ind> <dep> 80.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-16.22</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.175</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>c_gear_Ob2</object-name>
+  <property>gear/gear[0]/compression-norm</property>
+  <interpolation>
+    <entry><ind>  0.0</ind> <dep> 0.0</dep></entry>
+    <entry><ind>  1.0</ind> <dep> 40.0</dep></entry>
+    <entry><ind>  2.1</ind> <dep> 80.0</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>-16.01</x-m>
+    <y-m>0.0</y-m>
+    <z-m>-0.066</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>1.0</y>
+    <z>0.0</z>
   </axis>
 </animation>
 
@@ -5108,7 +5171,7 @@
   <type>translate</type>
   <object-name>l_gear_Ob0</object-name>
   <object-name>l_gear_Ob5</object-name>
-  <object-name>l_gear_ME8</object-name>
+  <!--<object-name>l_gear_ME8</object-name>-->
   <property>tu154/gear/compression-left-m</property>
   <interpolation>
     <entry><ind>	0.15</ind>	<dep>	0.0</dep></entry>
@@ -5118,6 +5181,44 @@
     <x>0.9</x>
     <y>0.0</y>
     <z>0.1</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>l_gear_Ob5</object-name>
+  <property>tu154/gear/compression-left-m</property>
+  <interpolation>
+    <entry><ind>  0.15</ind>  <dep> 0.0</dep></entry>
+    <entry><ind>  0.49</ind>  <dep> 30</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>2.195</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.195</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>l_gear_ME8</object-name>
+  <property>tu154/gear/compression-left-m</property>
+  <interpolation>
+    <entry><ind>  0.15</ind>  <dep> 0.0</dep></entry>
+    <entry><ind>  0.49</ind>  <dep> 30</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>1.785</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.1775</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
   </axis>
 </animation>
 <!--Restore lever position-->
@@ -5236,29 +5337,6 @@
     <x-m>2.31288</x-m>
     <y-m>0.0</y-m>
     <z-m>-0.048</z-m>
-  </center>
-  <axis>
-    <x>0.0</x>
-    <y>1.0</y>
-    <z>0.0</z>
-  </axis>
-</animation>
-<animation>
-  <type>rotate</type>
-  <object-name>l_gear_ME8</object-name>
-  <property>tu154/gear/compression-left-m</property>
-  <interpolation>
-    <entry><ind>	0.15</ind>	<dep>	5.0</dep></entry>
-    <entry><ind>	0.167</ind>	<dep>	3.0</dep></entry>
-    <entry><ind>	0.1772</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.2724</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.2996</ind>	<dep>	-4.0</dep></entry>
-    <entry><ind>	0.49</ind>	<dep>	-4.0</dep></entry>
-  </interpolation>
-  <center>
-    <x-m>1.9634</x-m>
-    <y-m>0.0</y-m>
-    <z-m>0.4827</z-m>
   </center>
   <axis>
     <x>0.0</x>
@@ -5736,7 +5814,7 @@
   <type>translate</type>
   <object-name>r_gear_Ob2</object-name>
   <object-name>r_gear_Ob6</object-name>
-  <object-name>r_gear_ME9</object-name>
+  <!--<object-name>r_gear_ME9</object-name>-->
   <property>tu154/gear/compression-right-m</property>
   <interpolation>
     <entry><ind>	0.15</ind>	<dep>	0.0</dep></entry>
@@ -5746,6 +5824,44 @@
     <x>0.9</x>
     <y>0.0</y>
     <z>0.1</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>r_gear_Ob6</object-name>
+  <property>tu154/gear/compression-right-m</property>
+  <interpolation>
+    <entry><ind>  0.15</ind>  <dep> 0.0</dep></entry>
+    <entry><ind>  0.49</ind>  <dep> 30</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>2.195</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.195</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>1.0</y>
+    <z>0.0</z>
+  </axis>
+</animation>
+<animation>
+  <type>rotate</type>
+  <object-name>r_gear_ME9</object-name>
+  <property>tu154/gear/compression-right-m</property>
+  <interpolation>
+    <entry><ind>  0.15</ind>  <dep> 0.0</dep></entry>
+    <entry><ind>  0.49</ind>  <dep> 30</dep></entry>
+  </interpolation>
+  <center>
+    <x-m>1.785</x-m>
+    <y-m>0.0</y-m>
+    <z-m>0.1775</z-m>
+  </center>
+  <axis>
+    <x>0.0</x>
+    <y>-1.0</y>
+    <z>0.0</z>
   </axis>
 </animation>
 <!--Restore lever position-->
@@ -5864,29 +5980,6 @@
     <x-m>2.31288</x-m>
     <y-m>0.0</y-m>
     <z-m>-0.048</z-m>
-  </center>
-  <axis>
-    <x>0.0</x>
-    <y>1.0</y>
-    <z>0.0</z>
-  </axis>
-</animation>
-<animation>
-  <type>rotate</type>
-  <object-name>r_gear_ME9</object-name>
-  <property>tu154/gear/compression-right-m</property>
-  <interpolation>
-    <entry><ind>	0.15</ind>	<dep>	5.0</dep></entry>
-    <entry><ind>	0.167</ind>	<dep>	3.0</dep></entry>
-    <entry><ind>	0.1772</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.2724</ind>	<dep>	0.0</dep></entry>
-    <entry><ind>	0.2996</ind>	<dep>	-4.0</dep></entry>
-    <entry><ind>	0.49</ind>	<dep>	-4.0</dep></entry>
-  </interpolation>
-  <center>
-    <x-m>1.9634</x-m>
-    <y-m>0.0</y-m>
-    <z-m>0.4827</z-m>
   </center>
   <axis>
     <x>0.0</x>
