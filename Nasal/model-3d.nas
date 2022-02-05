@@ -265,3 +265,22 @@ var wngflx = func {
     settimer(wngflx, dt);
 }
 settimer(wngflx, 0);
+
+
+################################################# Gear pitch #################################################
+#var ac_pitch = props.globals.getNode("orientation/pitch-deg");
+#var ac_roll = props.globals.getNode("orientation/roll-deg");
+#var ac_agl = props.globals.getNode("position/altitude-agl-ft"); #12.13, x0.7, z-2
+var l_pitch_cmd = props.globals.getNode("tu154/gear/rotation-left-deg");
+var r_pitch_cmd = props.globals.getNode("tu154/gear/rotation-right-deg");
+var l_pitch_out = props.globals.getNode("tu154/gear/rotation-left-deg-s");
+var r_pitch_out = props.globals.getNode("tu154/gear/rotation-right-deg-s");
+#var l_pitch = 0;
+#var r_pitch = 0;
+var dt_gear = 0.1;
+var Gear_Pitch = maketimer(dt_gear, func() {
+      interpolate(l_pitch_out.getPath(), l_pitch_cmd.getValue(), dt_gear);
+      interpolate(r_pitch_out.getPath(), r_pitch_cmd.getValue(), dt_gear);
+});
+Gear_Pitch.simulatedTime = 1;
+Gear_Pitch.start();

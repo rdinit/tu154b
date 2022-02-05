@@ -5015,7 +5015,7 @@
   <type>rotate</type>
   <object-name>l_gear_Ob2</object-name>
   <object-name>l_gear_ME0</object-name>
-  <property>tu154/gear/rotation-left-deg</property>
+  <property>tu154/gear/rotation-left-deg-s</property>
   <center>
     <x-m>2.71</x-m>
     <y-m>0.0</y-m>
@@ -5263,7 +5263,7 @@
   <type>rotate</type>
   <object-name>l_gear_Ob1</object-name>
   <object-name>l_gear_ME2</object-name>
-  <property>tu154/gear/rotation-left-deg</property>
+  <property>tu154/gear/rotation-left-deg-s</property>
   <center>
     <x-m>2.5153</x-m>
     <y-m>0.0</y-m>
@@ -5657,7 +5657,7 @@
   <type>rotate</type>
   <object-name>r_gear_Ob4</object-name>
   <object-name>r_gear_ME3</object-name>
-  <property>tu154/gear/rotation-right-deg</property>
+  <property>tu154/gear/rotation-right-deg-s</property>
   <center>
     <x-m>2.71</x-m>
     <y-m>0.0</y-m>
@@ -5906,7 +5906,7 @@
   <type>rotate</type>
   <object-name>r_gear_Ob3</object-name>
   <object-name>r_gear_ME5</object-name>
-  <property>tu154/gear/rotation-right-deg</property>
+  <property>tu154/gear/rotation-right-deg-s</property>
   <center>
     <x-m>2.5153</x-m>
     <y-m>0.0</y-m>
