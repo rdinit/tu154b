@@ -189,6 +189,10 @@
   <f-connect-r type="bool">false</f-connect-r>
  </ground-services>
 
+ <replay-fix>
+  <save_state type="bool">true</save_state>
+ </replay-fix>
+
 </model>
 
 <flight-model>jsb</flight-model>
@@ -912,6 +916,10 @@
   <model-3d>
     <file>Aircraft/tu154b/Nasal/model-3d.nas</file>
   </model-3d>
+
+  <replay-fix>
+    <file>Aircraft/tu154b/Nasal/replay-fix.nas</file>
+  </replay-fix>
 
 </nasal>
 
