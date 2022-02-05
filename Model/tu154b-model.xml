@@ -13,6 +13,12 @@
 <!--External model-->
 <path>exterior.ac</path>
 
+<!-- Ground Services-->
+<model>
+  <name>groundservices</name>
+  <path>Aircraft/tu154b/Model/Services/groundservices.xml</path>
+</model>
+
 <animation>
   <type>select</type>
   <object-name>Exterior</object-name>

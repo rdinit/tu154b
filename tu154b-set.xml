@@ -88,6 +88,14 @@
       </item>
 
       <item>
+        <label>Maintenance</label>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>maintenance</dialog-name>
+        </binding>
+      </item>
+
+      <item>
 	      <label>Pushback</label>
 	      <name>pushback</name>
 	      <binding>
@@ -157,6 +165,28 @@
  <nav-display>
   <show type="bool">true</show>
  </nav-display>
+
+ <ground-services>
+  <stairs type="bool">false</stairs>
+  <st-cover type="bool">false</st-cover>
+  <bus1 type="bool">false</bus1>
+  <bus2 type="bool">false</bus2>
+  <f-buggage type="bool">false</f-buggage>
+  <r-buggage type="bool">false</r-buggage>
+  <chocks type="bool">true</chocks>
+  <chockss type="bool">true</chockss>
+  <de-ice type="bool">false</de-ice>
+  <de-ice-p type="bool">false</de-ice-p>
+  <de-ice-pp type="double">0</de-ice-pp>
+  <catering type="bool">false</catering>
+  <cat-up type="bool">false</cat-up>
+  <ext-power type="bool">false</ext-power>
+  <ep-connect type="bool">false</ep-connect>
+  <fuel-l type="bool">false</fuel-l>
+  <fuel-r type="bool">false</fuel-r>
+  <f-connect-l type="bool">false</f-connect-l>
+  <f-connect-r type="bool">false</f-connect-r>
+ </ground-services>
 
 </model>
 
@@ -1708,4 +1738,22 @@
     </outputs>
   </electrical>
 </systems>
+
+<services>
+  <catering>
+    <position-norm type="double">0</position-norm>
+  </catering>
+  <deicing_truck>
+    <crane>
+      <position-norm type="double">0</position-norm>
+    </crane>
+    <deicing>
+      <position-norm type="double">0</position-norm>
+    </deicing>
+    <truck>
+      <position-norm type="double">0</position-norm>
+    </truck>
+  </deicing_truck>
+</services>
+
 </PropertyList>
