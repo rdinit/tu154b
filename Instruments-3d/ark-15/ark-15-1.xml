@@ -15,19 +15,19 @@
 <animation>
   <type>material</type>
   <object-name>base</object-name>
-    <emission>
-    <red-prop>tu154/light/panel/ext-red</red-prop>
-    <green-prop>tu154/light/panel/ext-green</green-prop>
-    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+  <emission>
+    <red-prop>sim/model/cabin-lighting/vnesh</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh</blue-prop>
   </emission>
 </animation>
 <animation>
   <type>material</type>
   <object-name>base_switch</object-name>
   <emission>
-    <red-prop>tu154/light/panel/ext-red</red-prop>
-    <green-prop>tu154/light/panel/ext-green</green-prop>
-    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+    <red-prop>sim/model/cabin-lighting/vnesh</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh</blue-prop>
     <factor>0.5</factor>
   </emission>
 </animation>
@@ -37,9 +37,9 @@
   <type>material</type>
   <object-name>digits</object-name>
   <emission>
-    <red-prop>tu154/light/instruments/int-red</red-prop>
-    <green-prop>tu154/light/instruments/int-green</green-prop>
-    <blue-prop>tu154/light/instruments/int-blue</blue-prop>
+    <red-prop>sim/model/cabin-lighting/lamps</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh</blue-prop>
   </emission>
 </animation>
 

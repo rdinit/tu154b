@@ -139,6 +139,15 @@
   </default_exit>
  </map>
 
+ <cabin-lighting>
+  <vnesh type="double" >0.0</vnesh>
+  <vnesh-2 type="double" >0.0</vnesh-2>
+  <lamps type="double" >0.0</lamps>
+  <lamps-2 type="double" >0.0</lamps-2>
+  <prib type="double" >0.0</prib>
+  <prib-2 type="double" >0.0</prib-2>
+ </cabin-lighting>
+
 </model>
 
 <flight-model>jsb</flight-model>

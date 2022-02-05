@@ -397,3 +397,29 @@ var light_manager = {
 };
 
 light_manager.init();
+
+
+############################################# Model lights ############################################
+light_rework = func{
+      blue = getprop("tu154/light/panel/amb-blue");
+      green = getprop("tu154/light/panel/amb-green");
+      red = getprop("tu154/light/panel/amb-red");
+      if( blue == nil ) { return; }
+      if( green == nil ) { return; }
+      if( red == nil ) { return; }
+
+      podsvetka_osn = (blue + green + red) / 3;
+      podsvetka_lamps = podsvetka_osn * 1.25;
+      podsvetka_prib = podsvetka_osn * 1.2;
+      podsvetka_osn /= 3;
+
+      setprop("sim/model/cabin-lighting/vnesh", podsvetka_osn);
+      setprop("sim/model/cabin-lighting/vnesh-2", podsvetka_osn / 1.5);
+      setprop("sim/model/cabin-lighting/lamps", podsvetka_lamps);
+      setprop("sim/model/cabin-lighting/lamps-2", podsvetka_lamps / 1.5);
+      setprop("sim/model/cabin-lighting/prib", podsvetka_prib);
+      setprop("sim/model/cabin-lighting/prib-2", podsvetka_prib / 1.5);
+}
+setlistener("tu154/light/panel/amb-blue", light_rework);
+setlistener("tu154/light/panel/amb-green", light_rework);
+setlistener("tu154/light/panel/amb-red", light_rework);

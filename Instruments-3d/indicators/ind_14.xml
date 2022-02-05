@@ -27,6 +27,17 @@
   <object-name>base</object-name>
 </effect>
 
+<!--Covers lighting-->
+<animation>
+  <type>material</type>
+  <object-name>base</object-name>
+  <emission>
+    <red-prop>sim/model/cabin-lighting/vnesh</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh</blue-prop>
+  </emission>
+</animation>
+
 <!--Indicators-->
 <animation>
   <type>material</type>

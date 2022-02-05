@@ -35,6 +35,21 @@
   <object-name>cover_5</object-name>
 </effect>
 
+<!--Covers lighting-->
+<animation>
+  <type>material</type>
+  <object-name>cover_1</object-name>
+  <object-name>cover_2</object-name>
+  <object-name>cover_3</object-name>
+  <object-name>cover_4</object-name>
+  <object-name>cover_5</object-name>
+  <emission>
+    <red-prop>sim/model/cabin-lighting/vnesh</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh</blue-prop>
+  </emission>
+</animation>
+
 <!--Indicators-->
 <animation>
   <type>material</type>

@@ -6341,9 +6341,9 @@
   </condition>  
   <texture-prop>tu154/textures/capt-panel</texture-prop>
   <emission>
-    <red-prop>tu154/light/panel/ext-red</red-prop>
-    <green-prop>tu154/light/panel/ext-green</green-prop>
-    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+    <red-prop>sim/model/cabin-lighting/vnesh-2</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh-2</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh-2</blue-prop>
   </emission>
   
 </animation>
@@ -6357,9 +6357,9 @@
     </not>
   </condition>
   <emission>
-    <red-prop>tu154/light/panel/ext-red</red-prop>
-    <green-prop>tu154/light/panel/ext-green</green-prop>
-    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+    <red-prop>sim/model/cabin-lighting/vnesh-2</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh-2</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh-2</blue-prop>
   </emission>
   <texture-prop>tu154/textures/copilot-panel</texture-prop>
 </animation>
@@ -6373,9 +6373,9 @@
     </not>
   </condition>
   <emission>
-    <red-prop>tu154/light/panel/ext-red</red-prop>
-    <green-prop>tu154/light/panel/ext-green</green-prop>
-    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+    <red-prop>sim/model/cabin-lighting/vnesh-2</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh-2</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh-2</blue-prop>
   </emission>
   <texture-prop>tu154/textures/overhead-panel</texture-prop>
 </animation>
@@ -6389,9 +6389,9 @@
     </not>
   </condition>
   <emission>
-    <red-prop>tu154/light/panel/ext-red</red-prop>
-    <green-prop>tu154/light/panel/ext-green</green-prop>
-    <blue-prop>tu154/light/panel/ext-blue</blue-prop>
+    <red-prop>sim/model/cabin-lighting/vnesh-2</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh-2</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh-2</blue-prop>
   </emission>
   <texture-prop>tu154/textures/fe-panel</texture-prop>
 </animation>
@@ -6456,7 +6456,7 @@
   <object-name>RightWindowHandle</object-name>
   <object-name>WiperLeft</object-name>
   <object-name>WiperRight</object-name>
-  <object-name>MESH23</object-name>
+  <!--<object-name>MESH23</object-name>-->
   <object-name>MESH25</object-name>
   <object-name>MESH27</object-name>
   <object-name>pnl</object-name>
@@ -6476,9 +6476,24 @@
     </not>
   </condition>
   <emission>
-    <red-prop>tu154/light/panel/amb-red</red-prop>
-    <green-prop>tu154/light/panel/amb-green</green-prop>
-    <blue-prop>tu154/light/panel/amb-blue</blue-prop>
+    <red-prop>sim/model/cabin-lighting/vnesh-2</red-prop>
+    <green-prop>sim/model/cabin-lighting/vnesh-2</green-prop>
+    <blue-prop>sim/model/cabin-lighting/vnesh-2</blue-prop>
+  </emission>
+</animation>
+<animation>
+  <type>material</type>
+  <object-name>mapcase</object-name>
+  <condition>
+    <not>
+      <property>sim/rendering/rembrandt/enabled</property>
+    </not>
+  </condition>
+  <emission>
+    <red-prop>sim/model/cabin-lighting/prib</red-prop>
+    <green-prop>sim/model/cabin-lighting/prib</green-prop>
+    <blue-prop>sim/model/cabin-lighting/prib-2</blue-prop>
+    <factor>0.5</factor>
   </emission>
 </animation>
 
