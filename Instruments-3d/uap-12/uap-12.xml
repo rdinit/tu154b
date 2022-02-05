@@ -141,7 +141,7 @@
 
 <animation>
   <type>rotate</type>
-  <object-name>n_max</object-name>
+  <object-name>n_min</object-name>
   <property>tu154/instrumentation/uap-12/accelerate-max</property>
   <condition>
     <property>tu154/instrumentation/uap-12/powered</property>
@@ -161,7 +161,7 @@
 </animation>
 <animation>
   <type>rotate</type>
-  <object-name>n_min</object-name>
+  <object-name>n_max</object-name>
   <property>tu154/instrumentation/uap-12/accelerate-min</property>
   <condition>
     <property>tu154/instrumentation/uap-12/powered</property>
