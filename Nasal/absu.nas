@@ -161,6 +161,11 @@ if( getprop("fdm/jsbsim/ap/pitch-selector") == 5.0 )
 
 # ABSU control
 
+var absu_stab_toggle = func {
+	if( getprop("fdm/jsbsim/ap/pitch-hold") and getprop("fdm/jsbsim/ap/roll-hold") ) absu_stab_b_off();
+	else absu_stab_on();
+}
+
 var absu_stab_on = func {
 if( absu_powered() == 0 ) return;
 
@@ -208,7 +213,41 @@ var absu_stab_off = func {
 	setprop("fdm/jsbsim/ap/go-around", 0.0);
         clr_pitch_lamp();
         clr_heading_lamp();
+	
+	if( absu_powered() == 1 )
+	{
+# PN-5 indicators
+	setprop( "tu154/instrumentation/pn-5/pitch-state", 1 );
+	setprop( "tu154/instrumentation/pn-5/heading-state", 1 );
+	setprop("tu154/instrumentation/pn-5/sbros", 1.0 );
+	}
+	else{
+	setprop( "tu154/instrumentation/pn-5/pitch-state", 0 );
+	setprop( "tu154/instrumentation/pn-5/heading-state", 0 );
+	}
+}
 
+var absu_stab_b_off = func {
+# Autopilot state
+# Clear audio warning if interpolation of is stale
+	setprop("tu154/systems/warning/alarm/absu_warn", 0.0 );
+	var state = 0;
+	if( getprop("fdm/jsbsim/ap/pitch-hold") ) state = 1;
+	if( getprop("fdm/jsbsim/ap/roll-hold") ) state = state + 1;
+	if( getprop("tu154/instrumentation/pu-46/stab") ) state = state + 1;
+	if( state ) absu_alarm();
+	
+	#setprop("fdm/jsbsim/ap/roll-selector", 0.0 );
+	#setprop("fdm/jsbsim/ap/pitch-selector", 0.0 );
+	setprop("fdm/jsbsim/ap/pitch-hold", 0.0 );
+	setprop("fdm/jsbsim/ap/roll-hold", 0.0 );
+# Blue lamp on PU-46
+	setprop("tu154/instrumentation/pu-46/stab", 0.0 );
+# stop go around 	
+	setprop("fdm/jsbsim/ap/go-around", 0.0);
+        clr_pitch_lamp();
+        clr_heading_lamp();
+	
 	if( absu_powered() == 1 )
 	{
 # PN-5 indicators
@@ -716,6 +755,12 @@ if( getprop("tu154/instrumentation/pn-6/mode") > 2.0 )
 # 	setprop("tu154/instrumentation/pn-6/check-lamp", state );
 	}
 
+}
+
+#Switch AT mode on button "C"
+var absu_at_toggle = func{
+	if( getprop("tu154/instrumentation/pn-6/stab" ) ) absu_at_stop();
+	else absu_at_start();
 }
 
 # Start stabilize speed

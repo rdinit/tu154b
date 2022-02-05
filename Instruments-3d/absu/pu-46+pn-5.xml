@@ -642,7 +642,7 @@
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
-      <script>absu.absu_stab_on()</script>
+      <script>absu.absu_stab_toggle()</script>
     </binding>
   </action>
 </animation>

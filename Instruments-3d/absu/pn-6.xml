@@ -377,7 +377,7 @@
     <binding>
       <command>nasal</command>
       <script>
-        absu.absu_at_start();
+        absu.absu_at_toggle();
       </script>
     </binding>
   </action>
