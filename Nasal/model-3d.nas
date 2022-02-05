@@ -50,3 +50,35 @@ var splash_vec_loop = func(){
  settimer(func(){ splash_vec_loop(); }, 0.01);
 }
 splash_vec_loop();
+
+
+#################################### Reversers animation ############################################
+reversers = func{
+      eng1_n1 = getprop("/engines/engine/n1");
+      eng3_n1 = getprop("/engines/engine[2]/n1");
+      reverser1 = getprop("fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad");
+      reverser3 = getprop("fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad");
+      offset = getprop ("/sim/model/rev-flaps/rev-flaps-offset");
+      if( eng1_n1 == nil ) { return; }
+      if( eng3_n1 == nil ) { return; }
+      if( reverser1 == nil ) { retiurn; }
+      if( reverser3 == nil ) { retiurn; }
+      if( offset == nil ) { retiurn; }
+
+      if ( eng1_n1 > 30 ) { eng1_n1 = 30; }
+      if ( eng3_n1 > 30 ) { eng3_n1 = 30; }
+
+      rev1 = reverser1 / 2.35 * eng1_n1 / 30 * 1.51;
+      rev3 = reverser3 / 2.35 * eng3_n1 / 30 * 1.51;
+
+      rev1 = rev1 + offset;
+      rev3 = rev3 + offset;
+
+      setprop("/sim/model/rev-flaps/rev-flaps1", rev1);
+      setprop("/sim/model/rev-flaps/rev-flaps3", rev3);
+}
+setlistener("/engines/engine/n1", reversers);
+setlistener("/engines/engine[2]/n1", reversers);
+setlistener("fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad", reversers);
+setlistener("fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad", reversers);
+setlistener("/sim/model/rev-flaps/rev-flaps-offset", reversers);

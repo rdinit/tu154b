@@ -139,6 +139,12 @@
   </default_exit>
  </map>
 
+ <rev-flaps>
+  <rev-flaps1 type ="float">0</rev-flaps1>
+  <rev-flaps3 type ="float">0</rev-flaps3>
+  <rev-flaps-offset type ="float">0</rev-flaps-offset>
+ </rev-flaps>
+
  <cabin-lighting>
   <vnesh type="double" >0.0</vnesh>
   <vnesh-2 type="double" >0.0</vnesh-2>
