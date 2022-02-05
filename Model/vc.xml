@@ -15,11 +15,17 @@
 <PropertyList>
  <path>interior.ac</path>
 <!-- Transparent Surfaces for Rembrandt rendering -->
- <effect>
+ <!--<effect>
     <inherits-from>Effects/model-transparent</inherits-from>
     <object-name>MESH199</object-name>
     <object-name>LeftWindowGlass</object-name>
     <object-name>RightWindowGlass</object-name>
+ </effect>-->
+ <effect>
+  <inherits-from>Effects/Glass</inherits-from>
+  <object-name>MESH199</object-name>
+  <object-name>LeftWindowGlass</object-name>
+  <object-name>RightWindowGlass</object-name>
  </effect>
 
 <!-- Uncomment it if you want remove cabin glass -->
