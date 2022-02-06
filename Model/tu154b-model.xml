@@ -1862,6 +1862,11 @@
 
 
 <!--********************* Flight Engineer panel **********************-->
+<!--Aie Conditioning Panel-->
+<model>
+  <name>air-cond-panel</name>
+  <path>Aircraft/tu154b/Instruments-3d/air-cond/panel.xml</path>
+</model>
 <!--Throttle lever indicator IP21-08-->
 <model>
   <name>ip21_1</name>
@@ -2286,7 +2291,7 @@
   </offsets>
 </model>
 <!--Internal (cabin) variometer-->
-<model>
+<!--<model>
   <name>var-30-fe-2</name>
   <path>Aircraft/tu154b/Instruments-3d/var/var-30mk.xml</path>
   <offsets>
@@ -2295,7 +2300,7 @@
     <z-m>2.234</z-m>
     <heading-deg>-90.0</heading-deg>
   </offsets>
-</model>
+</model>-->
 
 <!--27 V direct voltage indicator-->
 <model>
@@ -4255,6 +4260,7 @@
     <object-name>dme-1</object-name>
     <object-name>dme-2</object-name>
     <object-name>ind-busters</object-name>
+    <object-name>air-cond-panel</object-name>
 </animation>
 <!--Hide VC on external views-->
 <animation>
