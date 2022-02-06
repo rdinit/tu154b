@@ -172,6 +172,17 @@ setlistener("/sim/signals/fdm-initialized", load_exterior, 0, 0 );
 print("View registered");
 
 
+var resetView = func{
+	var current = sprintf("%d", getprop("/sim/current-view/view-number-raw"));
+	setprop("/sim/current-view/heading-offset-deg", getprop("sim/view["~current~"]/config/heading-offset-deg"));
+	setprop("/sim/current-view/pitch-offset-deg", getprop("sim/view["~current~"]/config/pitch-offset-deg"));
+	setprop("/sim/current-view/field-of-view", getprop("sim/view["~current~"]/config/default-field-of-view-deg"));
+	setprop("/sim/current-view/x-offset-m", getprop("sim/view["~current~"]/config/x-offset-m"));
+	setprop("/sim/current-view/y-offset-m", getprop("sim/view["~current~"]/config/y-offset-m"));
+	setprop("/sim/current-view/z-offset-m", getprop("sim/view["~current~"]/config/z-offset-m"));
+}
+
+
 
 # Redefining view parameters
 view_checker = func{
