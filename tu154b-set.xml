@@ -59,6 +59,15 @@
      </key>
 	 </help>
 
+  <flight-recorder include="Systems/tu154b-flightrec.xml"/>
+
+  <replay>
+    <buffer>
+      <medium-res-sample-dt type="double">0.25</medium-res-sample-dt>
+      <medium-res-time type="double">1800</medium-res-time>
+    </buffer>
+  </replay>
+
 <menubar>
   <default>
 
