@@ -194,7 +194,7 @@
 		</key-triggers>
 	</walker>
 
-		<view n="110">
+		<view n="200">
 			<name>Walk View</name>
 			<type>lookfrom</type>
 			<enabled type="bool">false</enabled>
@@ -215,7 +215,7 @@
 				</limits>
 			</config>
 		</view>
-		<view n="111">
+		<view n="201">
 			<name>Walker Orbit View</name>
 			<type>lookat</type>
 			<enabled type="bool">false</enabled>

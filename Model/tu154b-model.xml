@@ -7384,7 +7384,7 @@
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
-      <script>view.forceView(9)</script>
+      <script>view.forceView(12)</script>
     </binding>
   </action>
   <action>
@@ -7427,7 +7427,7 @@
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
-      <script>view.forceView(10)</script>
+      <script>view.forceView(13)</script>
     </binding>
   </action>
   <action>
@@ -7470,7 +7470,7 @@
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
-      <script>view.forceView(7)</script>
+      <script>view.forceView(10)</script>
     </binding>
   </action>
 </animation>
@@ -7528,7 +7528,7 @@
     <repeatable>false</repeatable>
     <binding>
       <command>nasal</command>
-      <script>view.forceView(8)</script>
+      <script>view.forceView(11)</script>
     </binding>
   </action>
   <action>
