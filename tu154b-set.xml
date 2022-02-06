@@ -61,31 +61,15 @@
 
 <menubar>
   <default>
+
     <menu n="10">
+      <label>|</label>
+      <enabled type="bool">false</enabled>
+    </menu>
+
+    <menu n="11">
       <label>Tu-154B-2</label>
       <enabled type="bool">true</enabled>
-      <item>
-	<label>Select Livery</label>
-	<binding>
-	<command>nasal</command>
-	<script>aircraft.livery.dialog.toggle()</script>
-	</binding>
-      </item>
-      <item>
-	      <label>Route manager</label>
-	      <binding>
-		      <command>dialog-show</command>
-		      <dialog-name>route-manager</dialog-name>
-	      </binding>
-      </item>
-
-      <item>
-	      <label>NVU Calculator</label>
-	      <binding>
-		      <command>dialog-show</command>
-		      <dialog-name>nav</dialog-name>
-	      </binding>
-      </item>
 
       <item>
         <label>Secondary Radio</label>
@@ -104,15 +88,60 @@
       </item>
 
       <item>
-	      <label>Pushback</label>
-	      <name>pushback</name>
-	      <binding>
-	      <command>dialog-show</command>
-	      <dialog-name>pushback</dialog-name>
-	      </binding>
+        <label>Pushback</label>
+        <name>pushback</name>
+        <binding>
+        <command>dialog-show</command>
+        <dialog-name>pushback</dialog-name>
+        </binding>
       </item>
 
     </menu>
+
+    <menu n="12">
+      <label>Navigation</label>
+      <enabled type="bool">true</enabled>
+
+      <item>
+        <label>Airport Charts</label>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>airports</dialog-name>
+        </binding>
+      </item>
+
+      <item>
+        <label>Route manager</label>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>route-manager</dialog-name>
+        </binding>
+      </item>
+
+      <item>
+        <label>NVU Calculator</label>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>nav</dialog-name>
+        </binding>
+      </item>
+
+    </menu>
+
+    <menu n="14">
+      <label>Other</label>
+      <enabled type="bool">true</enabled>
+
+      <item>
+        <label>Select Livery</label>
+        <binding>
+          <command>nasal</command>
+          <script>aircraft.livery.dialog.toggle()</script>
+        </binding>
+      </item>
+
+    </menu>
+
   </default>
 </menubar>
 
