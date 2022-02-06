@@ -668,7 +668,8 @@
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
-      <property>instrumentation/adf[0]/volume</property>
+      <!--<property>instrumentation/adf[0]/volume</property>-->
+      <property>/tu154/instrumentation/ark-15[0]/volume</property>
       <step>0.2</step>
       <min>0.0</min>
       <max>1.0</max>
@@ -686,7 +687,8 @@
     <repeatable>false</repeatable>
     <binding>
       <command>property-adjust</command>
-      <property>instrumentation/adf[0]/volume</property>
+      <!--<property>instrumentation/adf[0]/volume</property>-->
+      <property>/tu154/instrumentation/ark-15[0]/volume</property>
       <step>-0.2</step>
       <min>0.0</min>
       <max>1.0</max>

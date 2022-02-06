@@ -1095,8 +1095,8 @@
   <path>Aircraft/tu154b/Instruments-3d/com/com.xml</path>
   <overlay>
     <params>
-      <freq>instrumentation/comm[0]/frequencies/selected-mhz</freq>
-      <volume>instrumentation/comm[0]/volume</volume>
+      <freq>/tu154/instrumentation/comm[0]/freq</freq>
+      <volume>/tu154/instrumentation/comm[0]/volume</volume>
     </params>
   </overlay>
   <offsets>
@@ -1111,8 +1111,8 @@
   <path>Aircraft/tu154b/Instruments-3d/com/com.xml</path>
   <overlay>
     <params>
-      <freq>instrumentation/comm[1]/frequencies/selected-mhz</freq>
-      <volume>instrumentation/comm[1]/volume</volume>
+      <freq>/tu154/instrumentation/comm[1]/freq</freq>
+      <volume>/tu154/instrumentation/comm[1]/volume</volume>
     </params>
   </overlay>
   <offsets>
@@ -1179,6 +1179,55 @@
     <y-m>-0.212</y-m>
     <z-m>2.467</z-m>
     <pitch-deg>69.0</pitch-deg>
+  </offsets>
+</model>
+<!--SPU-7-->
+<model>
+  <name>spu-7-cpt</name>
+  <path>Aircraft/tu154b/Instruments-3d/spu-7/spu-7.xml</path>
+  <offsets>
+    <x-m>-22.295</x-m>
+    <y-m>-0.96</y-m>
+    <z-m>1.65</z-m>
+    <pitch-deg>3.0</pitch-deg>
+    <roll-deg>-3</roll-deg>
+    <heading-deg>75.0</heading-deg>
+  </offsets>
+</model>
+<model>
+  <name>spu-7-fo</name>
+  <path>Aircraft/tu154b/Instruments-3d/spu-7/spu-7.xml</path>
+  <offsets>
+    <x-m>-22.32</x-m>
+    <y-m>0.96</y-m>
+    <z-m>1.66</z-m>
+    <pitch-deg>3.0</pitch-deg>
+    <roll-deg>3</roll-deg>
+    <heading-deg>-75.0</heading-deg>
+  </offsets>
+</model>
+<model>
+  <name>spu-7-nav</name>
+  <path>Aircraft/tu154b/Instruments-3d/spu-7/spu-7.xml</path>
+  <offsets>
+    <x-m>-20.5</x-m>
+    <y-m>-0.92</y-m>
+    <z-m>1.64</z-m>
+    <pitch-deg>0.0</pitch-deg>
+    <roll-deg>0.0</roll-deg>
+    <heading-deg>180.0</heading-deg>
+  </offsets>
+</model>
+<model>
+  <name>spu-7-eng</name>
+  <path>Aircraft/tu154b/Instruments-3d/spu-7/spu-7.xml</path>
+  <offsets>
+    <x-m>-19.87</x-m>
+    <y-m>0.88</y-m>
+    <z-m>1.79</z-m>
+    <pitch-deg>-12.0</pitch-deg>
+    <roll-deg>0</roll-deg>
+    <heading-deg>-90.0</heading-deg>
   </offsets>
 </model>
 <!--USHDB selector-->
@@ -3968,6 +4017,10 @@
     <object-name>comm-2</object-name>
     <object-name>skawk</object-name>
     <object-name>rsbn</object-name>
+    <object-name>spu-7-cpt</object-name>
+    <object-name>spu-7-fo</object-name>
+    <object-name>spu-7-nav</object-name>
+    <object-name>spu-7-eng</object-name>
     <object-name>ushdb-selector</object-name>
     <object-name>sw-41</object-name>
     <object-name>sw-42</object-name>

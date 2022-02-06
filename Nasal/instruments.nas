@@ -2352,3 +2352,99 @@ var vol = getprop("/sim/sound/volume");
 	  setprop("tu154/volume", vol);
 	  setprop("/sim/sound/volume", 0.0);
 print("PNK started");
+
+
+
+################################################################ Radios volume ###################################################################
+var radios_init = func {
+    setprop("/tu154/instrumentation/comm[0]/freq", getprop("/instrumentation/comm[0]/frequencies/selected-mhz"));
+    #removelistener(comm1_init);
+    setlistener ("/tu154/instrumentation/comm[0]/volume", radios_update);
+    setlistener ("/tu154/instrumentation/comm[1]/volume", radios_update);
+    setlistener ("/tu154/instrumentation/ark-15[0]/volume", radios_update);
+    setlistener ("/tu154/instrumentation/ark-15[1]/volume", radios_update);
+    setlistener ("/tu154/instrumentation/nav[0]/volume", radios_update);
+    setlistener ("/tu154/instrumentation/nav[1]/volume", radios_update);
+    setlistener ("/tu154/instrumentation/rsbn/volume", radios_update);
+    setlistener ("/tu154/instrumentation/comm[0]/freq", radios_update);
+    setlistener ("/tu154/instrumentation/comm[1]/freq", radios_update);
+    setlistener ("/tu154/instrumentation/spu-7/volume", radios_update);
+    setlistener ("/tu154/instrumentation/spu-7/source", radios_update);
+    setlistener ("/tu154/instrumentation/spu-7/source-sec", radios_update);
+    setlistener ("/tu154/instrumentation/spu-7/power-sec", radios_update);
+    setlistener ("/instrumentation/comm[0]/serviceable", radios_update);
+    setlistener ("/instrumentation/comm[1]/serviceable", radios_update);
+    radios_update();
+}
+#var comm1_init = setlistener ("/instrumentation/comm[0]/frequencies/selected-mhz", radios_init);
+settimer(radios_init, 5);
+setprop("/tu154/instrumentation/comm[1]/freq", getprop("/instrumentation/comm[1]/frequencies/selected-mhz"));
+var radios_update = func {
+    comm1 = 0;
+    freq1 = 0;
+    comm2 = 0;
+    freq2 = 0;
+    ark1 = 0;
+    ark2 = 0;
+    nav1 = 0;
+    nav2 = 0;
+    rsbn = 0;
+    volume = getprop("/tu154/instrumentation/spu-7/volume");
+    source = getprop("/tu154/instrumentation/spu-7/source");
+    source_sec = getprop("/tu154/instrumentation/spu-7/source-sec");
+    power_sec = getprop("/tu154/instrumentation/spu-7/power-sec");
+    vhf1 = getprop("/instrumentation/comm[0]/serviceable");
+    vhf2 = getprop("/instrumentation/comm[1]/serviceable");
+
+    if (source == 0) {
+        comm1 = getprop("/tu154/instrumentation/comm[0]/volume");
+        freq1 = getprop("/tu154/instrumentation/comm[0]/freq");
+    }
+    if (source == 1) {
+        comm2 = getprop("/tu154/instrumentation/comm[1]/volume");
+        freq2 = getprop("/tu154/instrumentation/comm[1]/freq");
+    }
+    if (source == 2) {
+        ark1 = getprop("/tu154/instrumentation/ark-15[0]/volume");
+        ark2 = getprop("/tu154/instrumentation/ark-15[1]/volume");
+    }
+    if (source == 3) {
+        rsbn = getprop("/tu154/instrumentation/rsbn/volume");
+    }
+    if (source == 4) {
+        nav1 = getprop("/tu154/instrumentation/nav[0]/volume");
+    }
+    if (source == 5) {
+        nav2 = getprop("/tu154/instrumentation/nav[1]/volume");
+    }
+
+    if (power_sec == 1 and source_sec == 0) {
+        comm1 = getprop("/tu154/instrumentation/comm[0]/volume");
+        freq1 = getprop("/tu154/instrumentation/comm[0]/freq");
+    }
+    if (power_sec == 1 and source_sec == 1) {
+        comm2 = getprop("/tu154/instrumentation/comm[1]/volume");
+        freq2 = getprop("/tu154/instrumentation/comm[1]/freq");
+    }
+
+    if (vhf1 == 0) { freq1 = 0; }
+    if (vhf2 == 0) { freq2 = 0; }
+
+    comm1 = comm1 * volume;
+    comm2 = comm2 * volume;
+    ark1 = ark1 * volume;
+    ark2 = ark2 * volume;
+    nav1 = nav1 * volume;
+    nav2 = nav2 * volume;
+    rsbn = rsbn * volume;
+
+    setprop("/instrumentation/comm[0]/volume", comm1);
+    setprop("/instrumentation/comm[1]/volume", comm2);
+    setprop("/instrumentation/adf[0]/volume", ark1);
+    setprop("/instrumentation/adf[1]/volume", ark2);
+    setprop("/instrumentation/nav[0]/volume", nav1);
+    setprop("/instrumentation/nav[1]/volume", nav2);
+    setprop("/instrumentation/nav[2]/volume", rsbn);
+    setprop("/instrumentation/comm[0]/frequencies/selected-mhz", freq1);
+    setprop("/instrumentation/comm[1]/frequencies/selected-mhz", freq2);
+}

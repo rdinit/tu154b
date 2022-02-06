@@ -88,6 +88,14 @@
       </item>
 
       <item>
+        <label>Secondary Radio</label>
+        <binding>
+          <command>dialog-show</command>
+          <dialog-name>sec-radio</dialog-name>
+        </binding>
+      </item>
+
+      <item>
         <label>Maintenance</label>
         <binding>
           <command>dialog-show</command>
@@ -1477,9 +1485,11 @@
     </altimeter>
     <ark-15 n="0">
       <powered type="bool">false</powered>
+      <volume type="double">0</volume>
     </ark-15>
     <ark-15 n="1">
       <powered type="bool" >false</powered>
+      <volume type="double">0</volume>
     </ark-15>
     <dme>
       <distance type="double">0</distance>
@@ -1575,6 +1585,7 @@
     <distance type="double" >0</distance>
     <radial type="double" >0</radial>
     <twist type="double" >0</twist>
+    <volume type="double">0.2</volume>
   </rsbn>
     <b-8m>
       <outer type="int">0</outer>
@@ -1594,6 +1605,31 @@
       <adjust-speed type="int">1000</adjust-speed>
       <scale type="int">1</scale>
     </v-51>
+
+    <comm>
+      <freq type="double">0</freq>
+      <volume type="double">0.6</volume>
+    </comm>
+    <comm>
+      <freq type="double">0</freq>
+      <volume type="double">0.6</volume>
+    </comm>
+
+    <nav>
+      <volume type="double">0.2</volume>
+    </nav>
+    <nav>
+      <volume type="double">0.2</volume>
+    </nav>
+
+    <spu-7>
+      <source type="double">0</source>
+      <source-sec type="double">0</source-sec>
+      <power-sec type="bool">0</power-sec>
+      <ind-1 type="bool">1</ind-1>
+      <ind-2 type="bool">0</ind-2>
+      <volume type="double">1</volume>
+    </spu-7>
 
   </instrumentation>
 
