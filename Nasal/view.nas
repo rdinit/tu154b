@@ -196,7 +196,7 @@ view_checker = func{
       if( wind_r == nil ) { return; }
 
       setprop("/sim/sound/window-open", 0);
-      if( internal == 1 or vnr == 105 or vnr == 106 ) {
+      if( internal == 1 or vnr == 105 or vnr == 106 or vnr == 107 or vnr == 108 ) {
             setprop("/sim/sound/internal", 1);
             setprop("/sim/sound/external", 0);
       }
@@ -206,7 +206,7 @@ view_checker = func{
       }
       #settimer( view_checker, 0.1 );
 
-      if( vnr == 105 or vnr == 106 ) {
+      if( vnr == 105 or vnr == 106 or vnr == 107 or vnr == 108 ) {
             setprop("/sim/sound/pax", 1);
       }
       else {
