@@ -8,6 +8,8 @@
 # Warning & alarm
 #
 
+var nascallwarn = props.globals.initNode("/debug/nascalls/warn", 0, "INT");
+
 var UPDATE_PERIOD = 0.5;
 # sound
 var horn = aircraft.light.new("tu154/systems/warning/horn", [0.5, 0.2] );
@@ -30,6 +32,7 @@ var strobe = aircraft.light.new("tu154/light/strobe", [0.1, 1.5] );
 #var strobe_2 = aircraft.light.new("tu154/light/strobe-2", [0.1, 1.4] );
 # blank all if we lose 27 V power
 var blank_all = func{
+	nascallwarn.setValue(nascallwarn.getValue() + 1);
 setprop("tu154/systems/electrical/indicators/wrong-trim", 0 );
 setprop("tu154/systems/electrical/indicators/pitch", 0 );
 setprop("tu154/systems/warning/absu/state", 0 );
@@ -147,6 +150,7 @@ setprop("tu154/instrumentation/pkp/gliss-failure", 0 );
 }
 
 var nav_lighting = func{
+	nascallwarn.setValue(nascallwarn.getValue() + 1);
 if( arg[0] ) {
 	setprop("tu154/light/nav/red", 1.0 );
 	setprop("tu154/light/nav/green", 1.0 );
@@ -161,6 +165,7 @@ else {
 }
 
 var strobe_selector = func{
+	nascallwarn.setValue(nascallwarn.getValue() + 1);
 
   var state = getprop("tu154/light/strobe/state" );
   var selector = getprop("tu154/light/strobe/strobe_selector" );
@@ -177,6 +182,7 @@ var strobe_selector = func{
 setlistener( "tu154/light/strobe/state", strobe_selector, 1, 0 );
 
 var panel_lighting = func{
+	nascallwarn.setValue(nascallwarn.getValue() + 1);
 if( arg[0] ) {
 	setprop("tu154/light/instruments/int-blue",
 		getprop("tu154/light/instruments/int-blue-def") );
@@ -249,6 +255,7 @@ else {
 }
 
 var horn_handler = func{
+	nascallwarn.setValue(nascallwarn.getValue() + 1);
 settimer( horn_handler, UPDATE_PERIOD );
 var pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
 if( pwr == nil ) return;
@@ -297,6 +304,7 @@ else
 }
 
 var audio_handler = func{
+	nascallwarn.setValue(nascallwarn.getValue() + 1);
 settimer( audio_handler, UPDATE_PERIOD );
 var pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
 if( pwr == nil ) return;
@@ -423,6 +431,7 @@ if( alt < (250.0 + RV_OFFSET) )
 }
 
 var check_lamps_capt = func{
+	nascallwarn.setValue(nascallwarn.getValue() + 1);
 	var pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
 	if( pwr == nil ) return;
 	if(  pwr < 13.0 )
@@ -505,6 +514,7 @@ var check_lamps_capt = func{
 }
 
 var indicator_handler = func{
+	nascallwarn.setValue(nascallwarn.getValue() + 1);
 settimer( indicator_handler, UPDATE_PERIOD );
 var pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
 if( pwr == nil ) return;
@@ -1018,10 +1028,12 @@ else strobe_control(0);
 #}
 
 stab_watchdog = func{
+	nascallwarn.setValue(nascallwarn.getValue() + 1);
 setprop("tu154/systems/warning/run-stabilizer", 1.0 );
 }
 
 flap_watchdog = func{
+	nascallwarn.setValue(nascallwarn.getValue() + 1);
 # flaps flag
 setprop("tu154/systems/warning/run-flaps", 1.0 );
 # RV-RN flag
@@ -1040,6 +1052,7 @@ if( getprop( "controls/flight/flaps" ) < 0.1 )
 }
 
 var flap_control_watchdog = func{
+	nascallwarn.setValue(nascallwarn.getValue() + 1);
 if( getprop( "controls/flight/flaps" ) > 0.1 )
 	setprop("tu154/systems/warning/deploy-flaps", 1.0 );
 }
@@ -1057,6 +1070,7 @@ else	{
 
 
 var headlight_mode = func{
+	nascallwarn.setValue(nascallwarn.getValue() + 1);
 var pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
 if( pwr == nil ) pwr = 0.0;
 if(  pwr > 13.0 ) {
@@ -1074,6 +1088,7 @@ else { # set off lamps, but not change position
 }
 
 var headlight_retract = func{
+	nascallwarn.setValue(nascallwarn.getValue() + 1);
 var pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
 if( pwr == nil ) pwr = 0.0;
 if(  pwr > 13.0 ) {

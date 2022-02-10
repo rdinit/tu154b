@@ -5,10 +5,13 @@
 # dec 2007
 #
 
+var nascallhelp = props.globals.initNode("/debug/nascalls/help", 0, "INT");
+
 var help_win = screen.window.new( 0, 0, 1, 5 );
 help_win.fg = [0,1,1,1];
 
 var tks = func {
+  nascallhelp.setValue(nascallhelp.getValue() + 1);
    var gpk_1 = getprop("fdm/jsbsim/instrumentation/ga3-corrected-1");
    var gpk_2 = getprop("fdm/jsbsim/instrumentation/ga3-corrected-2");
    var bgmk_1 = getprop("fdm/jsbsim/instrumentation/bgmk-1");
@@ -24,12 +27,14 @@ gpk_1, gpk_2, bgmk_1,  bgmk_2 ) );
 }
 
 var at = func {
+  nascallhelp.setValue(nascallhelp.getValue() + 1);
    var at_speed = getprop("tu154/instrumentation/pn-6/at-kt");
    if( at_speed == nil ) at_speed = 0.0;
 help_win.write(sprintf("Autothrottle speed: %.2f kmh", at_speed*1.852) );
 }
 
 var km = func {
+  nascallhelp.setValue(nascallhelp.getValue() + 1);
    var km_deg_1 = getprop("fdm/jsbsim/instrumentation/km-5-magvar-1");
    if(  km_deg_1 == nil ) km_deg_1 = 0.0;
    var km_deg_2 = getprop("fdm/jsbsim/instrumentation/km-5-magvar-2");
@@ -41,12 +46,14 @@ help_win.write(sprintf("Offset KM-5-1: %.2f deg,  KM-5-2: %.2f deg, magnetic var
 }
 
 var rsbn = func {
+  nascallhelp.setValue(nascallhelp.getValue() + 1);
    var rsbn_freq = getprop("instrumentation/nav[2]/frequencies/selected-mhz");
    if(  rsbn_freq == nil ) rsbn_freq = 108.0;
 help_win.write(sprintf("RSBN frequency: %.3f MHz", rsbn_freq) );
 }
 
 var advise = func {
+  nascallhelp.setValue(nascallhelp.getValue() + 1);
    var v2 = getprop("fdm/jsbsim/instrumentation/v-r");
    var vr = getprop("fdm/jsbsim/instrumentation/v-ref");
    var mass = getprop("fdm/jsbsim/instrumentation/mass-kg");
@@ -63,28 +70,34 @@ help_win.write(sprintf("mass: %.0f kg CG: %.1f%% MAC Vrotate: %.0f kmh Vref: %.0
 }
 
 var messenger = func{
+  nascallhelp.setValue(nascallhelp.getValue() + 1);
 help_win.write(arg[0]);
 }
 
 # Sound volume helpers
 
 var nav_0_vol = func{
+  nascallhelp.setValue(nascallhelp.getValue() + 1);
   help_win.write( sprintf( "NAV radio Kurs-MP #1 sound: %d%%", getprop("instrumentation/nav[0]/volume")*100 ) );
 }
 
 var nav_1_vol = func{
+  nascallhelp.setValue(nascallhelp.getValue() + 1);
   help_win.write( sprintf( "NAV radio Kurs-MP #2 sound: %d%%", getprop("instrumentation/nav[1]/volume")*100 ) );
 }
 
 var rsbn_vol = func{
+  nascallhelp.setValue(nascallhelp.getValue() + 1);
   help_win.write( sprintf( "RSBN sound: %d%%", getprop("instrumentation/nav[2]/volume")*100 ) );
 }
 
 var adf_0_vol = func{
+  nascallhelp.setValue(nascallhelp.getValue() + 1);
   help_win.write( sprintf( "ADF ARK-15 #1 sound: %d%%", getprop("instrumentation/adf[0]/volume")*100 ) );
 }
 
 var adf_1_vol = func{
+  nascallhelp.setValue(nascallhelp.getValue() + 1);
   help_win.write( sprintf( "ADF ARK-15 #2 sound: %d%%", getprop("instrumentation/adf[1]/volume")*100 ) );
 }
 

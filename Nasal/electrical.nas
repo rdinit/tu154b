@@ -2,6 +2,8 @@
 
 #print(getprop("/sim/gui/dialogs"));
 
+var nascallelec = props.globals.initNode("/debug/nascalls/electrical", 0, "INT");
+
 
 var UPDATE_PERIOD = 0.3;
 
@@ -61,6 +63,7 @@ var alt_flag = 0x00;
 ammeter_ave = 0.0;
 
 update_buses_thandler = func{
+    nascallelec.setValue(nascallelec.getValue() + 1);
 
     AC3x200_bus_1L.update_voltage();
     AC3x200_bus_2.update_voltage();
@@ -115,37 +118,46 @@ update_buses_thandler = func{
 
 
 RPPO30_KP_1_handler = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     n2=getprop("engines/engine[0]/n2");
     setprop("engines/engine[0]/rpm", n2>53 ? n2*73.9 : 0.0);
 }
 RPPO30_KP_2_handler = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     n2=getprop("engines/engine[1]/n2");
     setprop("engines/engine[1]/rpm", n2>53 ? n2*73.9 : 0.0);
 }
 RPPO30_KP_3_handler = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     n2=getprop("engines/engine[2]/n2");
     setprop("engines/engine[2]/rpm", n2>53 ? n2*73.9 : 0.0);
 }
 RPPO30_KP_4_handler = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     n2=getprop("engines/engine[3]/n2");
     setprop("engines/engine[3]/rpm", n2>53 ? n2*73.9 : 0.0);
 }
 
 GT40_1_rpm_handler = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     GT40_1.rpm_handler();
 }
 GT40_2_rpm_handler = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     GT40_2.rpm_handler();
 }
 GT40_3_rpm_handler = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     GT40_3.rpm_handler();
 }
 GT40_APU_rpm_handler = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     GT40_APU.rpm_handler();
 }
 
 
 generator_1_shandler = func{
+    nascallelec.setValue(nascallelec.getValue() + 1);
     if( getprop("tu154/switches/generator-1")==1 ){
 	AC3x200_bus_1L.add_input( GT40_1 );
 	GT40_1.connect_to_bus( AC3x200_bus_1L );
@@ -163,6 +175,7 @@ generator_1_shandler = func{
 }
 
 generator_2_shandler = func{
+    nascallelec.setValue(nascallelec.getValue() + 1);
     if( getprop("tu154/switches/generator-2")==1 ){
 	AC3x200_bus_2.add_input( GT40_2 );
 	GT40_2.connect_to_bus( AC3x200_bus_2 );
@@ -180,6 +193,7 @@ generator_2_shandler = func{
 }
 
 generator_3_shandler = func{
+    nascallelec.setValue(nascallelec.getValue() + 1);
     if( getprop("tu154/switches/generator-3")==1 ){
 	AC3x200_bus_3R.add_input( GT40_3 );
 	GT40_3.connect_to_bus( AC3x200_bus_3R );
@@ -198,6 +212,7 @@ generator_3_shandler = func{
 
 
 main_battery_handler = func{
+    nascallelec.setValue(nascallelec.getValue() + 1);
     if( getprop("tu154/switches/main-battery")==1 ){
 	DC27_bus_Lv.add_input( battery1 );
 	DC27_bus_Lv.add_input( battery3 );
@@ -225,6 +240,7 @@ main_battery_handler = func{
 }
 
 VU6B_1_shandler = func{
+    nascallelec.setValue(nascallelec.getValue() + 1);
     if( getprop("tu154/switches/vypr-1")==1 ){
 	AC3x200_bus_1L.add_output( "VU6B-1", 0.0);
 	DC27_bus_L.add_input( VU6B_1 );
@@ -238,6 +254,7 @@ VU6B_1_shandler = func{
 }
 
 VU6B_2_shandler = func{
+    nascallelec.setValue(nascallelec.getValue() + 1);
     if( getprop("tu154/switches/vypr-2")==1 ){
 	AC3x200_bus_3R.add_output( "VU6B-2", 0.0);
 	DC27_bus_R.add_input( VU6B_2 );
@@ -251,6 +268,7 @@ VU6B_2_shandler = func{
 }
 
 APU_RAP_shandler = func{
+    nascallelec.setValue(nascallelec.getValue() + 1);
     if( getprop("tu154/switches/APU-RAP-selector")==0 ){
 	AC3x200_bus_1L.add_input( GT40_APU );
 	AC3x200_bus_2.add_input( GT40_APU );
@@ -286,6 +304,7 @@ APU_RAP_shandler = func{
 
 
 AGR_shandler = func{
+    nascallelec.setValue(nascallelec.getValue() + 1);
     if( getprop("tu154/switches/AGR")==1 ){
 	DC27_bus_Lv.add_output( "PTS-250-1" ,0.0);
 	AC3x36_bus_PTS1.add_input( "PTS-250-1" );
@@ -303,6 +322,7 @@ AGR_shandler = func{
 
 
 init_electrical = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     print("Initializing Nasal Electrical System");
 
     battery1 = BatteryClass.new( "A20NKBN25U3-1" );
@@ -542,6 +562,7 @@ setlistener("/sim/signals/fdm-initialized", init_electrical);
 
 
 update_electrical = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     settimer(update_electrical, UPDATE_PERIOD);
 instruments.update_electrical();
 # Added by Yurik
@@ -706,6 +727,7 @@ if(  hd_input > 0.0 )
 DCBusClass = {};
 
 DCBusClass.new = func( name ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     obj = { parents : [DCBusClass],
 #	    node :  props.globals.getNode( enode ~ "buses/" ~ name , 1 ),
 	    node :  enode ~ "buses/" ~ name ~"/" ,
@@ -720,34 +742,42 @@ DCBusClass.new = func( name ) {
 }
 
 DCBusClass.add_input = func( obj ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.inputs.getNode( obj.name, 1).setValue( obj.node );
 }
 
 DCBusClass.add_output = func( name, load ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.outputs.getNode( name, 1).setValues({ "load" : load});
 }
 
 DCBusClass.rm_input = func( name ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.inputs.removeChild( name,0 );
 }
 
 DCBusClass.rm_output = func( name ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.outputs.removeChild( name,0 );
 }
 
 DCBusClass.voltage = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     return me.volts.getValue();
 }
 
 DCBusClass.update_intput = func( name, volts ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.inputs.getNode( name ).setValues( { "volts" : volts } );
 }
 
 DCBusClass.update_output = func( name, load ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.ouputs.getNode( name ).setValues( { name : load } );
 }
 
 DCBusClass.update_load = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     load = 0.0;
     outputs =  me.outputs.getChildren();
     if(outputs == nil) return;
@@ -758,6 +788,7 @@ DCBusClass.update_load = func {
 }
 
 DCBusClass.update_voltage = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     volts = 0.0;
     foreach( input; me.inputs.getChildren() ){
 	ivolts = props.globals.getNode( input.getValue() ~ "volts" ).getValue();
@@ -770,6 +801,7 @@ DCBusClass.update_voltage = func {
 ACBusClass = {};
 
 ACBusClass.new = func( name ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     obj = { parents : [ACBusClass],
 #	    node :  props.globals.getNode( enode ~ "buses/" ~ name , 1 ),
 	    node :  enode ~ "buses/" ~ name ~ "/",
@@ -786,34 +818,42 @@ ACBusClass.new = func( name ) {
 }
 
 ACBusClass.add_input = func( obj  ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.inputs.getNode( obj.name, 1).setValue( obj.node );
 }
 
 ACBusClass.add_output = func( name, load ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.outputs.getNode( name, 1).setValues({ "load" : load});
 }
 
 ACBusClass.rm_input = func( name ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.inputs.removeChild( name,0 );
 }
 
 ACBusClass.rm_output = func( name ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.outputs.removeChild( name,0 );
 }
 
 ACBusClass.voltage = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     return me.volts.getValue();
 }
 
 ACBusClass.update_intput = func( name, volts, freq ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.inputs.getNode( name ).setValues( { "volts" : volts, "frequency": freq } );
 }
 
 ACBusClass.update_output = func( name, load ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.ouputs.getNode( name ).setValues( { "load" : load } );
 }
 
 ACBusClass.update_load = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     load = 0.0;
     outputs = me.outputs.getChildren();
     if(outputs == nil) return;
@@ -824,6 +864,7 @@ ACBusClass.update_load = func {
 }
 
 ACBusClass.update_voltage = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     volts = 0.0;
     freq = 0.0;
     foreach( input; me.inputs.getChildren() ){
@@ -840,6 +881,7 @@ ACBusClass.update_voltage = func {
 
 BatteryClass = {};
 BatteryClass.new = func ( name ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     obj = { parents : [BatteryClass],
 	    name : name,
 	    node :   enode ~ "suppliers/" ~ name ~ "/",
@@ -854,6 +896,7 @@ BatteryClass.new = func ( name ) {
     return obj;
 }
 BatteryClass.apply_load = func( amps, dt ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     amphrs_used = amps * dt / 3600.0;
     percent_used = amphrs_used / me.amp_hours;
     me.charge_percent -= percent_used;
@@ -865,11 +908,13 @@ BatteryClass.apply_load = func( amps, dt ) {
     return me.amp_hours * me.charge_percent;
 }
 BatteryClass.get_output_volts = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     x = 1.0 - me.charge_percent;
     factor = x / 10;
     return me.ideal_volts - factor;
 }
 BatteryClass.get_output_amps = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     x = 1.0 - me.charge_percent;
     tmp = -(3.0 * x - 1.0);
     factor = (tmp*tmp*tmp*tmp*tmp + 32) / 32;
@@ -877,10 +922,12 @@ BatteryClass.get_output_amps = func {
 }
 
 BatteryClass.connect_to_bus = func( _bus ){
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.bus = _bus;
 }
 
 BatteryClass.disconnect_from_bus = func{
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.bus = nil;
 }
 
@@ -888,6 +935,7 @@ BatteryClass.disconnect_from_bus = func{
 
 ACAlternatorClass = {};
 ACAlternatorClass.new = func( name ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     obj = { parents : [ACAlternatorClass],
 	    name : name,
 	    node :  enode ~ "suppliers/" ~ name ~ "/",
@@ -904,12 +952,14 @@ ACAlternatorClass.new = func( name ) {
 
 
 ACAlternatorClass.apply_load = func( amps, dt ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     rpm = me.engine.getNode("rpm").getValue();
     available_amps = me.ideal_amps * math.ln(rpm)/9;
     return available_amps - amps;
 }
 
 ACAlternatorClass.rpm_handler = func {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     rpm = me.engine.getNode("rpm").getValue();
     if( rpm < 1000.0 ) volts = 0.0;
     else volts = me.ideal_volts*math.ln(rpm)/9;
@@ -920,6 +970,7 @@ ACAlternatorClass.rpm_handler = func {
 }
 
 ACAlternatorClass.get_output_amps = func(src ){
+    nascallelec.setValue(nascallelec.getValue() + 1);
     rpm = getprop( src );
     if( rpm == nil ) rpm = 0;
     # APU can have 0 rpm
@@ -932,24 +983,29 @@ ACAlternatorClass.get_output_amps = func(src ){
 }
 
 ACAlternatorClass.connect_to_bus = func( _bus ){
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.bus = _bus;
 }
 
 ACAlternatorClass.disconnect_from_bus = func{
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.bus = nil;
 }
 
 ACAlternatorClass.rpm_source = func( eng ){
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.engine = eng;
 }
 
 ACAlternatorClass.voltage = func( eng ){
+    nascallelec.setValue(nascallelec.getValue() + 1);
     return me.volts.getValue();
 }
 
 TransformerClass = {};
 
 TransformerClass.new = func( name, coeff ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     obj = { parents : [TransformerClass],
 	    name : name,
 	    node :  enode ~ "suppliers/" ~ name ~ "/",
@@ -963,14 +1019,17 @@ TransformerClass.new = func( name, coeff ) {
 }
 
 TransformerClass.add_input = func( obj ){
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.input = obj;
 }
 
 TransformerClass.output = func( obj ){
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.output = obj;
 }
 
 TransformerClass.update = func{
+    nascallelec.setValue(nascallelec.getValue() + 1);
     volts = me.input == nil ? 0.0 : me.input.volts.getValue()*me.trans_coeff ;
     me.volts.setValue(volts);
 }
@@ -978,6 +1037,7 @@ TransformerClass.update = func{
 ACDCconverterClass = {};
 
 ACDCconverterClass.new = func( name, coeff ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     obj = { parents : [ACDCconverterClass],
 	    name : name,
 	    node :  enode ~ "suppliers/" ~ name ~ "/",
@@ -991,14 +1051,17 @@ ACDCconverterClass.new = func( name, coeff ) {
 }
 
 ACDCconverterClass.add_input = func( obj ){
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.input = obj;
 }
 
 ACDCconverterClass.output = func( obj ){
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.output = obj;
 }
 
 ACDCconverterClass.update = func{
+    nascallelec.setValue(nascallelec.getValue() + 1);
     volts = me.input == nil ? 0.0 : me.input.volts.getValue()*me.conv_coeff ;
     me.volts.setValue(volts);
 }
@@ -1006,6 +1069,7 @@ ACDCconverterClass.update = func{
 DCACinverterClass = {};
 
 DCACinverterClass.new = func( name, coeff ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     obj = { parents : [DCACinverterClass],
 	    name : name,
 	    node :  enode ~ "suppliers/" ~ name ~ "/",
@@ -1019,14 +1083,17 @@ DCACinverterClass.new = func( name, coeff ) {
 }
 
 DCACinverterClass.add_input = func( obj ){
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.input = obj;
 }
 
 DCACinverterClass.output = func( obj ){
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.output = obj;
 }
 
 DCACinverterClass.update = func{
+    nascallelec.setValue(nascallelec.getValue() + 1);
     volts = me.input == nil ? 0.0 : me.input.volts.getValue()*me.conv_coeff;
     me.volts.setValue(volts);
 }
@@ -1034,6 +1101,7 @@ DCACinverterClass.update = func{
 ExternalClass = {};
 
 ExternalClass.new = func( name ) {
+    nascallelec.setValue(nascallelec.getValue() + 1);
     obj = { parents : [ExternalClass],
 	    name : name,
 	    node :  enode ~ "suppliers/" ~ name ~ "/",
@@ -1048,9 +1116,11 @@ ExternalClass.new = func( name ) {
 }
 
 ExternalClass.connect_to_bus = func( _bus ){
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.bus = _bus;
 }
 
 ExternalClass.disconnect_from_bus = func{
+    nascallelec.setValue(nascallelec.getValue() + 1);
     me.bus = nil;
 }

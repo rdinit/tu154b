@@ -5,6 +5,8 @@
 # jun 2007, dec 2013
 #
 
+var nascallinst = props.globals.initNode("/debug/nascalls/instruments", 0, "INT");
+
 
 ######################################################################
 #
@@ -20,11 +22,13 @@ srand();
 var Chase = {
     _active: {},
     deactivate: func(src) {
+        nascallinst.setValue(nascallinst.getValue() + 1);
         var m = Chase._active[src];
         if (m != nil)
             m.del();
     },
     new: func(src, dst, delay, wrap=nil) {
+        nascallinst.setValue(nascallinst.getValue() + 1);
         var m = {
             parents: [Chase],
             src: src,
@@ -40,13 +44,16 @@ var Chase = {
         return m;
     },
     active: func {
+        nascallinst.setValue(nascallinst.getValue() + 1);
         return (Chase._active[me.src] == me);
     },
     del: func {
+        nascallinst.setValue(nascallinst.getValue() + 1);
         Chase._active[me.src] = nil;
         me.t.stop();
     },
     _update: func {
+        nascallinst.setValue(nascallinst.getValue() + 1);
         var ts = systime();
         var passed = ts - me.ts;
         var dv = (num(me.dst) == nil ? getprop(me.dst) : me.dst);
@@ -82,6 +89,7 @@ var Chase = {
 
 # Smooth property re-aliasing.
 var realias = func(src, dst, delay, wrap=nil) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     if (src == dst)
         return;
 
@@ -110,6 +118,7 @@ var realias = func(src, dst, delay, wrap=nil) {
 }
 
 var range_wrap = func(val, min, max) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     while (val < min)
         val += max - min;
     while (val >= max)
@@ -178,6 +187,7 @@ var range_wrap = func(val, min, max) {
 #
 
 var pnp_mode_update = func(i, mode) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var plane = "/tu154/instrumentation/pnp["~i~"]/plane-dialed";
     var defl_course = 0;
     var defl_gs = 0;
@@ -230,6 +240,7 @@ var pnp_mode_update = func(i, mode) {
 
 # PNP mode for first pilot.
 var pnp0_mode_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var sel = getprop("fdm/jsbsim/ap/roll-selector") or 0;
     if (!getprop("instrumentation/heading-indicator[0]/serviceable")
         or !getprop("tu154/systems/absu/serviceable"))
@@ -257,6 +268,7 @@ var pnp0_mode_update = func {
 
 # PNP mode for second pilot.
 var pnp1_mode_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var sel = getprop("tu154/switches/pn-6-selector") or 0;
     if (!getprop("instrumentation/heading-indicator[1]/serviceable"))
         sel = 0;
@@ -264,6 +276,7 @@ var pnp1_mode_update = func {
 }
 
 var pnp_both_mode_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     pnp0_mode_update();
     pnp1_mode_update();
 }
@@ -295,6 +308,7 @@ setlistener("instrumentation/nav[0]/gs-in-range", pnp_both_mode_update, 0, 0);
 
 # Smooth DME updates.
 var dme_distance = func(i) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var distance = getprop("instrumentation/dme["~i~"]/indicated-distance-nm");
     # We ignore exact zero distance because it signifies out of range
     # condition, and we want to keep last value in this case.  Within DME
@@ -331,6 +345,7 @@ setprop("instrumentation/dme[1]/frequencies/selected-mhz",
 #
 
 var idr_mode_update = func(i, selector) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var sel = getprop(selector);
     if (int(sel) != sel) # The switch is in transition.
         return;
@@ -346,14 +361,17 @@ var idr_mode_update = func(i, selector) {
 }
 
 var idr0_mode_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     idr_mode_update(0, "tu154/switches/capt-idr-selector");
 }
 
 var idr1_mode_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     idr_mode_update(1, "tu154/switches/copilot-idr-selector");
 }
 
 var idr_both_mode_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     idr0_mode_update();
     idr1_mode_update();
 }
@@ -373,6 +391,7 @@ setlistener("instrumentation/dme[2]/in-range", idr_both_mode_update, 0, 0);
 #
 
 var rv_altitude_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var alt_m = getprop("position/altitude-agl-ft") * 0.3048;
     settimer(rv_altitude_update, (alt_m < 1200 ? 0.1 : (alt_m - 900) / 300));
     if (alt_m > 0) {
@@ -399,6 +418,7 @@ var rv_altitude_update = func {
 rv_altitude_update();
 
 var rv_mode_update = func(i, toggled) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     # Temporal hack to wait electrical initialization.
     if (getprop("tu154/switches/main-battery") == nil) {
         settimer(func { rv_mode_update(i, 1) }, 0.5);
@@ -462,6 +482,7 @@ rv_mode_update(1, 1);
 #
 
 var iku_vor_bearing = func(i) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     setprop("tu154/instrumentation/nav["~i~"]/bearing-deg",
             getprop("instrumentation/nav["~i~"]/radials/reciprocal-radial-deg")
             - getprop("fdm/jsbsim/instrumentation/bgmk-"~(i+1)));
@@ -470,6 +491,7 @@ var iku_vor_bearing_timer = [maketimer(0.1, func { iku_vor_bearing(0) }),
                              maketimer(0.1, func { iku_vor_bearing(1) })];
 
 var iku_mode_update = func(i, b) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var sel = getprop("tu154/instrumentation/iku-1["~i~"]/mode-"~b);
     var bearing = 90;
     var j = b - 1;
@@ -493,27 +515,33 @@ var iku_mode_update = func(i, b) {
 }
 
 var iku0_mode1_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     iku_mode_update(0, 1);
 }
 
 var iku0_mode2_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     iku_mode_update(0, 2);
 }
 
 var iku1_mode1_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     iku_mode_update(1, 1);
 }
 
 var iku1_mode2_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     iku_mode_update(1, 2);
 }
 
 var iku_both_mode1_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     iku0_mode1_update();
     iku1_mode1_update();
 }
 
 var iku_both_mode2_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     iku0_mode2_update();
     iku1_mode2_update();
 }
@@ -536,6 +564,7 @@ setlistener("tu154/instrumentation/iku-1[1]/mode-2", iku1_mode2_update, 1);
 #
 
 var ushdb_mode_update = func(b) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var sel = getprop("tu154/switches/ushdb-sel-"~b);
     if (int(sel) != sel) # The switch is in transition.
         return;
@@ -556,10 +585,12 @@ var ushdb_mode_update = func(b) {
 }
 
 var ushdb_mode1_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     ushdb_mode_update(1);
 }
 
 var ushdb_mode2_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     ushdb_mode_update(2);
 }
 
@@ -579,6 +610,7 @@ setlistener("tu154/switches/ushdb-sel-2", ushdb_mode2_update, 1);
 #
 
 var uvid_inhg = func(i) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var inhgX100 = getprop("tu154/instrumentation/altimeter["~i~"]/inhgX100");
     setprop("instrumentation/altimeter["~i~"]/setting-inhg", inhgX100 / 100.0);
 
@@ -611,6 +643,7 @@ setlistener("tu154/instrumentation/altimeter[1]/inhgX100",
 #
 
 var rsbn_corr = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var twist = getprop("tu154/instrumentation/rsbn/twist");
     var ds = (getprop("fdm/jsbsim/instrumentation/nvu/S-active")
               - getprop("fdm/jsbsim/instrumentation/nvu/Spm-active"));
@@ -658,6 +691,7 @@ var rsbn_corr = func {
 var rsbn_corr_timer = maketimer(0.1, rsbn_corr);
 
 var ppda_mode_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var radial = getprop("tu154/instrumentation/rsbn/radial");
     var distance = getprop("tu154/instrumentation/rsbn/distance");
     var nav_in_range = 1;
@@ -709,6 +743,7 @@ setlistener("tu154/switches/v-51-corr", ppda_mode_update, 0, 0);
 #
 
 var usvp_mode_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var target = "fdm/jsbsim/instrumentation/svs/TAS-fps";
     if (getprop("tu154/switches/usvp-selector"))
         target = "fdm/jsbsim/instrumentation/nvu/GS-fps";
@@ -739,6 +774,7 @@ setlistener("tu154/systems/svs/powered", func {
 }, 0, 0);
 
 var diss_sensitivity_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var diss_terrain = getprop("tu154/switches/DISS-surface");
     var lat = getprop("position/latitude-deg");
     var lon = getprop("position/longitude-deg");
@@ -794,6 +830,7 @@ setlistener("tu154/instrumentation/diss/powered", func {
 #
 
 var nvu_swap_alias = func(active, name) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var inactive = 3 - active;
     var src = "tu154/systems/nvu/"~name;
     var dst = "fdm/jsbsim/instrumentation/nvu/"~name;
@@ -816,6 +853,7 @@ nvu_swap_alias(1, "Zpm");
 nvu_swap_alias(1, "ZPU");
 
 var nvu_enable = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var powered = getprop("tu154/systems/nvu/powered");
     setprop("fdm/jsbsim/instrumentation/nvu/active", powered);
     if (powered)
@@ -827,6 +865,7 @@ var nvu_enable = func {
 setlistener("tu154/systems/nvu/powered", nvu_enable, 0, 0);
 
 var nvu_virtual_navigator_load = func(li, lin) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var active = getprop("fdm/jsbsim/instrumentation/nvu/active") or 1;
     var inactive = 3 - active;
     var msg = "";
@@ -871,11 +910,13 @@ var nvu_virtual_navigator_load = func(li, lin) {
 }
 
 var nvu_set_integrator = func(name, i, val) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var I = getprop("fdm/jsbsim/instrumentation/nvu/"~name~"-integrator");
     setprop("fdm/jsbsim/instrumentation/nvu/"~name~"-base-active", val - I);
 }
 
 var nvu_calculator_load = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var active = getprop("fdm/jsbsim/instrumentation/nvu/active");
     if (!active)
         return;
@@ -902,6 +943,7 @@ var nvu_calculator_load = func {
 
 var nvu_zpu_adjust_sign = 0;
 var nvu_zpu_adjust = func(vi, sign) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var active = getprop("fdm/jsbsim/instrumentation/nvu/active");
     if (!active)
         return;
@@ -923,6 +965,7 @@ var nvu_zpu_adjust = func(vi, sign) {
 }
 
 var nvu_distance_adjust = func(sign) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var active = getprop("fdm/jsbsim/instrumentation/nvu/active");
     if (!active)
         return;
@@ -946,8 +989,7 @@ var nvu_distance_adjust = func(sign) {
     var prop = "fdm/jsbsim/instrumentation/nvu/"~name;
     var v = getprop(prop);
     if (sign) {
-        var speed = (getprop("tu154/instrumentation/v-51/adjust-speed")
-                     / getprop("tu154/instrumentation/v-51/scale"));
+        var speed = (getprop("tu154/instrumentation/v-51/adjust-speed") / getprop("tu154/instrumentation/v-51/scale"));
         interpolate(prop, v + sign * speed * 610, 610);
     } else {
         interpolate(prop, v, 0);
@@ -955,6 +997,7 @@ var nvu_distance_adjust = func(sign) {
 }
 
 var nvu_next_leg = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var active = getprop("fdm/jsbsim/instrumentation/nvu/active");
     if (!active)
         return;
@@ -984,6 +1027,7 @@ setlistener("tu154/switches/v-51-selector-2", func {
 }, 0, 0);
 
 var nvu_fork_apply = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     if (getprop("/tu154/systems/nvu-calc/fork-only-route"))
        return;
 
@@ -1018,6 +1062,7 @@ var nvu_fork_apply = func {
 setlistener("tu154/systems/nvu-calc/fork-applied", nvu_fork_apply, 0, 0);
 
 var nvu_lur_vicinity = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var sel = getprop("tu154/switches/v-51-selector-2");
     var active = (getprop("fdm/jsbsim/instrumentation/nvu/active")
                   and getprop("fdm/jsbsim/instrumentation/nvu/LUR-vicinity-out")
@@ -1046,6 +1091,7 @@ setlistener("fdm/jsbsim/instrumentation/nvu/LUR-vicinity-out", func {
 #
 
 var nvu_wind_mode_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var target = "diss";
     var mode = getprop("fdm/jsbsim/instrumentation/nvu/mode-out");
     if (mode == 3 or mode == 0) {
@@ -1067,6 +1113,7 @@ setlistener("fdm/jsbsim/instrumentation/nvu/mode-out", nvu_wind_mode_update,
 
 var nvu_wind_adjust_sign = 0;
 var nvu_wind_adjust = func(which, sign) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var mode = getprop("fdm/jsbsim/instrumentation/nvu/mode-out");
     if (mode != 3
         and (mode != 0 or !getprop("fdm/jsbsim/instrumentation/nvu/active")))
@@ -1103,6 +1150,7 @@ var nvu_wind_adjust = func(which, sign) {
 
 var wiper_timer = {};
 var wiper_func = func(side) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var switch = getprop("tu154/wipers/switch-"~side);
     var pos = "tu154/wipers/pos-"~side;
     var bus = (side == "left" ? "DC27-bus-L" : "DC27-bus-R");
@@ -1114,6 +1162,7 @@ var wiper_func = func(side) {
     }
 }
 var wiper = func(side) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var switch = getprop("tu154/wipers/switch-"~side);
     if (switch) {
         if (!wiper_timer[side].isRunning)
@@ -1135,6 +1184,7 @@ setlistener("tu154/wipers/switch-right", func { wiper("right"); }, 0, 0);
 #
 
 var fuel_gauge_handler = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var enabled = (getprop("tu154/systems/electrical/buses/DC27-bus-L/volts")
                    and getprop("fdm/jsbsim/fuel/sw-fuel"));
     var name = [ "1", "2-l", "2-r", "3-l", "3-r", "4" ];
@@ -1153,6 +1203,7 @@ setlistener("fdm/jsbsim/fuel/sw-fuel", fuel_gauge_handler, 0, 1);
 
 
 var fuel_consumption_adjust = func(offset) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var enabled = (getprop("tu154/systems/electrical/buses/DC27-bus-L/volts")
                    and getprop("fdm/jsbsim/fuel/sw-consumption"));
     if (enabled) {
@@ -1169,6 +1220,7 @@ var fuel_consumption_adjust = func(offset) {
 
 var fuel_consumption_gauge_enabled = 0;
 var fuel_consumption_gauge_handler = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var enabled = (getprop("tu154/systems/electrical/buses/DC27-bus-L/volts")
                    and getprop("fdm/jsbsim/fuel/sw-consumption"));
     if (enabled and !fuel_consumption_gauge_enabled) {
@@ -1188,6 +1240,7 @@ setlistener("fdm/jsbsim/fuel/sw-consumption",
 
 
 var engine_cutoff = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     var name = [ "e1", "e2", "e3" ];
     for (var i = 0; i < 3; i += 1) {
         var cutoff = (!getprop("tu154/switches/cutoff-lever-"~(i + 1))
@@ -1205,6 +1258,7 @@ engine_cutoff_timer.start();
 ######################################################################
 
 svs_power = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( getprop( "tu154/switches/SVS-power" ) == 1.0 )
 	electrical.AC3x200_bus_1L.add_output( "SVS", 10.0);
 else electrical.AC3x200_bus_1L.rm_output( "SVS" );
@@ -1225,6 +1279,7 @@ setlistener("tu154/switches/UVID", uvid15_power, 0, 0 );
 # SKAWK support
 
 var skawk_handler = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
   var digit_1 = getprop( "tu154/instrumentation/skawk/handle-1" );
   var digit_2 = getprop( "tu154/instrumentation/skawk/handle-2" );
   var digit_3 = getprop( "tu154/instrumentation/skawk/handle-3" );
@@ -1246,6 +1301,7 @@ var skawk_handler = func{
 
 # Load defaults at startup
 var skawk_init = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 setprop( "tu154/instrumentation/skawk/handle-1", getprop( "instrumentation/transponder/inputs/digit[3]" ) );
 setprop( "tu154/instrumentation/skawk/handle-2", getprop( "instrumentation/transponder/inputs/digit[2]" ) );
 setprop( "tu154/instrumentation/skawk/handle-3", getprop( "instrumentation/transponder/inputs/digit[1]" ) );
@@ -1268,6 +1324,7 @@ if( getprop( "instrumentation/transponder/inputs/digit" ) != nil ) skawk_init();
 # BKK support
 
 bkk_handler = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 settimer( bkk_handler, 0.5 );
 var param = getprop("tu154/instrumentation/bkk/serviceable");
 if( param == nil ) return;
@@ -1370,6 +1427,7 @@ if( getprop("tu154/instrumentation/bkk/mgv-2-failure" ) == 0 )
 
 
 bkk_adjust = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 
 	var param = getprop("tu154/systems/mgv/one");
 	if( param == nil ) return;
@@ -1392,6 +1450,7 @@ bkk_adjust = func{
 }
 
 bkk_shutdown = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if ( arg[0] == 0 )
 	{
 #	setprop( "instrumentation/attitude-indicator[0]/serviceable", 0 );
@@ -1425,6 +1484,7 @@ if ( arg[0] == 3 )
 }
 
 bkk_reset = func(i) {
+    nascallinst.setValue(nascallinst.getValue() + 1);
 setprop("tu154/instrumentation/bkk/mgv-"~i~"-failure", 0);
 setprop("tu154/instrumentation/bkk/mgv-contr-failure", 0);
 setprop("tu154/systems/electrical/indicators/contr-gyro", 0);
@@ -1437,6 +1497,7 @@ bkk_handler();
 
 # BKK power support
 bkk_power = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( getprop( "tu154/switches/BKK-power" ) == 1.0 )
 	electrical.AC3x200_bus_1L.add_output( "BKK", 25.0);
 else electrical.AC3x200_bus_1L.rm_output( "BKK" );
@@ -1446,24 +1507,28 @@ setlistener("tu154/switches/BKK-power", bkk_power,0,0);
 
 # AGR power support
 agr_power = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( getprop( "tu154/switches/AGR" ) == 1.0 )
 	electrical.AC3x200_bus_1L.add_output( "AGR", 10.0);
 else electrical.AC3x200_bus_1L.rm_output( "AGR" );
 }
 # MGV-1 power support
 mgv_1_power = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( getprop( "tu154/switches/PKP-left" ) == 1.0 )
 	electrical.AC3x200_bus_1L.add_output( "MGV-1", 10.0);
 else electrical.AC3x200_bus_1L.rm_output( "MGV-1" );
 }
 # MGV-2 power support
 mgv_2_power = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( getprop( "tu154/switches/PKP-right" ) == 1.0 )
 	electrical.AC3x200_bus_3R.add_output( "MGV-2", 10.0);
 else electrical.AC3x200_bus_3R.rm_output( "MGV-2" );
 }
 # MGV contr power support
 mgv_c_power = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( getprop( "tu154/switches/MGV-contr" ) == 1.0 )
 	electrical.AC3x200_bus_3R.add_output( "MGV-contr", 10.0);
 else electrical.AC3x200_bus_3R.rm_output( "MGV-contr" );
@@ -1479,6 +1544,7 @@ setlistener("tu154/switches/MGV-contr", mgv_c_power,0,0);
 
 # auto corrector for GA-3 and BGMK
 var tks_corr = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 var mk1 = getprop("fdm/jsbsim/instrumentation/km-5-1");
 if( mk1 == nil ) return;
 var mk2 = getprop("fdm/jsbsim/instrumentation/km-5-2");
@@ -1530,6 +1596,7 @@ else	{ # BGMK-1
 
 # manually adjust gyro heading - GA-3 only
 tks_adj = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( getprop("tu154/switches/pu-11-gpk") != 0 ) return;
 help.tks();	# show help string
 var delta = 0.1;
@@ -1572,24 +1639,28 @@ else	{	# osn
 # TKS power support
 
 tks_power_1 = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( getprop( "tu154/switches/TKC-power-1" ) == 1.0 )
 	electrical.AC3x200_bus_1L.add_output( "GA3-1", 10.0);
 else electrical.AC3x200_bus_1L.rm_output( "GA3-1" );
 }
 
 tks_bgmk_1 = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( getprop( "tu154/switches/TKC-BGMK-1" ) == 1.0 )
 	electrical.AC3x200_bus_1L.add_output( "BGMK-1", 10.0);
 else electrical.AC3x200_bus_1L.rm_output( "BGMK-1" );
 }
 
 tks_power_2 = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( getprop( "tu154/switches/TKC-power-2" ) == 1.0 )
 	electrical.AC3x200_bus_3R.add_output( "GA3-2", 10.0);
 else electrical.AC3x200_bus_3R.rm_output( "GA3-2" );
 }
 
 tks_bgmk_2 = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( getprop( "tu154/switches/TKC-BGMK-2" ) == 1.0 )
 	electrical.AC3x200_bus_3R.add_output( "BGMK-2", 10.0);
 else electrical.AC3x200_bus_3R.rm_output( "BGMK-2" );
@@ -1614,6 +1685,7 @@ setprop("/fdm/jsbsim/instrumentation/az-err", 0.0 );
 
 # Azimuth error handler
 var tks_az_handler = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 settimer(tks_az_handler, 60.0 );
 current_point = geo.aircraft_position();
 if( last_point.distance_to( current_point ) < 1000.0 ) return; # skip small distance
@@ -1636,6 +1708,7 @@ settimer(tks_az_handler, 60.0 );
 #                           KURS-MP frequency support
 
 var kursmp_sync = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 var frequency = 0.0;
 var heading = 0.0;
 if( arg[0] == 0 )	# proceed captain panel
@@ -1691,6 +1764,7 @@ if( arg[0] == 1 ) # co-pilot
 
 # initialize KURS-MP frequencies & headings
 var kursmp_init = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 var freq = getprop("instrumentation/nav[0]/frequencies/selected-mhz");
 if( freq == nil ) { settimer( kursmp_init, 1.0 ); return; } # try until success
 setprop("tu154/instrumentation/kurs-mp-1/digit-f-hi", int(freq) );
@@ -1714,6 +1788,7 @@ setprop("tu154/instrumentation/kurs-mp-2/digit-h-ones", int( hdg-int( hdg/10.0 )
 }
 
 var kursmp_watchdog_1 = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 #settimer( kursmp_watchdog_1, 0.5 );
 if( getprop("instrumentation/nav[0]/in-range" ) == 1 ) return;
  if( getprop("tu154/instrumentation/pn-5/gliss" ) == 1.0 ) absu.absu_reset();
@@ -1722,6 +1797,7 @@ if( getprop("instrumentation/nav[0]/in-range" ) == 1 ) return;
 }
 
 var kursmp_watchdog_2 = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 #settimer( kursmp_watchdog_2, 0.5 );
 if( getprop("instrumentation/nav[1]/in-range" ) == 1 ) return;
 if( getprop("tu154/instrumentation/pn-5/az-2" ) == 1.0 ) absu.absu_reset();
@@ -1731,12 +1807,14 @@ setlistener( "instrumentation/nav[0]/in-range", kursmp_watchdog_1, 0,0 );
 setlistener( "instrumentation/nav[1]/in-range", kursmp_watchdog_2, 0,0 );
 
 var kursmp_power_1 = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( getprop( "tu154/switches/KURS-MP-1" ) == 1.0 )
 	electrical.AC3x200_bus_1L.add_output( "KURS-MP-1", 20.0);
 else electrical.AC3x200_bus_1L.rm_output( "KURS-MP-1" );
 }
 
 var kursmp_power_2 = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( getprop( "tu154/switches/KURS-MP-2" ) == 1.0 )
 	electrical.AC3x200_bus_3R.add_output( "KURS-MP-2", 20.0);
 else electrical.AC3x200_bus_3R.rm_output( "KURS-MP-2" );
@@ -1753,6 +1831,7 @@ kursmp_init();
 
 #RSBN support
 var rsbn_set_f_1 = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 var handle = getprop("tu154/instrumentation/rsbn/handle-1");
 if( handle == nil ) handle = 0.0;
 var step = arg[0];
@@ -1780,6 +1859,7 @@ else {
 }
 
 var rsbn_set_f_2 = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 var handle = getprop("tu154/instrumentation/rsbn/handle-2");
 if( handle == nil ) handle = 0.0;
 var step = arg[0];
@@ -1806,6 +1886,7 @@ else {
 }
 
 var rsbn_set_mode = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( arg[0] == 0 )
 	{
 	setprop("tu154/instrumentation/rsbn/mode", 0 );
@@ -1828,6 +1909,7 @@ rsbn_set_f_2(0);
 }
 
 var rsbn_chan_to_f = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 var handle_1 = getprop("tu154/instrumentation/rsbn/handle-1");
 var handle_2 = getprop("tu154/instrumentation/rsbn/handle-2");
 if( handle_1 == nil ) handle_1 = 0.0;
@@ -1844,6 +1926,7 @@ setprop("instrumentation/nav[2]/frequencies/selected-mhz", freq );
 
 
 var rsbn_power = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( arg[0] == 1 )
 	{
       if( getprop("instrumentation/nav[2]/powered") == 1 )
@@ -1867,6 +1950,7 @@ else {
 }
 
 var rsbn_pwr_watchdog = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 if( getprop("instrumentation/nav[2]/powered" ) != 1 ) # power off
 	{
 #	setprop("instrumentation/nav[2]/serviceable", 0 );
@@ -1902,6 +1986,7 @@ setlistener("instrumentation/nav[2]/powered", rsbn_pwr_watchdog, 0,0 );
 # ARK support
 
 ark_1_2_handler = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
 	var ones = getprop("tu154/instrumentation/ark-15[0]/digit-2-1");
 	if( ones == nil ) ones = 0.0;
 	var dec = getprop("tu154/instrumentation/ark-15[0]/digit-2-2");
@@ -1914,6 +1999,7 @@ ark_1_2_handler = func {
 }
 
 ark_1_1_handler = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
 	var ones = getprop("tu154/instrumentation/ark-15[0]/digit-1-1");
 	if( ones == nil ) ones = 0.0;
 	var dec = getprop("tu154/instrumentation/ark-15[0]/digit-1-2");
@@ -1926,6 +2012,7 @@ ark_1_1_handler = func {
 }
 
 ark_2_2_handler = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
 	var ones = getprop("tu154/instrumentation/ark-15[1]/digit-2-1");
 	if( ones == nil ) ones = 0.0;
 	var dec = getprop("tu154/instrumentation/ark-15[1]/digit-2-2");
@@ -1938,6 +2025,7 @@ ark_2_2_handler = func {
 }
 
 ark_2_1_handler = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
 	var ones = getprop("tu154/instrumentation/ark-15[1]/digit-1-1");
 	if( ones == nil ) ones = 0.0;
 	var dec = getprop("tu154/instrumentation/ark-15[1]/digit-1-2");
@@ -1951,6 +2039,7 @@ ark_2_1_handler = func {
 
 
 ark_1_power = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
     if( getprop("tu154/instrumentation/ark-15[0]/powered") == 1 )
 	{
     	if( getprop("tu154/switches/adf-power-1")==1 )
@@ -1970,6 +2059,7 @@ ark_1_power = func{
 }
 
 ark_2_power = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
     if( getprop("tu154/instrumentation/ark-15[1]/powered") == 1 )
 	{
     	if( getprop("tu154/switches/adf-power-2")==1 )
@@ -1992,6 +2082,7 @@ ark_2_power = func{
 
 # read selected and standby ADF frequencies and copy it to ARK
 ark_init = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 var freq = getprop("instrumentation/adf[0]/frequencies/selected-khz");
 if( freq == nil ) freq = 0.0;
 setprop("tu154/instrumentation/ark-15[0]/digit-1-3",
@@ -2064,6 +2155,7 @@ setlistener( "tu154/instrumentation/ark-15[1]/digit-2-3", ark_2_2_handler ,0,0);
 
 # AUASP (UAP-12) power support
 auasp_power = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 	if( getprop("tu154/switches/AUASP")==1 )
 	    {
 	     electrical.AC3x200_bus_1L.add_output( "AUASP", 10.0);
@@ -2077,6 +2169,7 @@ auasp_power = func{
 setlistener("tu154/switches/AUASP", auasp_power, 0,0 );
 
 uap_handler = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 settimer(uap_handler, 0.0);
 if( getprop("tu154/instrumentation/uap-12/powered") == 0.0 ) return;
 var n_norm = getprop("fdm/jsbsim/instrumentation/n-norm");
@@ -2093,6 +2186,7 @@ uap_handler();
 
 # EUP power support
 eup_power = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 	if( getprop("tu154/switches/EUP")==1 )
 {
 	     electrical.AC3x200_bus_1L.add_output( "EUP", 5.0);
@@ -2109,6 +2203,7 @@ setlistener("tu154/switches/EUP", eup_power, 0,0 );
 # electrical system update for PNK
 
 var update_electrical = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 var dc12 = getprop( "tu154/systems/electrical/buses/DC27-bus-L/volts" );
 if( dc12 == nil ) return;
 if( dc12 > 12.0 ){
@@ -2305,6 +2400,7 @@ update_electrical();
 # Gear animation support
 # for animation only
 gear_handler = func{
+    nascallinst.setValue(nascallinst.getValue() + 1);
 settimer(gear_handler, 0.0);
 var rot = getprop("orientation/pitch-deg");
 if( rot == nil ) return;
@@ -2357,6 +2453,7 @@ print("PNK started");
 
 ################################################################ Radios volume ###################################################################
 var radios_init = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     setprop("/tu154/instrumentation/comm[0]/freq", getprop("/instrumentation/comm[0]/frequencies/selected-mhz"));
     #removelistener(comm1_init);
     setlistener ("/tu154/instrumentation/comm[0]/volume", radios_update);
@@ -2380,6 +2477,7 @@ var radios_init = func {
 settimer(radios_init, 5);
 setprop("/tu154/instrumentation/comm[1]/freq", getprop("/instrumentation/comm[1]/frequencies/selected-mhz"));
 var radios_update = func {
+    nascallinst.setValue(nascallinst.getValue() + 1);
     comm1 = 0;
     freq1 = 0;
     comm2 = 0;

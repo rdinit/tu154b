@@ -8,9 +8,11 @@
 # Novosibirsk, Russia
 # jan 2008, nov 2013
 #
+var nascallctrl = props.globals.initNode("/debug/nascalls/controls", 0, "INT");
 
 # turn off autopilot & autothrottle
 var trigger = func(x) { # x - unused var
+	nascallctrl.setValue(nascallctrl.getValue() + 1);
 absu.absu_stab_off();
 absu.absu_at_stop();
 }
@@ -19,6 +21,7 @@ absu.absu_at_stop();
 var TRIM_RATE = 0.08;
 
 var elevatorTrim = func {
+	nascallctrl.setValue(nascallctrl.getValue() + 1);
     #controls.slewProp("/controls/flight/elevator-trim", arg[0] * TRIM_RATE);
     setprop("fdm/jsbsim/fcs/met-cmd", arg[0]);
     setprop("tu154/systems/warning/elevator-trim-pressed", 1.0 );
@@ -27,12 +30,14 @@ var elevatorTrim = func {
 
 # we need clear trim variables when trim button is released
 var elev_trim_stop = func {
+	nascallctrl.setValue(nascallctrl.getValue() + 1);
   setprop("fdm/jsbsim/fcs/met-cmd", 0.0);
 }
 
 # It's func intend for support direct trim changing (from home\end keyboard and mouse wheel bindings)
 # Joysticks drivers use elevatorTrim()
 var trim_handler = func{
+	nascallctrl.setValue(nascallctrl.getValue() + 1);
   var old_trim = num( getprop("tu154/systems/absu/trim") );
   if ( old_trim == nil ) old_trim = 0.0;
   var new_trim = num( getprop("/controls/flight/elevator-trim") );
@@ -51,6 +56,7 @@ setlistener( "/controls/flight/elevator-trim", trim_handler );
 
 var origApplyBrakes = applyBrakes;
 var applyBrakes = func(v, which = 0) {
+	nascallctrl.setValue(nascallctrl.getValue() + 1);
     if (v and getprop("controls/gear/brake-parking")) {
        setprop("controls/gear/brake-parking", 0);
        origApplyBrakes(0);
@@ -60,6 +66,7 @@ var applyBrakes = func(v, which = 0) {
 
 var origApplyParkingBrake = applyParkingBrake;
 var applyParkingBrake = func(v) {
+	nascallctrl.setValue(nascallctrl.getValue() + 1);
     if (v) {
         v = origApplyParkingBrake(1);
         origApplyBrakes(v, 0);
@@ -72,6 +79,7 @@ applyParkingBrake(1);
 # Autostart
 # may 2010
 var autostart = func{
+	nascallctrl.setValue(nascallctrl.getValue() + 1);
 	# We should turn off electrical power before engine start, cause engine handlers will cutoff fuel until mandatory procedure will done. They will stop, if power will turn off.
 	setprop("tu154/switches/APU-RAP-selector", 1.0 );
 	setprop("tu154/switches/main-battery", 0.0 );
@@ -128,6 +136,7 @@ var autostart = func{
 
 # Do it after engine autostart
 var autostart_helper_1 = func{
+	nascallctrl.setValue(nascallctrl.getValue() + 1);
 	# wait until all engines turn to cutoff rpm
 	if( 	( getprop( "/fdm/jsbsim/propulsion/engine[0]/n2") > 20.0 ) and
 		( getprop( "/fdm/jsbsim/propulsion/engine[1]/n2") > 20.0 ) and
@@ -212,6 +221,7 @@ var autostart_helper_1 = func{
 
 # continue autostart procedure...
 var autostart_helper_2 = func{
+	nascallctrl.setValue(nascallctrl.getValue() + 1);
 	# Drop gyros failure control system
 	instruments.bkk_reset(1);
 	instruments.bkk_reset(2);

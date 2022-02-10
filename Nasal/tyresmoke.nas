@@ -1,3 +1,5 @@
+var nascalltyresmoke = props.globals.initNode("/debug/nascalls/tyresmoke", 0, "INT");
+
 # ==================================== timer stuff ===============================
 var run_tyresmoke0 = 0;
 var run_tyresmoke1 = 0;
@@ -8,6 +10,7 @@ var tyresmoke_2 = aircraft.tyresmoke.new(2, 0, 0.8, 0);
 
 # =============================== listeners ===============================
 setlistener("gear/gear[0]/position-norm", func {
+	nascalltyresmoke.setValue(nascalltyresmoke.getValue() + 1);
 	var gear = getprop("gear/gear[0]/position-norm");
 	if (gear == 1 ){
 		run_tyresmoke0 = 1;
@@ -17,6 +20,7 @@ setlistener("gear/gear[0]/position-norm", func {
 },1,0);
 
 setlistener("gear/gear[1]/position-norm", func {
+	nascalltyresmoke.setValue(nascalltyresmoke.getValue() + 1);
 	var gear = getprop("gear/gear[1]/position-norm");
 	if (gear == 1 ){
 		run_tyresmoke1 = 1;
@@ -26,6 +30,7 @@ setlistener("gear/gear[1]/position-norm", func {
 },1,0);
 
 setlistener("gear/gear[2]/position-norm", func {
+	nascalltyresmoke.setValue(nascalltyresmoke.getValue() + 1);
 	var gear = getprop("gear/gear[2]/position-norm");
 	if (gear == 1 ){
 		run_tyresmoke2 = 1;
@@ -39,6 +44,7 @@ aircraft.rain.init();
 
 #==================== Tyre Smoke / Rain Effects ======================
 var tyresmoke_and_rain = func {
+	nascalltyresmoke.setValue(nascalltyresmoke.getValue() + 1);
 	if (run_tyresmoke0)
 		tyresmoke_0.update();
 	if (run_tyresmoke1)

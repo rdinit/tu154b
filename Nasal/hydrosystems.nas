@@ -9,8 +9,11 @@
 # may 2008
 #
 
+var nascallhyd = props.globals.initNode("/debug/nascalls/hydrosystems", 0, "INT");
+
 var UPDATE_PERIOD = 0.1;
 var hs_handler = func{
+    nascallhyd.setValue(nascallhyd.getValue() + 1);
 settimer( hs_handler, UPDATE_PERIOD );
 
 # Freese aero surfaces & over hydro system consumers if hydrosystems are empty

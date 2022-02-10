@@ -9,6 +9,8 @@
 # aug 2008
 #
 
+var nascalleng = props.globals.initNode("/debug/nascalls/engines", 0, "INT");
+
 # engine support
 
 var ENGINE_UPDATE_PERIOD = 0.5;
@@ -17,6 +19,7 @@ var starter_rpm_2 = 0.0;
 var starter_rpm_3 = 0.0;
 
 var start_engine = func{
+    nascalleng.setValue(nascalleng.getValue() + 1);
 	var engine_prop = -1;
 	# Is start subsystem  serviceable?
 	if( getprop("tu154/switches/startpanel-start" ) != 1.0 ) return;
@@ -45,6 +48,7 @@ var start_engine = func{
 
 
 var break_start = func{
+    nascalleng.setValue(nascalleng.getValue() + 1);
 # which engine we start now?
 	var engine_prop = -1;
 	if( getprop("tu154/switches/startpanel-selector-1" ) == 1.0 )
@@ -70,6 +74,7 @@ var break_start = func{
 }
 
 var start_apu = func{
+    nascalleng.setValue(nascalleng.getValue() + 1);
 # Is start subsystem  serviceable?
 
 if (!getprop("fdm/jsbsim/fuel/sw-pump-apu")) return;
@@ -86,6 +91,7 @@ var stop_apu = func{
 
 
 var eng_1_handler = func{
+    nascalleng.setValue(nascalleng.getValue() + 1);
 settimer( eng_1_handler, ENGINE_UPDATE_PERIOD );
 
 if( getprop( "engines/engine[0]/egt-degf" ) == nil ) return;
@@ -131,6 +137,7 @@ if( getprop( "controls/engines/engine[0]/cutoff" ) == 1 )
 }
 
 var eng_2_handler = func{
+    nascalleng.setValue(nascalleng.getValue() + 1);
 settimer( eng_2_handler, ENGINE_UPDATE_PERIOD );
 if( getprop( "controls/engines/engine[1]/cutoff" ) == nil ) return;
 if( getprop( "engines/engine[1]/n2" ) == nil ) return;
@@ -164,6 +171,7 @@ if( getprop( "controls/engines/engine[1]/cutoff" ) == 1 )
 }
 
 var eng_3_handler = func{
+    nascalleng.setValue(nascalleng.getValue() + 1);
 settimer( eng_3_handler, ENGINE_UPDATE_PERIOD );
 
 if( getprop( "controls/engines/engine[2]/cutoff" ) == nil ) return;
@@ -198,6 +206,7 @@ if( getprop( "controls/engines/engine[2]/cutoff" ) == 1 )
 }
 
 var apu_handler = func{
+    nascalleng.setValue(nascalleng.getValue() + 1);
 settimer( apu_handler, ENGINE_UPDATE_PERIOD );
 var param = 0.0;
 if( getprop( "controls/engines/engine[3]/cutoff" ) == nil ) return;
@@ -257,6 +266,7 @@ if( getprop( "engines/engine[3]/n2" ) > 90.0 and !getprop("fdm/jsbsim/fuel/has-f
 }
 
 var check_lamps_eng = func{
+    nascalleng.setValue(nascalleng.getValue() + 1);
 	var pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
 	if( pwr == nil ) return;
 	var param = getprop( "tu154/systems/electrical/checking-lamps/engine-panel" );

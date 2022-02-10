@@ -3,6 +3,8 @@
 # Map case inserted paper images (.svg or .png).
 #
 
+var nascallmapcase = props.globals.initNode("/debug/nascalls/mapcase", 0, "INT");
+
 # Pages will be shown in the following order.  You may add/delete file names
 # to this list.  Duplicates are OK.
 var filenames = [
@@ -34,6 +36,7 @@ var filenames = [
 
 var images = {};
 var switch_page = func(i) {
+    nascallmapcase.setValue(nascallmapcase.getValue() + 1);
     var total = size(filenames);
     if (total == 0)
         return;
@@ -49,6 +52,7 @@ var switch_page = func(i) {
 }
 
 var init = func {
+    nascallmapcase.setValue(nascallmapcase.getValue() + 1);
     removelistener(init_event);
     print("Map case page loader started");
     var mapcase = canvas.new({

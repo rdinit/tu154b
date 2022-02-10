@@ -30,6 +30,8 @@
 #   /fdm/jsbsim/contact/unit[*]/friction/
 #
 
+var nascallfriction = props.globals.initNode("/debug/nascalls/friction", 0, "INT");
+
 
 setprop("sim/fdm/surface/override-level", 1);
 
@@ -67,6 +69,7 @@ for (var i = 0; i < points_of_contact; i += 1) {
 
 
 var update_reactions = func {
+    nascallfriction.setValue(nascallfriction.getValue() + 1);
     settimer(update_reactions, 0.1);
 
     if (getprop("fdm/jsbsim/position/h-agl-ft") > 100)

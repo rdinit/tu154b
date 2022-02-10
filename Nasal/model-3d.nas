@@ -284,3 +284,18 @@ var Gear_Pitch = maketimer(dt_gear, func() {
 });
 Gear_Pitch.simulatedTime = 1;
 Gear_Pitch.start();
+
+
+########################################################### Nasal Debug #############################################################
+var nascalls = props.globals.getNode("/debug/nascalls", 1);
+var timer_debug = maketimer(60.0, func(){
+      print("------------------------------------------------------------");
+      print("Nasal calls per minute:");
+      foreach (var n; nascalls.getChildren()) {
+            print(" - ", n.getPath(), "                  ", n.getValue());
+            n.setValue(0);
+      }
+      print("------------------------------------------------------------");
+      });
+timer_debug.simulatedTime = 1;
+timer_debug.start();

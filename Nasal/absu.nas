@@ -7,12 +7,15 @@
 # Modded by ShFsn, oct 2021
 #
 
+var nascallabsu = props.globals.initNode("/debug/nascalls/absu", 0, "INT");
+
 #var HEADING_DEVIATION_LIMIT = 20.0;
 #var GLIDESLOPE_DEVIATION_LIMIT = 10.0;
 var PITCH_YOKE_LIMIT = 0.5;
 var BANK_YOKE_LIMIT = 0.5;
 
 var absu_property_update = func {	# <-   handler begin here
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 
 var param=0.0;
 
@@ -162,11 +165,13 @@ if( getprop("fdm/jsbsim/ap/pitch-selector") == 5.0 )
 # ABSU control
 
 var absu_stab_toggle = func {
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 	if( getprop("fdm/jsbsim/ap/pitch-hold") and getprop("fdm/jsbsim/ap/roll-hold") ) absu_stab_b_off();
 	else absu_stab_on();
 }
 
 var absu_stab_on = func {
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( absu_powered() == 0 ) return;
 
 var kren = getprop("tu154/switches/pu-46-kren");
@@ -193,6 +198,7 @@ if( tang == nil ) tang = 0.0;
 # Modified by Yurik dec 2013
 # Go to manual control
 var absu_stab_off = func {
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 # Autopilot state
 # Clear audio warning if interpolation of is stale
 	setprop("tu154/systems/warning/alarm/absu_warn", 0.0 );
@@ -228,6 +234,7 @@ var absu_stab_off = func {
 }
 
 var absu_stab_b_off = func {
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 # Autopilot state
 # Clear audio warning if interpolation of is stale
 	setprop("tu154/systems/warning/alarm/absu_warn", 0.0 );
@@ -264,6 +271,7 @@ var absu_stab_b_off = func {
 # switches on PN-5
 # for XML animation
 var absu_stab_kren = func {
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 
 var state = getprop("tu154/instrumentation/pu-46/stab");
 if ( state == nil ) state = 0;
@@ -296,6 +304,7 @@ else	# stop roll stabilizer
 
 
 var absu_stab_tang = func {
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 var state = getprop("tu154/instrumentation/pu-46/stab");
 if ( state == nil ) state = 0;
 if ( arg[0] != 0 )	# start pitch stabilizer
@@ -324,17 +333,20 @@ else	# stop pitch stabilizer
 
 
 var absu_powered = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( getprop("tu154/systems/absu/serviceable" ) == 1 ) return 1;
 else return 0;
 }
 
 var absu_stab_current_pitch = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 	setprop("fdm/jsbsim/ap/pitch-selector", 1.0 ); # 1 - stabilize pitch
 	setprop( "tu154/instrumentation/pn-5/pitch-state", 2 );
 	setprop("tu154/systems/electrical/indicators/stab-pitch", 1.0 );
 }
 
 var absu_stab_roll = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 	setprop("fdm/jsbsim/ap/stab-input-roll-rad", 0.0 ); # roll=0, stabilize wing level
 	setprop("fdm/jsbsim/ap/roll-selector", 1.0 ); # 1 - stabilize roll
 	setprop( "tu154/instrumentation/pn-5/heading-state", 2 );
@@ -342,6 +354,7 @@ var absu_stab_roll = func{
 }
 
 var clr_heading_lamp = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 # PU-5
 setprop("tu154/instrumentation/pn-5/sbros", 0.0 );
 setprop("tu154/instrumentation/pn-5/zk", 0.0 );
@@ -358,6 +371,7 @@ setprop("tu154/systems/electrical/indicators/stab-heading", 0.0 );
 }
 
 var clr_pitch_lamp = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 setprop("tu154/instrumentation/pu-46/m", 0.0 );
 setprop("tu154/instrumentation/pu-46/v", 0.0 );
 setprop("tu154/instrumentation/pu-46/h", 0.0 );
@@ -375,6 +389,7 @@ setprop("tu154/systems/electrical/indicators/reject", 0.0 );
 # "Sbros progr" lamp - reset AP to zero roll state
 # also use in heading wheel animation
 var absu_reset = func {
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( absu_powered() == 0 ) return;
 clr_heading_lamp();
 setprop("fdm/jsbsim/ap/roll-selector", 0.0 );
@@ -400,6 +415,7 @@ if( getprop("tu154/instrumentation/pu-46/stab" ) == 1.0
 # --------------- Pitch modes ------------------------------
 
 var absu_drop_mvh = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( absu_powered() == 0 ) return;
 if( getprop("tu154/instrumentation/pu-46/stab" ) == 1.0 )
 if( getprop("fdm/jsbsim/ap/pitch-selector" ) != 1.0 )
@@ -417,6 +433,7 @@ if( getprop("fdm/jsbsim/ap/pitch-selector" ) != 1.0 )
 }
 
 var set_pitch_stab = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
   setprop("fdm/jsbsim/ap/pitch-selector",1 );
 }
 
@@ -424,11 +441,13 @@ var set_pitch_stab = func{
 # Clear MET to neutral
 
 var absu_met_neutral = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
   setprop("fdm/jsbsim/ap/met-neutral", 1 );
   settimer( enable_met, 0.1 );
 }
 
 var enable_met = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
   setprop("fdm/jsbsim/ap/met-neutral", 0 );
 }
 
@@ -436,6 +455,7 @@ var enable_met = func{
 
 # Altitude stabilizer
 var absu_h = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( absu_powered() == 0 ) return;
 clr_pitch_lamp();
 var alt = getprop("instrumentation/altimeter[0]/pressure-alt-ft");		# Modified by Yurik dec 2013
@@ -450,6 +470,7 @@ if( getprop("tu154/switches/pu-46-tang" ) == 1.0 )
 
 # Air speed stabilizer
 var absu_v = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( absu_powered() == 0 ) return;
 var ias = getprop("fdm/jsbsim/velocities/vc-fps");
 clr_pitch_lamp();
@@ -463,6 +484,7 @@ if( getprop("tu154/switches/pu-46-tang" ) == 1.0 )
 
 # Mach stabilizer
 var absu_m = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( absu_powered() == 0 ) return;
 var mach = getprop("fdm/jsbsim/velocities/mach");
 #if ( mach == nil ) return;
@@ -477,6 +499,7 @@ if( getprop("tu154/switches/pu-46-tang" ) == 1.0 )
 
 # GLideslope
 var absu_glideslope = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( absu_powered() == 0 ) return;
 if( getprop("tu154/switches/pn-5-posadk") != 1.0)return;# "podgotovka posadki" not engaged
 if( getprop("tu154/switches/pn-5-navigac" ) != 0.0 ) return; # wrong control!
@@ -494,6 +517,7 @@ if( getprop("tu154/switches/pu-46-tang" ) == 1.0 )
 
 # ZK
 var absu_zk = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( absu_powered() == 0 ) return;
 
 clr_heading_lamp();
@@ -505,6 +529,7 @@ if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
 }
 # VOR 1
 var absu_az1 = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( absu_powered() == 0 ) return;
 
 clr_heading_lamp();
@@ -523,6 +548,7 @@ if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
 }
 # VOR 2
 var absu_az2 = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( absu_powered() == 0 ) return;
 
 clr_heading_lamp();
@@ -540,6 +566,7 @@ if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
 }
 # NVU
 var absu_nvu = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( absu_powered() == 0 ) return;
 clr_heading_lamp();
 
@@ -557,6 +584,7 @@ if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
 
 # Approach
 var absu_approach = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( absu_powered() == 0 ) return;
 
 clr_heading_lamp();
@@ -575,6 +603,7 @@ if( getprop("tu154/switches/pu-46-kren" ) == 1.0 )
 
 
 var absu_shutdown = func {
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 # Drop ABSU to idle state
 absu_reset();
 absu_stab_off();
@@ -592,11 +621,13 @@ if( getprop( "tu154/systems/absu/serviceable" ) == 0 )
 
 
 var absu_alarm = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 setprop("tu154/systems/warning/alarm/absu_warn", 1.0 );
 interpolate("tu154/systems/warning/alarm/absu_warn", 0.0, 1.4 );
 }
 
 var absu_alarm_watchdog = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( getprop("tu154/systems/warning/alarm/absu_warn") < 0.1 )
 	setprop("tu154/systems/warning/alarm/absu_warn", 0.0 );
 }
@@ -611,6 +642,7 @@ absu_property_update();
 # ********************** Go around procedure ********************************
 
 var absu_start_go_around = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 	absu_at_stop();
 	absu_stab_roll();
 	absu_stab_current_pitch();
@@ -639,11 +671,13 @@ var absu_start_go_around = func{
 
 # ========================== yoke ap off =============================
 var check_yoke_pitch = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 var pitch = abs( getprop("/controls/flight/elevator") );
 if( pitch < PITCH_YOKE_LIMIT ) return;
 if( getprop( "fdm/jsbsim/ap/pitch-hold" ) ) absu_stab_tang(0); # drop pitch stabilizer
 }
 var check_yoke_bank = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 var bank = abs( getprop("/controls/flight/aileron") );
 if( bank < BANK_YOKE_LIMIT ) return;
 if( getprop( "fdm/jsbsim/ap/roll-hold" ) ) absu_stab_kren(0); # drop roll
@@ -656,6 +690,7 @@ setlistener("/controls/flight/aileron", check_yoke_bank, 0, 0 );
 
 
 var absu_at_handler = func(param) {
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( param == 0.0 )
 	{	# drop to power off state
 	absu_at_stop();
@@ -709,6 +744,7 @@ setlistener("tu154/instrumentation/pn-6/serviceable", func {
 
 # ABSU AT timer procedure
 var absu_at_sogl = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( getprop("tu154/instrumentation/pn-6/mode") == 0.0 ) return;
 settimer( absu_at_sogl, 0.3 );
 
@@ -747,6 +783,7 @@ if( kias != nil ) setprop( "fdm/jsbsim/ap/input-at", kias*1.688 ); # from knots 
 }
 
 var absu_at_check = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( getprop("tu154/instrumentation/pn-6/mode") > 2.0 )
 	{
 	var state = !arg[0];
@@ -759,12 +796,14 @@ if( getprop("tu154/instrumentation/pn-6/mode") > 2.0 )
 
 #Switch AT mode on button "C"
 var absu_at_toggle = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 	if( getprop("tu154/instrumentation/pn-6/stab" ) ) absu_at_stop();
 	else absu_at_start();
 }
 
 # Start stabilize speed
 var absu_at_start = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 if( getprop("tu154/instrumentation/pn-6/mode") < 2.0 ) return;
 if( absu_at_check_thr() ) return; # 2 or 3 engines are offline now
 # Set AT to stab mode
@@ -809,6 +848,7 @@ setprop("tu154/systems/electrical/indicators/autothrottle", 0.0 );
 }
 
 var absu_at_check_thr = func{
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
 # Check off-line engines
 var eng_1 = getprop( "tu154/instrumentation/pn-6/g1" );
 if( eng_1 == nil ) eng_1 = 0;
@@ -879,6 +919,7 @@ print("ABSU started, default autopilot disabled");
 
 # Smoothing AT output
 var autothrottle_smooth = maketimer(0.01, func(){
+	nascallabsu.setValue(nascallabsu.getValue() + 1);
       x1 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[0]");
       x2 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[1]");
       x3 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[2]");

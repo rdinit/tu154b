@@ -12,6 +12,8 @@
 # Custom views 
 #
 
+var nascallview = props.globals.initNode("/debug/nascalls/view", 0, "INT");
+
 var modview_active = 0;
 
 
@@ -24,6 +26,7 @@ var modview_active = 0;
 # Handler.  Step to the next (force=1) or next enabled view.
 #
 var stepView = func(step, force = 0) {
+	nascallview.setValue(nascallview.getValue() + 1);
     if( modview_active ) return;	# Deny view modification if ~ pressed (sub view active)
     step = step > 0 ? 1 : -1;
     var n = index;
@@ -47,6 +50,7 @@ var stepView = func(step, force = 0) {
 
 
 var forceView = func{
+	nascallview.setValue(nascallview.getValue() + 1);
 	if( modview_active ) return;	# Deny view modification if ~ pressed (sub view active)
 	var n = arg[0];
 	# Hide levers on navigator view
@@ -63,6 +67,7 @@ var forceView = func{
 };
 
 var modView  = func{
+	nascallview.setValue(nascallview.getValue() + 1);
 	var n = getprop("sim/current-view/view-number");
 	var offset = getprop("tu154/mod-views/view-offset");
 	if( n == nil ) n = 0;
@@ -130,6 +135,7 @@ var modView  = func{
 
 var fe_view = {
 	start: func {
+		nascallview.setValue(nascallview.getValue() + 1);
 		setprop("sim/current-view/config/heading-offset-deg",
 			getprop("sim/view[104]/config/heading-offset-deg"));
 		},
@@ -137,6 +143,7 @@ var fe_view = {
 
 
 var init_offset = func{
+	nascallview.setValue(nascallview.getValue() + 1);
 setprop("/tu154/mod-views/nav-view", 0);
 setprop("/tu154/mod-views/copilot-view", 0);
 # Do we have Model View?
@@ -154,6 +161,7 @@ view.manager.register("Flight Engineer View", fe_view );});
 # Added by Yurik jun 2013
 # Load exterior at startup to avoid stale sim at first external view selection.
 var load_exterior = func{
+	nascallview.setValue(nascallview.getValue() + 1);
 print("Load exterior, wait...");
 # return to cabin to next cycle
 settimer( load_interior, 0 );
@@ -161,6 +169,7 @@ setprop("/sim/current-view/view-number", 1);
 }
 
 var load_interior = func{
+	nascallview.setValue(nascallview.getValue() + 1);
 setprop("/sim/current-view/view-number", 0);
 print("Done!");
 # Enable sim sound - it was disabled in instruments.nas while startup for avoid stupid effects sound.
@@ -173,6 +182,7 @@ print("View registered");
 
 
 var resetView = func{
+	nascallview.setValue(nascallview.getValue() + 1);
 	var current = sprintf("%d", getprop("/sim/current-view/view-number-raw"));
 	setprop("/sim/current-view/heading-offset-deg", getprop("sim/view["~current~"]/config/heading-offset-deg"));
 	setprop("/sim/current-view/pitch-offset-deg", getprop("sim/view["~current~"]/config/pitch-offset-deg"));
@@ -186,6 +196,7 @@ var resetView = func{
 
 # Redefining view parameters
 view_checker = func{
+	nascallview.setValue(nascallview.getValue() + 1);
       internal = getprop("/sim/current-view/internal");
       vnr = getprop("/sim/current-view/view-number-raw");
       wind_l = getprop("/tu154/door/window-left");
