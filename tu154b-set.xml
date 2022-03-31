@@ -1124,13 +1124,13 @@
     <file>Aircraft/tu154b/Nasal/model-3d.nas</file>
   </model-3d>
 
-  <replay-fix>
+  <!--<replay-fix>
     <file>Aircraft/tu154b/Nasal/replay-fix.nas</file>
-  </replay-fix>
+  </replay-fix>-->
 
-  <air-conditioning>
+  <!--<air-conditioning>
     <file>Aircraft/tu154b/Nasal/air-conditioning.nas</file>
-  </air-conditioning>
+  </air-conditioning>-->
 
 </nasal>
 

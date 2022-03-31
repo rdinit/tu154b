@@ -31,8 +31,13 @@ setlistener("gear/gear/position-norm", windows_constraints);
 
 
 ############################## Rain glass effect implementation ####################################
+var airspeed_node = props.globals.getNode("/velocities/airspeed-kt");
+var splash_x_node = props.globals.getNode("/environment/aircraft-effects/splash-vector-x");
+var splash_y_node = props.globals.getNode("/environment/aircraft-effects/splash-vector-y");
+var splash_z_node = props.globals.getNode("/environment/aircraft-effects/splash-vector-z");
+
 var splash_vec_loop = func(){
- var airspeed = getprop("/velocities/airspeed-kt");
+ var airspeed = airspeed_node.getValue();
 
  if ( airspeed > 300 ) { airspeed = 300; }
 
@@ -43,39 +48,42 @@ var splash_vec_loop = func(){
  var splash_y = 0.0;
  var splash_z = -1;
 
- setprop("/environment/aircraft-effects/splash-vector-x", splash_x);
- setprop("/environment/aircraft-effects/splash-vector-y", splash_y);
- setprop("/environment/aircraft-effects/splash-vector-z", splash_z);
-
- settimer(func(){ splash_vec_loop(); }, 0.01);
+ splash_x_node.setValue(splash_x);
+ splash_y_node.setValue(splash_y);
+ splash_z_node.setValue(splash_z);
 }
-splash_vec_loop();
+
+var timer_splash_vec_loop = maketimer(0.05, splash_vec_loop);
+timer_splash_vec_loop.simulatedTime = 1;
+timer_splash_vec_loop.start();
 
 
 #################################### Reversers animation ############################################
+var eng1_n1_node = props.globals.getNode("/engines/engine/n1");
+var eng3_n1_node = props.globals.getNode("/engines/engine[2]/n1");
+var eng1_n1 = 0.0;
+var eng3_n1 = 0.0;
+var reverser1_node = props.globals.getNode("fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad");
+var reverser3_node = props.globals.getNode("fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad");
+var flap1_node = props.globals.getNode("/sim/model/rev-flaps/rev-flaps1");
+var flap3_node = props.globals.getNode("/sim/model/rev-flaps/rev-flaps3");
+var offset_node = props.globals.getNode("/sim/model/rev-flaps/rev-flaps-offset");
+
 reversers = func{
-      eng1_n1 = getprop("/engines/engine/n1");
-      eng3_n1 = getprop("/engines/engine[2]/n1");
-      reverser1 = getprop("fdm/jsbsim/propulsion/engine[0]/reverser-angle-rad");
-      reverser3 = getprop("fdm/jsbsim/propulsion/engine[2]/reverser-angle-rad");
-      offset = getprop ("/sim/model/rev-flaps/rev-flaps-offset");
-      if( eng1_n1 == nil ) { return; }
-      if( eng3_n1 == nil ) { return; }
-      if( reverser1 == nil ) { retiurn; }
-      if( reverser3 == nil ) { retiurn; }
-      if( offset == nil ) { retiurn; }
+      if( eng1_n1_node.getValue() == nil ) { return; }
+      if( eng3_n1_node.getValue() == nil ) { return; }
+      if( reverser1_node.getValue() == nil ) { return; }
+      if( reverser3_node.getValue() == nil ) { return; }
+      if( offset_node.getValue() == nil ) { return; }
+
+      eng1_n1 = eng1_n1_node.getValue();
+      eng3_n1 = eng3_n1_node.getValue();
 
       if ( eng1_n1 > 30 ) { eng1_n1 = 30; }
       if ( eng3_n1 > 30 ) { eng3_n1 = 30; }
 
-      rev1 = reverser1 / 2.35 * eng1_n1 / 30 * 1.51;
-      rev3 = reverser3 / 2.35 * eng3_n1 / 30 * 1.51;
-
-      rev1 = rev1 + offset;
-      rev3 = rev3 + offset;
-
-      setprop("/sim/model/rev-flaps/rev-flaps1", rev1);
-      setprop("/sim/model/rev-flaps/rev-flaps3", rev3);
+      flap1_node.setValue(reverser1_node.getValue() / 2.35 * eng1_n1 / 30 * 1.51 + offset_node.getValue());
+      flap3_node.setValue(reverser3_node.getValue() / 2.35 * eng3_n1 / 30 * 1.51 + offset_node.getValue());
 }
 setlistener("/engines/engine/n1", reversers);
 setlistener("/engines/engine[2]/n1", reversers);
@@ -163,7 +171,7 @@ var shakext = props.globals.initNode("/systems/shake/shakingext", 0, "DOUBLE");
 var sf = 0;
 
 var theShakeEffect = func {
-      if (getprop("/systems/shake/effect") == 1) {
+      if (shakeEffect.getBoolValue()) {
             n = 100000;
             max = 80;
             ext = 2.5;
@@ -208,63 +216,90 @@ setlistener("/systems/shake/effect", func {
 
 
 ################################################# Wingflex #################################################
+var replay_time = props.globals.getNode("/sim/replay/time", 1);
+var norm_accel = props.globals.getNode("/accelerations/n-z-cg-fps_sec", 1);
+var par_K = props.globals.getNode("/sim/systems/wingflexer/params/K", 1);
+var par_D = props.globals.getNode("/sim/systems/wingflexer/params/D", 1);
+var m_wing_dry_kg = props.globals.getNode("/sim/systems/wingflexer/params/m-wing-dry-kg", 1);
+var lift_node_lbs = props.globals.getNode("/sim/systems/wingflexer/params/lift-node-lbs", 1);
+var grav_accel_mps2 = props.globals.getNode("environment/gravitational-acceleration-mps2", 1);
+var fuel_frac = props.globals.getNode("/sim/systems/wingflexer/params/fuel-frac", 1);
+var fuel_node_1_kg = props.globals.getNode("/sim/systems/wingflexer/params/fuel-node-1-kg", 1);
+var fuel_node_2_kg = props.globals.getNode("/sim/systems/wingflexer/params/fuel-node-2-kg", 1);
+var fuel_node_3_kg = props.globals.getNode("/sim/systems/wingflexer/params/fuel-node-3-kg", 1);
+var fuel_node_4_kg = props.globals.getNode("/sim/systems/wingflexer/params/fuel-node-4-kg", 1);
+var z_fac = props.globals.getNode("/sim/systems/wingflexer/params/z-fac");
+var z_m = props.globals.getNode("/sim/systems/wingflexer/z-m");
+
 var z1 = getprop("/sim/systems/wingflexer/z-m");
 var z2 = getprop("/sim/systems/wingflexer/z-m");
 var dt = 0.025;
+var accel = 0.0;
+var k = 0.0;
+var d = 0.0;
+var f_lift_N = 0.0;
+var z_ofs_m = 0.0;
+var m_wing_kg = 0.0;
 
 var wngflx = func {
 
-    if (getprop("/sim/replay/time") == 0) {
-    # fuselage z (up) acceleration in m/s^2 we get -g in unaccelerated flight, and large negative numbers on touchdown
+    if (replay_time.getValue() == 0) {
+          # fuselage z (up) acceleration in m/s^2 we get -g in unaccelerated flight, and large negative numbers on touchdown
 
-    #setprop("/sim/systems/wingflexer/a-fuselage-mps2", getprop("/accelerations/pilot/z-accel-fps_sec") * 0.3048);            #
-    setprop("/sim/systems/wingflexer/a-fuselage-mps2", getprop("/accelerations/n-z-cg-fps_sec") * 9.8176);            #
-
-
-    # compute k and d
-
-    setprop("/sim/systems/wingflexer/k", getprop("/sim/systems/wingflexer/params/K") * getprop("/sim/systems/wingflexer/params/m-wing-dry-kg"));
-
-    setprop("/sim/systems/wingflexer/d", getprop("/sim/systems/wingflexer/params/D") * getprop("/sim/systems/wingflexer/params/m-wing-dry-kg"));
+          #setprop("/sim/systems/wingflexer/a-fuselage-mps2", getprop("/accelerations/n-z-cg-fps_sec") * 9.8176);            #
+          accel = norm_accel.getValue() * 9.8176;
 
 
-    # lift force. Convert to N and use 1/2 (one wing only)
+          # compute k and d
 
-    setprop("/sim/systems/wingflexer/f-lift-N", getprop("/sim/systems/wingflexer/params/lift-node-lbs") * getprop("environment/gravitational-acceleration-mps2") * 0.226796);                   #
+          #setprop("/sim/systems/wingflexer/k", getprop("/sim/systems/wingflexer/params/K") * getprop("/sim/systems/wingflexer/params/m-wing-dry-kg"));
+          k = par_K.getValue() * m_wing_dry_kg.getValue();
 
-
-    # z_ofs = g * mass_dry_kg / k
-
-    setprop("/sim/systems/wingflexer/z-ofs-m", (getprop("/sim/systems/wingflexer/params/m-wing-dry-kg") * getprop("environment/gravitational-acceleration-mps2")) / getprop("/sim/systems/wingflexer/k"));
-
-
-    # compute total mass of one wing, using the average fuel mass in all wing tanks. The weighting factor should be lumped into fuel_frac. mass = mass_dry_kg + fuel_frac * sum_i (fuel_node_i_kg)
-
-    setprop("/sim/systems/wingflexer/m-wing-kg", getprop("/sim/systems/wingflexer/params/m-wing-dry-kg") + (getprop("/sim/systems/wingflexer/params/fuel-frac") * (getprop("/sim/systems/wingflexer/params/fuel-node-1-kg") + getprop("/sim/systems/wingflexer/params/fuel-node-2-kg") + getprop("/sim/systems/wingflexer/params/fuel-node-3-kg") + getprop("/sim/systems/wingflexer/params/fuel-node-4-kg"))));
+          #setprop("/sim/systems/wingflexer/d", getprop("/sim/systems/wingflexer/params/D") * getprop("/sim/systems/wingflexer/params/m-wing-dry-kg"));
+          d = par_D.getValue() * m_wing_dry_kg.getValue();
 
 
-    # integrate discretised equation of motion
-    # reverse sign of F_l because z in JSBsim body coordinate system points down
-    # z = (2 * z1 - z2 + dt * ((d * z1 + dt * (-F_lift - k * z1)) / m_wing + dt * accel)) / (1 + d * dt / m_wing)
+          # lift force. Convert to N and use 1/2 (one wing only)
 
-    z = (2 * z1 - z2 + dt * ((getprop("/sim/systems/wingflexer/d") * z1 + dt * (-getprop("/sim/systems/wingflexer/f-lift-N") - getprop("/sim/systems/wingflexer/k") * z1)) / getprop("/sim/systems/wingflexer/m-wing-kg") + dt * getprop("/sim/systems/wingflexer/a-fuselage-mps2"))) / (1 + getprop("/sim/systems/wingflexer/d") * dt / getprop("/sim/systems/wingflexer/m-wing-kg"));
+          #setprop("/sim/systems/wingflexer/f-lift-N", getprop("/sim/systems/wingflexer/params/lift-node-lbs") * getprop("environment/gravitational-acceleration-mps2") * 0.226796);                   #
+          f_lift_N = lift_node_lbs.getValue() * grav_accel_mps2.getValue() * 0.226796;
 
-    z2 = z1;
-    z1 = z;
 
-    z = z * getprop("/sim/systems/wingflexer/params/z-fac");
-    z = z + 0.7585 / 20 * getprop("/sim/systems/wingflexer/params/z-fac");
-    if (math.abs(z) > 1) {
-        if (z >= 0) { z = math.sqrt(z - 0.555) * 1.5; }
-        else { z = -math.sqrt(math.abs(z) - 0.555) * 1.5; }
+          # z_ofs = g * mass_dry_kg / k
+
+          #setprop("/sim/systems/wingflexer/z-ofs-m", (getprop("/sim/systems/wingflexer/params/m-wing-dry-kg") * getprop("environment/gravitational-acceleration-mps2")) / getprop("/sim/systems/wingflexer/k"));
+          z_ofs_m = m_wing_dry_kg.getValue() * grav_accel_mps2.getValue() / k;
+
+
+          # compute total mass of one wing, using the average fuel mass in all wing tanks. The weighting factor should be lumped into fuel_frac. mass = mass_dry_kg + fuel_frac * sum_i (fuel_node_i_kg)
+
+          #setprop("/sim/systems/wingflexer/m-wing-kg", getprop("/sim/systems/wingflexer/params/m-wing-dry-kg") + (getprop("/sim/systems/wingflexer/params/fuel-frac") * (getprop("/sim/systems/wingflexer/params/fuel-node-1-kg") + getprop("/sim/systems/wingflexer/params/fuel-node-2-kg") + getprop("/sim/systems/wingflexer/params/fuel-node-3-kg") + getprop("/sim/systems/wingflexer/params/fuel-node-4-kg"))));
+          m_wing_kg = m_wing_dry_kg.getValue() + fuel_frac.getValue() * (fuel_node_1_kg.getValue() + fuel_node_2_kg.getValue() + fuel_node_3_kg.getValue() + fuel_node_4_kg.getValue());
+
+
+          # integrate discretised equation of motion
+          # reverse sign of F_l because z in JSBsim body coordinate system points down
+          # z = (2 * z1 - z2 + dt * ((d * z1 + dt * (-F_lift - k * z1)) / m_wing + dt * accel)) / (1 + d * dt / m_wing)
+
+          #z = (2 * z1 - z2 + dt * ((getprop("/sim/systems/wingflexer/d") * z1 + dt * (-getprop("/sim/systems/wingflexer/f-lift-N") - getprop("/sim/systems/wingflexer/k") * z1)) / getprop("/sim/systems/wingflexer/m-wing-kg") + dt * getprop("/sim/systems/wingflexer/a-fuselage-mps2"))) / (1 + getprop("/sim/systems/wingflexer/d") * dt / getprop("/sim/systems/wingflexer/m-wing-kg"));
+          z = (2 * z1 - z2 + dt * ((d * z1 + dt * (-f_lift_N - k * z1)) / m_wing_kg + dt * accel)) / (1 + d * dt / m_wing_kg);
+
+          z2 = z1;
+          z1 = z;
+
+          z = z * z_fac.getValue() + 0.7585 / 20 * z_fac.getValue();
+          if (math.abs(z) > 1) {
+              if (z >= 0) { z = math.sqrt(z - 0.555) * 1.5; }
+              else { z = -math.sqrt(math.abs(z) - 0.555) * 1.5; }
+          }
+
+          #setprop("/sim/systems/wingflexer/z-m", z);
+          z_m.setValue(z);
     }
-
-    setprop("/sim/systems/wingflexer/z-m", z);
-    }
-
-    settimer(wngflx, dt);
 }
-settimer(wngflx, 0);
+var timer_wngflx = maketimer(dt, wngflx);
+timer_wngflx.simulatedTime = 1;
+timer_wngflx.start();
 
 
 ################################################# Gear pitch #################################################

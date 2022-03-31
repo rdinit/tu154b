@@ -93,7 +93,7 @@ var showNav = func() {
     if ( el_l > 0 or el_r > 0) {
     if ( page == 24 ) { 
     setprop("sim/model/nav-display/show", 1);
-    setprop("systems/electrical/outputs/efis", 1);
+    #setprop("systems/electrical/outputs/efis", 1);
     }
     else { setprop("sim/model/nav-display/show", 0); }
     }
