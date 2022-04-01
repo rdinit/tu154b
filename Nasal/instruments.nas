@@ -946,8 +946,7 @@ var nvu_distance_adjust = func(sign) {
     var prop = "fdm/jsbsim/instrumentation/nvu/"~name;
     var v = getprop(prop);
     if (sign) {
-        var speed = (getprop("tu154/instrumentation/v-51/adjust-speed")
-                     / getprop("tu154/instrumentation/v-51/scale"));
+        var speed = (getprop("tu154/instrumentation/v-51/adjust-speed") / getprop("tu154/instrumentation/v-51/scale"));
         interpolate(prop, v + sign * speed * 610, 610);
     } else {
         interpolate(prop, v, 0);
