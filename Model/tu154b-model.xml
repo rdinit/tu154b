@@ -4411,7 +4411,7 @@
     </less-than>
   </condition>
   <action>
-    <button>4</button>
+    <button>3</button>
     <!--  scroll down -->
     <repeatable>false</repeatable>   
     <binding>
@@ -4437,7 +4437,7 @@
     </greater-than>
   </condition>
   <action>
-    <button>3</button>
+    <button>4</button>
     <!--  scroll up -->
     <repeatable>false</repeatable>
     <binding>
