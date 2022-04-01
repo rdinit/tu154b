@@ -44,7 +44,7 @@ var nd_display = {};
 ###
 # entry point, this will set up all ND instances
 
-var _list = setlistener("systems/electrical/outputs/efis", func() {
+var ND_init = func() {
 
 
     # get a handle to the NavDisplay in canvas namespace (for now), see $FG_ROOT/Nasal/canvas/map/navdisplay.mfd
@@ -71,9 +71,7 @@ var _list = setlistener("systems/electrical/outputs/efis", func() {
     var group = nd_display.cpt.createGroup();
     NDCpt.newMFD(group, nd_display.cpt);
     NDCpt.update();
-
-    removelistener(_list); # run ONCE
-}); # fdm-initialized listener callback
+} # fdm-initialized listener callback
 
 
 #var showNd = func(pilot='cpt') {
@@ -103,3 +101,5 @@ var showNav = func() {
 setlistener("tu154/instrumentation/mapcase/page", showNav);
 setlistener("/tu154/systems/electrical/buses/DC27-bus-L/volts", showNav);
 setlistener("/tu154/systems/electrical/buses/DC27-bus-R/volts", showNav);
+
+settimer(ND_init, 5);
