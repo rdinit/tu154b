@@ -1,22 +1,37 @@
+var save_state = props.globals.getNode("sim/model/replay-fix/save_state", 1);
+var time_node = props.globals.getNode("/sim/replay/time", 1);
 var time = getprop("/sim/replay/time");
 time = 0; 
 var alt = getprop("/position/altitude-ft");
+var alt_node = props.globals.getNode("/position/altitude-ft", 1);
 var lat = getprop("/position/latitude-deg");
+var lat_node = props.globals.getNode("/position/latitude-deg", 1);
 var lon = getprop("/position/longitude-deg");
+var lon_node = props.globals.getNode("/position/longitude-deg", 1);
 var vdown = getprop("/velocities/speed-down-fps");
+var vdown_node = props.globals.getNode("/velocities/speed-down-fps", 1);
 var veast = getprop("/velocities/speed-east-fps");
+var veast_node = props.globals.getNode("/velocities/speed-east-fps", 1);
 var vnorth = getprop("/velocities/speed-north-fps");
+var vnorth_node = props.globals.getNode("/velocities/speed-north-fps", 1);
 var hdg = getprop("/orientation/heading-deg");
+var hdg_node = props.globals.getNode("/orientation/heading-deg", 1);
 var pitch = getprop("/orientation/pitch-deg");
+var pitch_node = props.globals.getNode("/orientation/pitch-deg", 1);
 var roll = getprop("/orientation/roll-deg");
+var roll_node = props.globals.getNode("/orientation/roll-deg", 1);
 var yr = getprop("/orientation/yaw-rate-degps");
+var yr_node = props.globals.getNode("/orientation/yaw-rate-degps", 1);
 var pr = getprop("/orientation/pitch-rate-degps");
+var pr_node = props.globals.getNode("/orientation/pitch-rate-degps", 1);
 var rr = getprop("/orientation/roll-rate-degps");
+var rr_node = props.globals.getNode("/orientation/roll-rate-degps", 1);
 var flag = 0;
 
 replay_fix = func{
 
-      if( getprop("/sim/replay/time") == 0 and time != 0 and getprop("sim/model/replay-fix/save_state") == 1 ) {
+      if( time_node.getValue() == 0 and time != 0 and save_state.getValue() == 1 ) {
+            timer_replay_fix.stop();
             flag = 1;
             setprop("/position/altitude-ft", alt + 5);
             setprop("/position/latitude-deg", lat);
@@ -95,23 +110,26 @@ replay_fix = func{
             setprop("orientation/pitch-rate-degps", pr);
             setprop("orientation/roll-rate-degps", rr);
             flag = 0;
+            timer_replay_fix.start();
             }, 1.0);
       }
-      if( getprop("/sim/replay/time") == 0 and time == 0 and flag == 0 ) {
-            alt = getprop("/position/altitude-ft");
-            lat = getprop("/position/latitude-deg");
-            lon = getprop("/position/longitude-deg");
-            vdown = getprop("/velocities/speed-down-fps");
-            veast = getprop("/velocities/speed-east-fps");
-            vnorth = getprop("/velocities/speed-north-fps");
-            hdg = getprop("/orientation/heading-deg");
-            pitch = getprop("/orientation/pitch-deg");
-            roll = getprop("/orientation/roll-deg");
-            yr = getprop("/orientation/yaw-rate-degps");
-            pr = getprop("/orientation/pitch-rate-degps");
-            rr = getprop("/orientation/roll-rate-degps");
+      if( time_node.getValue() == 0 and time == 0 and flag == 0 ) {
+            alt = alt_node.getValue();
+            lat = lat_node.getValue();
+            lon = lon_node.getValue();
+            vdown = vdown_node.getValue();
+            veast = veast_node.getValue();
+            vnorth = vnorth_node.getValue();
+            hdg = hdg_node.getValue();
+            pitch = pitch_node.getValue();
+            roll = roll_node.getValue();
+            yr = yr_node.getValue();
+            pr = pr_node.getValue();
+            rr = rr_node.getValue();
       }
 
-      time = getprop("/sim/replay/time");
-      settimer(replay_fix, 0.001);
-} replay_fix();
+      time = time_node.getValue();
+}
+
+var timer_replay_fix = maketimer(0.1, replay_fix);
+timer_replay_fix.start();
