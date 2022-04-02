@@ -204,7 +204,6 @@ view_checker = func{
             setprop("/sim/sound/internal", 0);
             setprop("/sim/sound/external", 1);
       }
-      #settimer( view_checker, 0.1 );
 
       if( vnr == 105 or vnr == 106 or vnr == 107 or vnr == 108 ) {
             setprop("/sim/sound/pax", 1);

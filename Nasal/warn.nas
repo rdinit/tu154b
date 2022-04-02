@@ -249,7 +249,6 @@ else {
 }
 
 var horn_handler = func{
-settimer( horn_handler, UPDATE_PERIOD );
 var pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
 if( pwr == nil ) return;
 if(  pwr < 13.0 )
@@ -295,9 +294,9 @@ else
 	setprop("tu154/systems/warning/horn/const", 0 );
 
 }
+var timer_horn_handler = maketimer( UPDATE_PERIOD, horn_handler );
 
 var audio_handler = func{
-settimer( audio_handler, UPDATE_PERIOD );
 var pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
 if( pwr == nil ) return;
 if(  pwr < 13.0 )
@@ -334,10 +333,10 @@ if( alarm_pulse_src > 0.0 ) alarm.switch(1);
 else alarm.switch(0);
 
 }
+var timer_audio_handler = maketimer( UPDATE_PERIOD, audio_handler );
 
 var RV_OFFSET = 4;
 var voice_handler = func{
-settimer( voice_handler, 0.0 ); # no need delay for voise
 
 if (getprop("tu154/instrumentation/rv-5m[0]/blank") and
     getprop("tu154/instrumentation/rv-5m[1]/blank"))
@@ -421,6 +420,7 @@ if( alt < (250.0 + RV_OFFSET) )
 		setprop( "tu154/systems/warning/voice/altitude", 250.0 );
 
 }
+var timer_voice_handler = maketimer( 0.0, voice_handler ); # no need delay for voise
 
 var check_lamps_capt = func{
 	var pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
@@ -505,7 +505,6 @@ var check_lamps_capt = func{
 }
 
 var indicator_handler = func{
-settimer( indicator_handler, UPDATE_PERIOD );
 var pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
 if( pwr == nil ) return;
 if(  pwr < 13.0 )
@@ -1011,6 +1010,7 @@ else strobe_control(0);
 
 
 }
+var timer_indicator_handler = maketimer( UPDATE_PERIOD, indicator_handler );
 # END indicator handler
 
 #elev_trim_watchdog = func{
@@ -1112,10 +1112,10 @@ setlistener( "fdm/jsbsim/fcs/stabilizer-pos-rad", stab_watchdog, 1, 0 );
 #setlistener( "instrumentation/marker-beacon[0]/inner", beacon_inner_watchdog, 1, 0 );
 #setlistener( "instrumentation/marker-beacon[0]/middle", beacon_middle_watchdog, 1, 0 );
 #setlistener( "instrumentation/marker-beacon[0]/outer", beacon_middle_watchdog, 1, 0 );
-horn_handler();
-audio_handler();
-indicator_handler();
-voice_handler();
+timer_horn_handler.start();
+timer_audio_handler.start();
+timer_indicator_handler.start();
+timer_voice_handler.start();
 
 
 print("Warning subsystem started");

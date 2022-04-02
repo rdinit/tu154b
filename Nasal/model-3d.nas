@@ -169,43 +169,62 @@ var shakeEffect = props.globals.initNode("/systems/shake/effect", 0, "BOOL");
 var shake = props.globals.initNode("/systems/shake/shaking", 0, "DOUBLE");
 var shakext = props.globals.initNode("/systems/shake/shakingext", 0, "DOUBLE");
 var sf = 0;
+var n_shake = 100000;
+var max_shake = 80;
+var ext_shake = 2.5;
+
+var timer_shake_0_2 = maketimer(0.2, func() {
+      shake.setValue(0);
+      shakext.setValue(0);
+      shakeEffect.setBoolValue(0);
+      });
+timer_shake_0_2.singleShot = 1;
+timer_shake_0_2.simulatedTime = 1;
+
+var timer_shake_1_2 = maketimer(0.2, func() {
+      setprop("/systems/shake/shakingext", 0);
+      });
+timer_shake_1_2.singleShot = 1;
+timer_shake_1_2.simulatedTime = 1;
+
+var timer_shake_1_1 = maketimer(0.06, func() {
+      interpolate("/systems/shake/shaking", -sf * 2, 0.03); 
+      if (getprop("/sim/sound/pax") == 1) {
+            interpolate("/systems/shake/shakingext", -sf * 2 * ext_shake, 0.03);
+      } else {
+            timer_shake_1_2.start();
+      }
+      });
+timer_shake_1_1.singleShot = 1;
+timer_shake_1_1.simulatedTime = 1;
+
+var timer_shake_2_2 = maketimer(0.2, func() {
+      setprop("/systems/shake/shakingext", 0);
+      });
+timer_shake_2_2.singleShot = 1;
+timer_shake_2_2.simulatedTime = 1;
+
+var timer_shake_2_1 = maketimer(0.12, func() {
+      interpolate("/systems/shake/shaking", sf, 0.03);
+      if (getprop("/sim/sound/pax") == 1) {
+            interpolate("/systems/shake/shakingext", sf * ext_shake, 0.03);
+      } else {
+            timer_shake_2_2.start();
+      }
+      });
+timer_shake_2_1.singleShot = 1;
+timer_shake_2_1.simulatedTime = 1;
 
 var theShakeEffect = func {
       if (shakeEffect.getBoolValue()) {
-            n = 100000;
-            max = 80;
-            ext = 2.5;
-            sf = getprop("/velocities/groundspeed-kt") / n;
-            if (sf > max / n) { sf = max / n; }
+            sf = getprop("/velocities/groundspeed-kt") / n_shake;
+            if (sf > max_shake / n_shake) { sf = max_shake / n_shake; }
             interpolate("/systems/shake/shaking", sf, 0.03);
-            settimer(func {
-                  interpolate("/systems/shake/shaking", -sf * 2, 0.03); 
-                  if (getprop("/sim/sound/pax") == 1) {
-                        interpolate("/systems/shake/shakingext", -sf * 2 * ext, 0.03);
-                  } else {
-                        settimer(func {
-                              setprop("/systems/shake/shakingext", 0);
-                        }, 0.2);
-                  }
-            }, 0.06);
-            settimer(func {
-                  interpolate("/systems/shake/shaking", sf, 0.03);
-                  if (getprop("/sim/sound/pax") == 1) {
-                        interpolate("/systems/shake/shakingext", sf * ext, 0.03);
-                  } else {
-                        settimer(func {
-                              setprop("/systems/shake/shakingext", 0);
-                        }, 0.2);
-                  }
-            }, 0.12);
-            settimer(theShakeEffect, 0.09);     
+            timer_shake_1_1.start();
+            timer_shake_2_1.start();
+            timer_shake_0_1.start();    
       } else {
-#           shake.setValue(0);
-#           shakeEffect.setBoolValue(0);
-            settimer(func {
-                  setprop("/systems/shake/shaking", 0);
-                  setprop("/systems/shake/shakingext", 0);
-            }, 0.2);
+            timer_shake_0_2.start();
       }         
 }
 setlistener("/systems/shake/effect", func {
@@ -213,6 +232,10 @@ setlistener("/systems/shake/effect", func {
             theShakeEffect();
       }
 }, 0, 0);
+
+var timer_shake_0_1 = maketimer(0.09, theShakeEffect);
+timer_shake_0_1.singleShot = 1;
+timer_shake_0_1.simulatedTime = 1;
 
 
 ################################################# Wingflex #################################################
