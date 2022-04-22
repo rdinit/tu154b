@@ -109,9 +109,8 @@ update_buses_thandler = func{
     DC27_bus_Rv.update_load();
     DC27_bus_R.update_load();
 
-    settimer(update_buses_thandler, UPDATE_PERIOD );
-
 }
+var timer_update_buses_thandler = maketimer(UPDATE_PERIOD, update_buses_thandler);
 
 
 RPPO30_KP_1_handler = func {
@@ -531,8 +530,9 @@ init_electrical = func {
     setlistener("engines/engine[3]/rpm", GT40_APU_rpm_handler,0,0 );
 
 
-    settimer(update_buses_thandler, UPDATE_PERIOD );
-    settimer(update_electrical, 0);
+    timer_update_buses_thandler.start();
+    update_electrical();
+    timer_update_electrical.start();
 
 }
 
@@ -542,7 +542,6 @@ setlistener("/sim/signals/fdm-initialized", init_electrical);
 
 
 update_electrical = func {
-    settimer(update_electrical, UPDATE_PERIOD);
 instruments.update_electrical();
 # Added by Yurik
 # Electrical panel gauges and lamps support
@@ -697,6 +696,8 @@ if(  hd_input > 0.0 )
 
 }
 
+var timer_update_electrical = maketimer(UPDATE_PERIOD, update_electrical);
+
 
 
 
@@ -748,8 +749,8 @@ DCBusClass.update_output = func( name, load ) {
 }
 
 DCBusClass.update_load = func {
-    load = 0.0;
-    outputs =  me.outputs.getChildren();
+    var load = 0.0;
+    var outputs =  me.outputs.getChildren();
     if(outputs == nil) return;
     foreach( output; outputs ){
 	load += output.getNode("load").getValue();
@@ -758,7 +759,8 @@ DCBusClass.update_load = func {
 }
 
 DCBusClass.update_voltage = func {
-    volts = 0.0;
+    var volts = 0.0;
+    var ivolts = 0.0;
     foreach( input; me.inputs.getChildren() ){
 	ivolts = props.globals.getNode( input.getValue() ~ "volts" ).getValue();
 	volts = volts < ivolts ? ivolts : volts;
@@ -814,8 +816,8 @@ ACBusClass.update_output = func( name, load ) {
 }
 
 ACBusClass.update_load = func {
-    load = 0.0;
-    outputs = me.outputs.getChildren();
+    var load = 0.0;
+    var outputs = me.outputs.getChildren();
     if(outputs == nil) return;
     foreach( output;  outputs ){
 	load += output.getNode("load").getValue();
@@ -824,8 +826,10 @@ ACBusClass.update_load = func {
 }
 
 ACBusClass.update_voltage = func {
-    volts = 0.0;
-    freq = 0.0;
+    var volts = 0.0;
+    var freq = 0.0;
+    var ivolts = 0.0;
+    var ifreq = 0.0;
     foreach( input; me.inputs.getChildren() ){
 	ivolts = getprop( input.getValue() ~ "/volts" );
 	ifreq  = getprop( input.getValue() ~ "/frequency" );
