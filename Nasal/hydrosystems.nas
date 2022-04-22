@@ -11,7 +11,6 @@
 
 var UPDATE_PERIOD = 0.1;
 var hs_handler = func{
-settimer( hs_handler, UPDATE_PERIOD );
 
 # Freese aero surfaces & over hydro system consumers if hydrosystems are empty
 var param = getprop("fdm/jsbsim/hs/busters-serviceable");
@@ -60,6 +59,8 @@ if( param != 0 ) # if 0 - hydro power failure, surfaces are freese
 
 }
 
+var timer_hs_handler = maketimer( UPDATE_PERIOD, hs_handler );
 hs_handler();
+timer_hs_handler.start();
 
 print("Hydro systems started");
