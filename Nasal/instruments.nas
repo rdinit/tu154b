@@ -1188,8 +1188,9 @@ setlistener("fdm/jsbsim/fuel/sw-consumption",
 
 var engine_cutoff = func {
     var name = [ "e1", "e2", "e3" ];
+    var cutoff = nil;
     for (var i = 0; i < 3; i += 1) {
-        var cutoff = (!getprop("tu154/switches/cutoff-lever-"~(i + 1))
+        cutoff = (!getprop("tu154/switches/cutoff-lever-"~(i + 1))
                       or !getprop("fdm/jsbsim/fuel/has-fuel-"~name[i]));
         if (cutoff)
             setprop("controls/engines/engine["~i~"]/cutoff", cutoff);
@@ -1267,7 +1268,6 @@ if( getprop( "instrumentation/transponder/inputs/digit" ) != nil ) skawk_init();
 # BKK support
 
 bkk_handler = func{
-settimer( bkk_handler, 0.5 );
 var param = getprop("tu154/instrumentation/bkk/serviceable");
 if( param == nil ) return;
 if( param == 0 )
@@ -1432,7 +1432,10 @@ setprop("tu154/systems/electrical/indicators/mgvk-failure", 0);
 
 
 
+var timer_bkk_handler = maketimer(0.5, bkk_handler);
+timer_bkk_handler.simulatedTime = 1;
 bkk_handler();
+timer_bkk_handler.start();
 
 # BKK power support
 bkk_power = func{
@@ -1613,7 +1616,6 @@ setprop("/fdm/jsbsim/instrumentation/az-err", 0.0 );
 
 # Azimuth error handler
 var tks_az_handler = func{
-settimer(tks_az_handler, 60.0 );
 current_point = geo.aircraft_position();
 if( last_point.distance_to( current_point ) < 1000.0 ) return; # skip small distance
 
@@ -1627,7 +1629,9 @@ setprop("/fdm/jsbsim/instrumentation/az-err", az_err );
 last_point = current_point;
 }
 
-settimer(tks_az_handler, 60.0 );
+var timer_tks_az_handler = maketimer(60.0, tks_az_handler);
+timer_tks_az_handler.simulatedTime = 1;
+timer_tks_az_handler.start();
 
 
 # ************************* End TKS staff ***********************************
@@ -2076,7 +2080,6 @@ auasp_power = func{
 setlistener("tu154/switches/AUASP", auasp_power, 0,0 );
 
 uap_handler = func{
-settimer(uap_handler, 0.0);
 if( getprop("tu154/instrumentation/uap-12/powered") == 0.0 ) return;
 var n_norm = getprop("fdm/jsbsim/instrumentation/n-norm");
 var n_max = getprop("tu154/instrumentation/uap-12/accelerate-max");
@@ -2088,7 +2091,9 @@ if( n_norm >= n_max ) setprop("tu154/instrumentation/uap-12/accelerate-max", n_n
 if( n_norm <= n_min ) setprop("tu154/instrumentation/uap-12/accelerate-min", n_norm);
 }
 
+var timer_uap_handler = maketimer(0.0, uap_handler);
 uap_handler();
+timer_uap_handler.start();
 
 # EUP power support
 eup_power = func{
@@ -2304,7 +2309,6 @@ update_electrical();
 # Gear animation support
 # for animation only
 gear_handler = func{
-settimer(gear_handler, 0.0);
 var rot = getprop("orientation/pitch-deg");
 if( rot == nil ) return;
 var offset = getprop("tu154/gear/offset");
@@ -2326,7 +2330,9 @@ setprop("tu154/gear/compression-right-m", pressure*gain+offset );
 
 }
 
+var timer_gear_handler = maketimer(0.0, gear_handler);
 gear_handler();
+timer_gear_handler.start();
 
 # Set random gyro deviation
 setprop("instrumentation/heading-indicator[0]/offset-deg", 359.0 * rand() );
