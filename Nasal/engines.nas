@@ -86,7 +86,6 @@ var stop_apu = func{
 
 
 var eng_1_handler = func{
-settimer( eng_1_handler, ENGINE_UPDATE_PERIOD );
 
 if( getprop( "engines/engine[0]/egt-degf" ) == nil ) return;
 if( getprop( "controls/engines/engine[0]/cutoff" ) == nil ) return;
@@ -131,7 +130,6 @@ if( getprop( "controls/engines/engine[0]/cutoff" ) == 1 )
 }
 
 var eng_2_handler = func{
-settimer( eng_2_handler, ENGINE_UPDATE_PERIOD );
 if( getprop( "controls/engines/engine[1]/cutoff" ) == nil ) return;
 if( getprop( "engines/engine[1]/n2" ) == nil ) return;
 # EGT delivery to fdm property tree
@@ -164,7 +162,6 @@ if( getprop( "controls/engines/engine[1]/cutoff" ) == 1 )
 }
 
 var eng_3_handler = func{
-settimer( eng_3_handler, ENGINE_UPDATE_PERIOD );
 
 if( getprop( "controls/engines/engine[2]/cutoff" ) == nil ) return;
 if( getprop( "engines/engine[2]/n2" ) == nil ) return;
@@ -198,7 +195,6 @@ if( getprop( "controls/engines/engine[2]/cutoff" ) == 1 )
 }
 
 var apu_handler = func{
-settimer( apu_handler, ENGINE_UPDATE_PERIOD );
 var param = 0.0;
 if( getprop( "controls/engines/engine[3]/cutoff" ) == nil ) return;
 if( getprop( "engines/engine[3]/n2" ) == nil ) return;
@@ -297,9 +293,17 @@ var check_lamps_eng = func{
         setprop("tu154/systems/electrical/indicators/engine-3/vibration", param );
 }
 
+var timer_eng_1_handler = maketimer(ENGINE_UPDATE_PERIOD, eng_1_handler);
+var timer_eng_2_handler = maketimer(ENGINE_UPDATE_PERIOD, eng_2_handler);
+var timer_eng_3_handler = maketimer(ENGINE_UPDATE_PERIOD, eng_3_handler);
+var timer_apu_handler = maketimer(ENGINE_UPDATE_PERIOD, apu_handler);
 eng_1_handler();
 eng_2_handler();
 eng_3_handler();
 apu_handler();
+timer_eng_1_handler.start();
+timer_eng_2_handler.start();
+timer_eng_3_handler.start();
+timer_apu_handler.start();
 
 print("Engines support started");
