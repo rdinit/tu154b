@@ -22,11 +22,8 @@ var elevatorTrim = func {
     #controls.slewProp("/controls/flight/elevator-trim", arg[0] * TRIM_RATE);
     setprop("fdm/jsbsim/fcs/met-cmd", arg[0]);
     setprop("tu154/systems/warning/elevator-trim-pressed", 1.0 );
-    timer_elev_trim_stop.start();
+    settimer( elev_trim_stop, 0.2 );
 	}
-var timer_elev_trim_stop(0.2, elev_trim_stop);
-timer_elev_trim_stop.simulatedTime = 1;
-timer_elev_trim_stop.singleShot = 1;
 
 # we need clear trim variables when trim button is released
 var elev_trim_stop = func {
