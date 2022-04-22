@@ -27,13 +27,14 @@ var stepView = func(step, force = 0) {
     if( modview_active ) return;	# Deny view modification if ~ pressed (sub view active)
     step = step > 0 ? 1 : -1;
     var n = index;
+    var e = nil;
     for (var i = 0; i < size(views); i += 1) {
         n += step;
         if (n < 0)
             n = size(views) - 1;
         elsif (n >= size(views))
             n = 0;
-        var e = views[n].getNode("enabled");
+        e = views[n].getNode("enabled");
         if (force or (e == nil or e.getBoolValue()) and
             (views[n].getNode("name")!=nil))
             break;
