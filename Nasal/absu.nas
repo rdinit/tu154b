@@ -16,8 +16,6 @@ var absu_property_update = func {	# <-   handler begin here
 
 var param=0.0;
 
-settimer( absu_property_update, 0 );
-
 # pn-5 selected mode
 #var az1 = getprop("tu154/instrumentation/pn-5/az-1");
 #if( az1 == nil ) az1 = 0.0;
@@ -406,7 +404,7 @@ if( getprop("fdm/jsbsim/ap/pitch-selector" ) != 1.0 )
 	{
         clr_pitch_lamp();
         setprop("fdm/jsbsim/ap/pitch-selector",0);
-	settimer( set_pitch_stab, 0.1 );
+	timer_set_pitch_stab.start();
         setprop("fdm/jsbsim/ap/pitch-hold",1);
         if( getprop("tu154/switches/pu-46-tang" ) == 1.0 )
 		{
@@ -419,18 +417,24 @@ if( getprop("fdm/jsbsim/ap/pitch-selector" ) != 1.0 )
 var set_pitch_stab = func{
   setprop("fdm/jsbsim/ap/pitch-selector",1 );
 }
+var timer_set_pitch_stab = maketimer(0.1, set_pitch_stab);
+timer_set_pitch_stab.simulatedTime = 1;
+timer_set_pitch_stab.singleShot = 1;
 
 
 # Clear MET to neutral
 
 var absu_met_neutral = func{
   setprop("fdm/jsbsim/ap/met-neutral", 1 );
-  settimer( enable_met, 0.1 );
+  timer_enable_met.start();
 }
 
 var enable_met = func{
   setprop("fdm/jsbsim/ap/met-neutral", 0 );
 }
+var timer_enable_met = maketimer(0.1, enable_met);
+timer_enable_met.simulatedTime = 1;
+timer_enable_met.singleShot = 1;
 
 
 
@@ -606,7 +610,9 @@ setlistener("tu154/systems/absu/serviceable", absu_shutdown, 0, 0 );
 setlistener("tu154/systems/absu/serviceable", absu_alarm, 0, 0 );
 setlistener("tu154/systems/warning/alarm/absu_warn", absu_alarm_watchdog, 0, 0 );
 
+var timer_absu_property_update = maketimer(0.0, absu_property_update);
 absu_property_update();
+timer_absu_property_update.start();
 
 # ********************** Go around procedure ********************************
 
@@ -710,7 +716,7 @@ setlistener("tu154/instrumentation/pn-6/serviceable", func {
 # ABSU AT timer procedure
 var absu_at_sogl = func{
 if( getprop("tu154/instrumentation/pn-6/mode") == 0.0 ) return;
-settimer( absu_at_sogl, 0.3 );
+timer_absu_at_sogl.start();
 
 
 # control lamps
@@ -745,6 +751,9 @@ if( kias != nil ) setprop( "fdm/jsbsim/ap/input-at", kias*1.688 ); # from knots 
 
 
 }
+var timer_absu_at_sogl = maketimer(0.3, absu_at_sogl);
+timer_absu_at_sogl.simulatedTime = 1;
+timer_absu_at_sogl.singleShot = 1;
 
 var absu_at_check = func{
 if( getprop("tu154/instrumentation/pn-6/mode") > 2.0 )
