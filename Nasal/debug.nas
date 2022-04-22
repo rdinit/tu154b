@@ -9,7 +9,6 @@ util_win = screen.window.new( 0, 0, 1, 0 );
 util_win.fg = [0,1,1,1];
 
 show_param_update = func {
-settimer( show_param_update, 1 );
 
 var mass = getprop("fdm/jsbsim/inertia/mass-slugs");
 var cg = getprop("fdm/jsbsim/inertia/cg-x-in");
@@ -51,4 +50,6 @@ int(mass), cg, int(ias), alpha, cy, thrust, elev ));
 }
 
 print("Debug subsystem started");
+var timer_show_param_update = maketimer(1.0, show_param_update);
 show_param_update();
+timer_show_param_update.start();
