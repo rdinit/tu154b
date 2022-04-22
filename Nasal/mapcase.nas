@@ -61,12 +61,14 @@ var init = func {
     mapcase.setColorBackground(0.82, 0.82, 0.82, 1);
 
     var root = mapcase.createGroup();
+    var path = nil;
+    var g = nil;
     foreach (var name; filenames) {
         if (images[name] != nil)
             continue;
         print("Loading ", name);
-        var path = getprop("sim/aircraft-dir")~"/"~name;
-        var g = root.createChild("group", name);
+        path = getprop("sim/aircraft-dir")~"/"~name;
+        g = root.createChild("group", name);
         if (substr(name, -4) == ".svg")
             canvas.parsesvg(g, path);
         else
