@@ -5,10 +5,10 @@ var smoke1 = func() {
                 setprop("tu154/contrail/smoke1", 1 );
         } else {
                 setprop("tu154/contrail/smoke1", 0 );
+        }
 }
-        settimer(smoke1, 1);
-}
-_setlistener("/sim/signals/fdm-initialized", func { smoke1() });
+var timer_smoke1 = maketimer(1, smoke1);
+_setlistener("/sim/signals/fdm-initialized", func { timer_smoke1.start() });
 
 setprop("tu154/contrail/smoke2", 0 );
 setprop("engines/engine[1]/rpm", 0);
@@ -17,10 +17,10 @@ var smoke2 = func() {
                 setprop("tu154/contrail/smoke2", 1 );
         } else {
                 setprop("tu154/contrail/smoke2", 0 );
+        }
 }
-        settimer(smoke2, 1);
-}
-_setlistener("/sim/signals/fdm-initialized", func { smoke2() });
+var timer_smoke2 = maketimer(1, smoke2);
+_setlistener("/sim/signals/fdm-initialized", func { timer_smoke2.start() });
 
 setprop("tu154/contrail/smoke3", 0 );
 setprop("engines/engine[2]/rpm", 0);
@@ -29,10 +29,10 @@ var smoke3 = func() {
                 setprop("tu154/contrail/smoke3", 1 );
         } else {
                 setprop("tu154/contrail/smoke3", 0 );
+        }
 }
-        settimer(smoke3, 1);
-}
-_setlistener("/sim/signals/fdm-initialized", func { smoke3() });
+var timer_smoke3 = maketimer(1, smoke3);
+_setlistener("/sim/signals/fdm-initialized", func { timer_smoke3.start() });
 
 setprop("tu154/contrail/contrail1", 0 );
 setprop("engines/engine/rpm", 0);
@@ -41,10 +41,10 @@ var contrail1 = func() {
                 setprop("tu154/contrail/contrail1", 1 );
         } else {
                 setprop("tu154/contrail/contrail1", 0 );
+        }
 }
-        settimer(contrail1, 1);
-}
-_setlistener("/sim/signals/fdm-initialized", func { contrail1() });
+var timer_contrail1 = maketimer(1, contrail1);
+_setlistener("/sim/signals/fdm-initialized", func { timer_contrail1.start() });
 
 setprop("tu154/contrail/contrail2", 0 );
 setprop("engines/engine[1]/rpm", 0);
@@ -53,10 +53,10 @@ var contrail2 = func() {
                 setprop("tu154/contrail/contrail2", 1 );
         } else {
                 setprop("tu154/contrail/contrail2", 0 );
+        }
 }
-        settimer(contrail2, 1);
-}
-_setlistener("/sim/signals/fdm-initialized", func { contrail2() });
+var timer_contrail2 = maketimer(1, contrail2);
+_setlistener("/sim/signals/fdm-initialized", func { timer_contrail2.start() });
 
 setprop("tu154/contrail/contrail3", 0 );
 setprop("engines/engine[2]/rpm", 0);
@@ -65,10 +65,10 @@ var contrail3 = func() {
                 setprop("tu154/contrail/contrail3", 1 );
         } else {
                 setprop("tu154/contrail/contrail3", 0 );
+        }
 }
-        settimer(contrail3, 1);
-}
-_setlistener("/sim/signals/fdm-initialized", func { contrail3() });
+var timer_contrail3 = maketimer(1, contrail3);
+_setlistener("/sim/signals/fdm-initialized", func { timer_contrail3.start() });
 
 setprop("tu154/contrail/condensation", 0 );
 var condensation = func() {
@@ -76,10 +76,10 @@ var condensation = func() {
                 setprop("tu154/contrail/condensation", 1 );
         } else {
                 setprop("tu154/contrail/condensation", 0 );
+        }
 }
-        settimer(condensation, 1);
-}
-_setlistener("/sim/signals/fdm-initialized", func { condensation() });
+var timer_condensation = maketimer(1, condensation);
+_setlistener("/sim/signals/fdm-initialized", func { timer_condensation.start() });
 
 
 print ( "Contrail system started" );
