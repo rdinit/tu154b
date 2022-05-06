@@ -887,7 +887,7 @@ print("ABSU started, default autopilot disabled");
 
 
 # Smoothing AT output
-var autothrottle_smooth = maketimer(0.01, func(){
+var autothrottle_smooth = func(){
       x1 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[0]");
       x2 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[1]");
       x3 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[2]");
@@ -934,5 +934,7 @@ var autothrottle_smooth = maketimer(0.01, func(){
       setprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[0]", a1);
       setprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[1]", a2);
       setprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[2]", a3);
-});
-autothrottle_smooth.start();
+}
+var timer_autothrottle_smooth = maketimer(0.1, autothrottle_smooth);
+timer_autothrottle_smooth.simulatedTime = 1;
+timer_autothrottle_smooth.start();

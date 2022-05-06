@@ -22,13 +22,15 @@ var elevatorTrim = func {
     #controls.slewProp("/controls/flight/elevator-trim", arg[0] * TRIM_RATE);
     setprop("fdm/jsbsim/fcs/met-cmd", arg[0]);
     setprop("tu154/systems/warning/elevator-trim-pressed", 1.0 );
-    settimer( elev_trim_stop, 0.2 );
+    timer_elev_trim_stop.start();
 	}
 
 # we need clear trim variables when trim button is released
 var elev_trim_stop = func {
   setprop("fdm/jsbsim/fcs/met-cmd", 0.0);
 }
+var timer_elev_trim_stop = maketimer(0.2, elev_trim_stop);
+timer_elev_trim_stop.singleShot = 1;
 
 # It's func intend for support direct trim changing (from home\end keyboard and mouse wheel bindings)
 # Joysticks drivers use elevatorTrim()
@@ -143,7 +145,7 @@ var autostart_helper_1 = func{
 	}
 	else
 	{
-	settimer(autostart_helper_1, 0.5);
+	timer_autostart_helper_1.start();
 	return;
 	}
 	# wait until engines achieved idle rpm
@@ -151,7 +153,7 @@ var autostart_helper_1 = func{
 		getprop( "controls/engines/engine[0]/starter") or
 		getprop( "controls/engines/engine[0]/starter") )
 	{
-	settimer(autostart_helper_1, 0.5);
+	timer_autostart_helper_1.start();
 	return;
 	}
 	help.messenger("Continue autostart procedure...");
@@ -206,9 +208,11 @@ var autostart_helper_1 = func{
 	setprop("tu154/systems/mgv/two", 6.0 );
 	setprop("tu154/systems/mgv/contr", 6.0 );
 	# wait until gyroscopes will be aligned
-	settimer( autostart_helper_2, 5.0 );
+	timer_autostart_helper_2.start();
 	# To be continued...
 }
+var timer_autostart_helper_1 = maketimer(0.5, autostart_helper_1);
+timer_autostart_helper_1.singleShot = 1;
 
 # continue autostart procedure...
 var autostart_helper_2 = func{
@@ -283,3 +287,5 @@ var autostart_helper_2 = func{
 
 	help.messenger("Autostart done");
 }
+var timer_autostart_helper_2 = maketimer(5.0, autostart_helper_2);
+timer_autostart_helper_2.singleShot = 1;

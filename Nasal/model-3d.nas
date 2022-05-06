@@ -173,45 +173,50 @@ var n_shake = 100000;
 var max_shake = 80;
 var ext_shake = 2.5;
 
-var timer_shake_0_2 = maketimer(0.2, func() {
+var shake_0_2 = func {
       shake.setValue(0);
       shakext.setValue(0);
       shakeEffect.setBoolValue(0);
-      });
+}
+var timer_shake_0_2 = maketimer(0.2, shake_0_2);
 timer_shake_0_2.singleShot = 1;
 timer_shake_0_2.simulatedTime = 1;
 
-var timer_shake_1_2 = maketimer(0.2, func() {
+var shake_1_2 = func {
       setprop("/systems/shake/shakingext", 0);
-      });
+}
+var timer_shake_1_2 = maketimer(0.2, shake_1_2);
 timer_shake_1_2.singleShot = 1;
 timer_shake_1_2.simulatedTime = 1;
 
-var timer_shake_1_1 = maketimer(0.06, func() {
+var shake_1_1 = func {
       interpolate("/systems/shake/shaking", -sf * 2, 0.03); 
       if (getprop("/sim/sound/pax") == 1) {
             interpolate("/systems/shake/shakingext", -sf * 2 * ext_shake, 0.03);
       } else {
             timer_shake_1_2.start();
       }
-      });
+}
+var timer_shake_1_1 = maketimer(0.06, shake_1_1);
 timer_shake_1_1.singleShot = 1;
 timer_shake_1_1.simulatedTime = 1;
 
-var timer_shake_2_2 = maketimer(0.2, func() {
+var shake_2_2 = func {
       setprop("/systems/shake/shakingext", 0);
-      });
+}
+var timer_shake_2_2 = maketimer(0.2, shake_2_2);
 timer_shake_2_2.singleShot = 1;
 timer_shake_2_2.simulatedTime = 1;
 
-var timer_shake_2_1 = maketimer(0.12, func() {
+var shake_2_1 = func {
       interpolate("/systems/shake/shaking", sf, 0.03);
       if (getprop("/sim/sound/pax") == 1) {
             interpolate("/systems/shake/shakingext", sf * ext_shake, 0.03);
       } else {
             timer_shake_2_2.start();
       }
-      });
+}
+var timer_shake_2_1 = maketimer(0.12, shake_2_1);
 timer_shake_2_1.singleShot = 1;
 timer_shake_2_1.simulatedTime = 1;
 

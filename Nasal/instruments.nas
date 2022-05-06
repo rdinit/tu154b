@@ -461,13 +461,18 @@ rv_mode_update(1, 1);
 # IKU-1
 #
 
-var iku_vor_bearing = func(i) {
-    setprop("tu154/instrumentation/nav["~i~"]/bearing-deg",
-            getprop("instrumentation/nav["~i~"]/radials/reciprocal-radial-deg")
-            - getprop("fdm/jsbsim/instrumentation/bgmk-"~(i+1)));
+var iku_vor_bearing_0 = func {
+    setprop("tu154/instrumentation/nav[0]/bearing-deg",
+            getprop("instrumentation/nav[0]/radials/reciprocal-radial-deg")
+            - getprop("fdm/jsbsim/instrumentation/bgmk-1"));
 }
-var iku_vor_bearing_timer = [maketimer(0.1, func { iku_vor_bearing(0) }),
-                             maketimer(0.1, func { iku_vor_bearing(1) })];
+var iku_vor_bearing_1 = func {
+    setprop("tu154/instrumentation/nav[1]/bearing-deg",
+            getprop("instrumentation/nav[1]/radials/reciprocal-radial-deg")
+            - getprop("fdm/jsbsim/instrumentation/bgmk-2"));
+}
+var iku_vor_bearing_timer = [maketimer(0.1, iku_vor_bearing_0),
+                             maketimer(0.1, iku_vor_bearing_1)];
 
 var iku_mode_update = func(i, b) {
     var sel = getprop("tu154/instrumentation/iku-1["~i~"]/mode-"~b);
@@ -1029,7 +1034,7 @@ var nvu_lur_vicinity = func {
             nvu_next_leg();
     } else {
         setprop("tu154/systems/electrical/indicators/change-waypoint", 1);
-        settimer(nvu_lur_vicinity, 0);
+        timer_nvu_lur_vicinity.start();
     }
 }
 
@@ -1037,6 +1042,8 @@ setlistener("fdm/jsbsim/instrumentation/nvu/LUR-vicinity-out", func {
     if (getprop("fdm/jsbsim/instrumentation/nvu/LUR-vicinity-out"))
         nvu_lur_vicinity();
 }, 0, 0);
+var timer_nvu_lur_vicinity = maketimer(0.0, nvu_lur_vicinity);
+timer_nvu_lur_vicinity.singleShot = 1;
 
 
 ######################################################################
@@ -1101,15 +1108,18 @@ var nvu_wind_adjust = func(which, sign) {
 #
 
 var wiper_timer = {};
-var wiper_func = func(side) {
-    var switch = getprop("tu154/wipers/switch-"~side);
-    var pos = "tu154/wipers/pos-"~side;
-    var bus = (side == "left" ? "DC27-bus-L" : "DC27-bus-R");
-    var power = getprop("tu154/systems/electrical/buses/"~bus~"/volts");
-    if (power > 12) {
-       interpolate(pos, 1, 0);  # Stop any interpolation in progress.
-       setprop(pos, 1);  # The line above doesn't set the value.
-       interpolate(pos, 0, 1.74);
+var wiper_func_l = func(side) {
+    if (getprop("tu154/systems/electrical/buses/DC27-bus-L/volts") > 12) {
+       interpolate("tu154/wipers/pos-left", 1, 0);  # Stop any interpolation in progress.
+       setprop("tu154/wipers/pos-left", 1);  # The line above doesn't set the value.
+       interpolate("tu154/wipers/pos-left", 0, 1.74);
+    }
+}
+var wiper_func_r = func(side) {
+    if (getprop("tu154/systems/electrical/buses/DC27-bus-R/volts") > 12) {
+       interpolate("tu154/wipers/pos-right", 1, 0);  # Stop any interpolation in progress.
+       setprop("tu154/wipers/pos-right", 1);  # The line above doesn't set the value.
+       interpolate("tu154/wipers/pos-right", 0, 1.74);
     }
 }
 var wiper = func(side) {
@@ -1121,8 +1131,8 @@ var wiper = func(side) {
     } else
         wiper_timer[side].stop();
 }
-wiper_timer["left"] = maketimer(0, func { wiper_func("left"); });
-wiper_timer["right"] = maketimer(0, func { wiper_func("right"); });
+wiper_timer["left"] = maketimer(0, wiper_func_l);
+wiper_timer["right"] = maketimer(0, wiper_func_r);
 
 setlistener("tu154/wipers/switch-left", func { wiper("left"); }, 0, 0);
 setlistener("tu154/wipers/switch-right", func { wiper("right"); }, 0, 0);
@@ -1695,26 +1705,28 @@ if( arg[0] == 1 ) # co-pilot
 # initialize KURS-MP frequencies & headings
 var kursmp_init = func{
 var freq = getprop("instrumentation/nav[0]/frequencies/selected-mhz");
-if( freq == nil ) { settimer( kursmp_init, 1.0 ); return; } # try until success
+if( freq == nil ) { timer_kursmp_init.start(); return; } # try until success
 setprop("tu154/instrumentation/kurs-mp-1/digit-f-hi", int(freq) );
 setprop("tu154/instrumentation/kurs-mp-1/digit-f-low", (freq - int(freq) ) * 100 );
 var hdg = getprop("instrumentation/nav[0]/radials/selected-deg");
-if( hdg == nil ) { settimer( kursmp_init, 1.0 ); return; }
+if( hdg == nil ) { timer_kursmp_init.start(); return; }
 setprop("tu154/instrumentation/kurs-mp-1/digit-h-hund", int(hdg/100) );
 setprop("tu154/instrumentation/kurs-mp-1/digit-h-dec", int( (hdg/10.0)-int(hdg/100.0 )*10.0) );
 setprop("tu154/instrumentation/kurs-mp-1/digit-h-ones", int(hdg-int(hdg/10.0 )*10.0) );
 # second KURS-MP
 freq = getprop("instrumentation/nav[1]/frequencies/selected-mhz");
-if( freq == nil ) { settimer( kursmp_init, 1.0 ); return; } # try until success
+if( freq == nil ) { timer_kursmp_init.start(); return; } # try until success
 setprop("tu154/instrumentation/kurs-mp-2/digit-f-hi", int(freq) );
 setprop("tu154/instrumentation/kurs-mp-2/digit-f-low", (freq - int(freq) ) * 100 );
 hdg = getprop("instrumentation/nav[1]/radials/selected-deg");
-if( hdg == nil ) { settimer( kursmp_init, 1.0 ); return; }
+if( hdg == nil ) { timer_kursmp_init.start(); return; }
 setprop("tu154/instrumentation/kurs-mp-2/digit-h-hund", int( hdg/100) );
 setprop("tu154/instrumentation/kurs-mp-2/digit-h-dec",int( ( hdg / 10.0 )-int( hdg / 100.0 ) * 10.0 ) );
 setprop("tu154/instrumentation/kurs-mp-2/digit-h-ones", int( hdg-int( hdg/10.0 )* 10.0 ) );
 
 }
+var timer_kursmp_init = maketimer(1.0, kursmp_init);
+timer_kursmp_init.singleShot = 1;
 
 var kursmp_watchdog_1 = func{
 #settimer( kursmp_watchdog_1, 0.5 );
