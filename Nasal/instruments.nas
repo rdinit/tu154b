@@ -1157,8 +1157,8 @@ var fuel_gauge_handler = func {
 fuel_gauge_handler();
 
 setlistener("tu154/systems/electrical/buses/DC27-bus-L/volts",
-            fuel_gauge_handler, 0, 1);
-setlistener("fdm/jsbsim/fuel/sw-fuel", fuel_gauge_handler, 0, 1);
+            fuel_gauge_handler, 0, 0);
+setlistener("fdm/jsbsim/fuel/sw-fuel", fuel_gauge_handler, 0, 0);
 
 
 var fuel_consumption_adjust = func(offset) {
@@ -1191,9 +1191,9 @@ var fuel_consumption_gauge_handler = func {
 fuel_consumption_gauge_handler();
 
 setlistener("tu154/systems/electrical/buses/DC27-bus-L/volts",
-            fuel_consumption_gauge_handler, 0, 1);
+            fuel_consumption_gauge_handler, 0, 0);
 setlistener("fdm/jsbsim/fuel/sw-consumption",
-            fuel_consumption_gauge_handler, 0, 1);
+            fuel_consumption_gauge_handler, 0, 0);
 
 
 var engine_cutoff = func {
