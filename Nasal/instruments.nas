@@ -269,18 +269,18 @@ var pnp_both_mode_update = func {
 }
 
 setlistener("tu154/systems/absu/serviceable", pnp0_mode_update, 0, 0);
-setlistener("tu154/switches/pn-5-navigac", pnp0_mode_update);
-setlistener("tu154/switches/pn-5-posadk", pnp0_mode_update);
-setlistener("fdm/jsbsim/ap/roll-selector", pnp0_mode_update);
+setlistener("tu154/switches/pn-5-navigac", pnp0_mode_update, 0, 0);
+setlistener("tu154/switches/pn-5-posadk", pnp0_mode_update, 0, 0);
+setlistener("fdm/jsbsim/ap/roll-selector", pnp0_mode_update, 0, 0);
 setlistener("instrumentation/heading-indicator[0]/serviceable",
             pnp0_mode_update, 1, 0);
 
-setlistener("tu154/switches/pn-6-selector", pnp1_mode_update);
+setlistener("tu154/switches/pn-6-selector", pnp1_mode_update, 0, 0);
 setlistener("instrumentation/heading-indicator[1]/serviceable",
             pnp1_mode_update, 1, 0);
 
 setlistener("fdm/jsbsim/instrumentation/nvu/active", pnp_both_mode_update, 0, 0);
-setlistener("tu154/instrumentation/distance-to-pnp", pnp_both_mode_update);
+setlistener("tu154/instrumentation/distance-to-pnp", pnp_both_mode_update, 0, 0);
 setlistener("instrumentation/nav[0]/nav-loc", pnp_both_mode_update, 0, 0);
 setlistener("instrumentation/nav[1]/nav-loc", pnp_both_mode_update, 0, 0);
 setlistener("instrumentation/nav[0]/in-range", pnp_both_mode_update, 0, 0);
@@ -358,9 +358,9 @@ var idr_both_mode_update = func {
     idr1_mode_update();
 }
 
-setlistener("tu154/switches/capt-idr-selector", idr0_mode_update, 1);
+setlistener("tu154/switches/capt-idr-selector", idr0_mode_update, 1, 0);
 
-setlistener("tu154/switches/copilot-idr-selector", idr1_mode_update, 1);
+setlistener("tu154/switches/copilot-idr-selector", idr1_mode_update, 1, 0);
 
 setlistener("instrumentation/dme[0]/in-range", idr_both_mode_update, 0, 0);
 setlistener("instrumentation/dme[1]/in-range", idr_both_mode_update, 0, 0);
@@ -524,10 +524,10 @@ setlistener("instrumentation/nav[0]/nav-loc", iku_both_mode1_update, 0, 0);
 setlistener("instrumentation/adf[1]/in-range", iku_both_mode2_update, 0, 0);
 setlistener("instrumentation/nav[1]/in-range", iku_both_mode2_update, 0, 0);
 setlistener("instrumentation/nav[1]/nav-loc", iku_both_mode2_update, 0, 0);
-setlistener("tu154/instrumentation/iku-1[0]/mode-1", iku0_mode1_update, 1);
-setlistener("tu154/instrumentation/iku-1[0]/mode-2", iku0_mode2_update, 1);
-setlistener("tu154/instrumentation/iku-1[1]/mode-1", iku1_mode1_update, 1);
-setlistener("tu154/instrumentation/iku-1[1]/mode-2", iku1_mode2_update, 1);
+setlistener("tu154/instrumentation/iku-1[0]/mode-1", iku0_mode1_update, 1, 0);
+setlistener("tu154/instrumentation/iku-1[0]/mode-2", iku0_mode2_update, 1, 0);
+setlistener("tu154/instrumentation/iku-1[1]/mode-1", iku1_mode1_update, 1, 0);
+setlistener("tu154/instrumentation/iku-1[1]/mode-2", iku1_mode2_update, 1, 0);
 
 
 ######################################################################
@@ -569,8 +569,8 @@ setlistener("instrumentation/nav[0]/nav-loc", ushdb_mode1_update, 0, 0);
 setlistener("instrumentation/adf[1]/in-range", ushdb_mode2_update, 0, 0);
 setlistener("instrumentation/nav[1]/in-range", ushdb_mode2_update, 0, 0);
 setlistener("instrumentation/nav[1]/nav-loc", ushdb_mode2_update, 0, 0);
-setlistener("tu154/switches/ushdb-sel-1", ushdb_mode1_update, 1);
-setlistener("tu154/switches/ushdb-sel-2", ushdb_mode2_update, 1);
+setlistener("tu154/switches/ushdb-sel-1", ushdb_mode1_update, 1, 0);
+setlistener("tu154/switches/ushdb-sel-2", ushdb_mode2_update, 1, 0);
 
 
 ######################################################################
@@ -1148,8 +1148,8 @@ var fuel_gauge_handler = func {
 fuel_gauge_handler();
 
 setlistener("tu154/systems/electrical/buses/DC27-bus-L/volts",
-            fuel_gauge_handler, 0, 1);
-setlistener("fdm/jsbsim/fuel/sw-fuel", fuel_gauge_handler, 0, 1);
+            fuel_gauge_handler, 0, 0);
+setlistener("fdm/jsbsim/fuel/sw-fuel", fuel_gauge_handler, 0, 0);
 
 
 var fuel_consumption_adjust = func(offset) {
@@ -1182,9 +1182,9 @@ var fuel_consumption_gauge_handler = func {
 fuel_consumption_gauge_handler();
 
 setlistener("tu154/systems/electrical/buses/DC27-bus-L/volts",
-            fuel_consumption_gauge_handler, 0, 1);
+            fuel_consumption_gauge_handler, 0, 0);
 setlistener("fdm/jsbsim/fuel/sw-consumption",
-            fuel_consumption_gauge_handler, 0, 1);
+            fuel_consumption_gauge_handler, 0, 0);
 
 
 var engine_cutoff = func {
