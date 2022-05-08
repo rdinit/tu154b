@@ -271,7 +271,7 @@ var pnp_both_mode_update = func {
 setlistener("tu154/systems/absu/serviceable", pnp0_mode_update, 0, 0);
 setlistener("tu154/switches/pn-5-navigac", pnp0_mode_update);
 setlistener("tu154/switches/pn-5-posadk", pnp0_mode_update);
-setlistener("fdm/jsbsim/ap/roll-selector", pnp0_mode_update);
+setlistener("fdm/jsbsim/ap/roll-selector", pnp0_mode_update, 0, 0);
 setlistener("instrumentation/heading-indicator[0]/serviceable",
             pnp0_mode_update, 1, 0);
 
