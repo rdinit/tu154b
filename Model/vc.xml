@@ -22,7 +22,7 @@
     <object-name>RightWindowGlass</object-name>
  </effect>-->
  <effect>
-  <inherits-from>Effects/Glass</inherits-from>
+  <inherits-from>Effects/glass</inherits-from>
   <object-name>MESH199</object-name>
   <object-name>LeftWindowGlass</object-name>
   <object-name>RightWindowGlass</object-name>
