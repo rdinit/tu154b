@@ -8,6 +8,7 @@ var smoke1 = func() {
         }
 }
 var timer_smoke1 = maketimer(1, smoke1);
+timer_smoke1.simulatedTime = 1;
 _setlistener("/sim/signals/fdm-initialized", func { timer_smoke1.start() });
 
 setprop("tu154/contrail/smoke2", 0 );
@@ -20,6 +21,7 @@ var smoke2 = func() {
         }
 }
 var timer_smoke2 = maketimer(1, smoke2);
+timer_smoke2.simulatedTime = 1;
 _setlistener("/sim/signals/fdm-initialized", func { timer_smoke2.start() });
 
 setprop("tu154/contrail/smoke3", 0 );
@@ -32,6 +34,7 @@ var smoke3 = func() {
         }
 }
 var timer_smoke3 = maketimer(1, smoke3);
+timer_smoke3.simulatedTime = 1;
 _setlistener("/sim/signals/fdm-initialized", func { timer_smoke3.start() });
 
 setprop("tu154/contrail/contrail1", 0 );
@@ -44,6 +47,7 @@ var contrail1 = func() {
         }
 }
 var timer_contrail1 = maketimer(1, contrail1);
+timer_contrail1.simulatedTime = 1;
 _setlistener("/sim/signals/fdm-initialized", func { timer_contrail1.start() });
 
 setprop("tu154/contrail/contrail2", 0 );
@@ -56,6 +60,7 @@ var contrail2 = func() {
         }
 }
 var timer_contrail2 = maketimer(1, contrail2);
+timer_contrail2.simulatedTime = 1;
 _setlistener("/sim/signals/fdm-initialized", func { timer_contrail2.start() });
 
 setprop("tu154/contrail/contrail3", 0 );
@@ -68,6 +73,7 @@ var contrail3 = func() {
         }
 }
 var timer_contrail3 = maketimer(1, contrail3);
+timer_contrail3.simulatedTime = 1;
 _setlistener("/sim/signals/fdm-initialized", func { timer_contrail3.start() });
 
 setprop("tu154/contrail/condensation", 0 );
@@ -79,6 +85,7 @@ var condensation = func() {
         }
 }
 var timer_condensation = maketimer(1, condensation);
+timer_condensation.simulatedTime = 1;
 _setlistener("/sim/signals/fdm-initialized", func { timer_condensation.start() });
 
 

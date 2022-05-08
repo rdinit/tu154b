@@ -111,6 +111,7 @@ update_buses_thandler = func{
 
 }
 var timer_update_buses_thandler = maketimer(UPDATE_PERIOD, update_buses_thandler);
+timer_update_buses_thandler.simulatedTime = 1;
 
 
 RPPO30_KP_1_handler = func {
@@ -697,6 +698,7 @@ if(  hd_input > 0.0 )
 }
 
 var timer_update_electrical = maketimer(UPDATE_PERIOD, update_electrical);
+timer_update_electrical.simulatedTime = 1;
 
 
 

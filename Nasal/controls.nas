@@ -30,6 +30,7 @@ var elev_trim_stop = func {
   setprop("fdm/jsbsim/fcs/met-cmd", 0.0);
 }
 var timer_elev_trim_stop = maketimer(0.2, elev_trim_stop);
+timer_elev_trim_stop.simulatedTime = 1;
 timer_elev_trim_stop.singleShot = 1;
 
 # It's func intend for support direct trim changing (from home\end keyboard and mouse wheel bindings)

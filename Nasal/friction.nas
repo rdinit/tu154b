@@ -196,5 +196,6 @@ var update_reactions = func {
 }
 
 var timer_update_reactions = maketimer(0.1, update_reactions);
+timer_update_reactions.simulatedTime = 1;
 update_reactions();
 timer_update_reactions.start();

@@ -60,6 +60,7 @@ if( param != 0 ) # if 0 - hydro power failure, surfaces are freese
 }
 
 var timer_hs_handler = maketimer( UPDATE_PERIOD, hs_handler );
+timer_hs_handler.simulatedTime = 1;
 hs_handler();
 timer_hs_handler.start();
 

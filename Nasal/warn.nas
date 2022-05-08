@@ -295,6 +295,7 @@ else
 
 }
 var timer_horn_handler = maketimer( UPDATE_PERIOD, horn_handler );
+timer_horn_handler.simulatedTime = 1;
 
 var audio_handler = func{
 var pwr = getprop("tu154/systems/electrical/buses/DC27-bus-L/volts");
@@ -334,6 +335,7 @@ else alarm.switch(0);
 
 }
 var timer_audio_handler = maketimer( UPDATE_PERIOD, audio_handler );
+timer_audio_handler.simulatedTime = 1;
 
 var RV_OFFSET = 4;
 var voice_handler = func{
@@ -1011,6 +1013,7 @@ else strobe_control(0);
 
 }
 var timer_indicator_handler = maketimer( UPDATE_PERIOD, indicator_handler );
+timer_indicator_handler.simulatedTime = 1;
 # END indicator handler
 
 #elev_trim_watchdog = func{

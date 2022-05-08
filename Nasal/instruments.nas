@@ -1726,6 +1726,7 @@ setprop("tu154/instrumentation/kurs-mp-2/digit-h-ones", int( hdg-int( hdg/10.0 )
 
 }
 var timer_kursmp_init = maketimer(1.0, kursmp_init);
+timer_kursmp_init.simulatedTime = 1;
 timer_kursmp_init.singleShot = 1;
 
 var kursmp_watchdog_1 = func{

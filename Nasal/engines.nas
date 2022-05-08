@@ -294,9 +294,13 @@ var check_lamps_eng = func{
 }
 
 var timer_eng_1_handler = maketimer(ENGINE_UPDATE_PERIOD, eng_1_handler);
+timer_eng_1_handler.simulatedTime = 1;
 var timer_eng_2_handler = maketimer(ENGINE_UPDATE_PERIOD, eng_2_handler);
+timer_eng_2_handler.simulatedTime = 1;
 var timer_eng_3_handler = maketimer(ENGINE_UPDATE_PERIOD, eng_3_handler);
+timer_eng_3_handler.simulatedTime = 1;
 var timer_apu_handler = maketimer(ENGINE_UPDATE_PERIOD, apu_handler);
+timer_apu_handler.simulatedTime = 1;
 eng_1_handler();
 eng_2_handler();
 eng_3_handler();
