@@ -887,54 +887,73 @@ print("ABSU started, default autopilot disabled");
 
 
 # Smoothing AT output
+var a1set = [0,0,0,0,0];
+var a2set = [0,0,0,0,0];
+var a3set = [0,0,0,0,0];
+var aptr = 0;
+var aptrn = 1;
+var x1 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[0]");
+var x2 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[1]");
+var x3 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[2]");
+#var a1 = getprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[0]");
+#var a2 = getprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[1]");
+#var a3 = getprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[2]");
+var h1 = getprop("fdm/jsbsim/ap/at-hold-0");
+var h2 = getprop("fdm/jsbsim/ap/at-hold-1");
+var h3 = getprop("fdm/jsbsim/ap/at-hold-2");
 var autothrottle_smooth = func(){
       x1 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[0]");
       x2 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[1]");
       x3 = getprop("fdm/jsbsim/fcs/xat-throttle-cmd-norm[2]");
-      a1 = getprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[0]");
-      a2 = getprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[1]");
-      a3 = getprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[2]");
+      #a1 = getprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[0]");
+      #a2 = getprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[1]");
+      #a3 = getprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[2]");
       h1 = getprop("fdm/jsbsim/ap/at-hold-0");
       h2 = getprop("fdm/jsbsim/ap/at-hold-1");
       h3 = getprop("fdm/jsbsim/ap/at-hold-2");
       if ( x1 == nil ) { return; }
       if ( x2 == nil ) { return; }
       if ( x3 == nil ) { return; }
-      if ( a1 == nil ) { return; }
-      if ( a2 == nil ) { return; }
-      if ( a3 == nil ) { return; }
+      #if ( a1 == nil ) { return; }
+      #if ( a2 == nil ) { return; }
+      #if ( a3 == nil ) { return; }
       if ( h1 == nil ) { return; }
       if ( h2 == nil ) { return; }
       if ( h3 == nil ) { return; }
 
-      space = 0.0025;
+      space = 0.025;
 
       if ( h1 == 1 ) {
-      if ( a1 - x1 > -space and a1 - x1 < space) { a1 = x1; }
+      if ( a1set[aptr] - x1 > -space and a1set[aptr] - x1 < space) { a1set[aptrn] = x1; }
       else { 
-            if (a1 > x1) { a1 -= space; }
-            else { a1 += space; }
+            if (a1set[aptr] > x1) { a1set[aptrn] -= space; }
+            else { a1set[aptrn] += space; }
       }
-      } else { a1 = x1; }
+      } else { a1set[aptrn] = x1; }
       if ( h2 == 1 ) {
-      if ( a2 - x2 > -space and a2 - x2 < space) { a2 = x2; }
+      if ( a2set[aptr] - x2 > -space and a2set[aptr] - x2 < space) { a2set[aptrn] = x2; }
       else { 
-            if (a2 > x2) { a2 -= space; }
-            else { a2 += space; }
+            if (a2set[aptr] > x2) { a2set[aptrn] -= space; }
+            else { a2set[aptrn] += space; }
       }
-      } else { a2 = x2; }
+      } else { a2set[aptrn] = x2; }
       if ( h3 == 1 ) {
-      if ( a3 - x3 > -space and a3 - x3 < space) { a3 = x3; }
+      if ( a3set[aptr] - x3 > -space and a3set[aptr] - x3 < space) { a3set[aptrn] = x3; }
       else { 
-            if (a3 > x3) { a3 -= space; }
-            else { a3 += space; }
+            if (a3set[aptr] > x3) { a3set[aptrn] -= space; }
+            else { a3set[aptrn] += space; }
       }
-      } else { a3 = x3; }
+      } else { a3set[aptrn] = x3; }
 
-      setprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[0]", a1);
-      setprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[1]", a2);
-      setprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[2]", a3);
+      aptr += 1;
+      if (aptr == 5) { aptr = 0; }
+      aptrn += 1;
+      if (aptrn == 5) { aptrn = 0; }
+
+      setprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[0]", (a1set[0] + a1set[1] + a1set[2] + a1set[3] + a1set[4]) * 0.2);
+      setprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[1]", (a2set[0] + a2set[1] + a2set[2] + a2set[3] + a2set[4]) * 0.2);
+      setprop("fdm/jsbsim/fcs/at-throttle-cmd-norm[2]", (a3set[0] + a3set[1] + a3set[2] + a3set[3] + a3set[4]) * 0.2);
 }
-var timer_autothrottle_smooth = maketimer(0.1, autothrottle_smooth);
+var timer_autothrottle_smooth = maketimer(0.05, autothrottle_smooth);
 timer_autothrottle_smooth.simulatedTime = 1;
 timer_autothrottle_smooth.start();
