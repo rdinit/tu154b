@@ -110,6 +110,8 @@
       <binding><command>dialog-apply</command></binding>
     </checkbox>
 
+    <text><label> </label></text>
+
     <group><layout>hbox</layout>
       <hrule>
         <stretch type="bool">true</stretch>
@@ -126,6 +128,8 @@
       <live>true</live>
       <!--<binding><command>dialog-apply</command></binding>-->
     </checkbox>
+
+    <text><label> </label></text>
 
     <group><layout>hbox</layout>
       <hrule>
